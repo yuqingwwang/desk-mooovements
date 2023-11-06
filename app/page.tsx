@@ -30,7 +30,7 @@ export default async function Home() {
 
   places = await SupabaseCall("work_spaces", "id,name,address,image,city");
   return (
-    <main className="bg-black">
+    <main>
       <h1>Welcome to desk-mooovements!</h1>
       {/* {fetchError && <p>{fetchError}</p>} */}
       {cities?.map((city) => (
