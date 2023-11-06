@@ -13,7 +13,7 @@ const AuthForm: React.FC<{ params: string }> = (props) => {
         </TextField.Root>
 
         <TextField.Root>
-          <TextField.Input placeholder="Password" />
+          <TextField.Input type="password" placeholder="Password" />
         </TextField.Root>
 
         <Button>Create</Button>
