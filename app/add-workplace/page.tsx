@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   TextField,
@@ -17,6 +17,7 @@ import { useRouter } from "next/navigation";
 import { CreateAddWorkplaceForm } from "../validationForm";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 
+
 const AddWorkplace = () => {
   const { register, control, handleSubmit } = useForm<CreateAddWorkplaceForm>();
   const onSubmit: SubmitHandler<CreateAddWorkplaceForm> = (data) =>
@@ -27,10 +28,11 @@ const AddWorkplace = () => {
   const [isSubmitting, setSubmitting] = useState(false);
 
   return (
-    <div className="max-w-xl">
-      <Heading as="h1" className="py-3">
+    <div className='max-w-xl'>
+      <Heading as='h1' className='py-3'>
         Add a place
       </Heading>
+
 
       <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
         <TextField.Root>
@@ -39,9 +41,10 @@ const AddWorkplace = () => {
 
         <TextField.Root>
           <TextField.Input placeholder="City" {...register("city")} />
+
         </TextField.Root>
 
-        <Heading as="h2" className="py-3">
+        <Heading as='h2' className='py-3'>
           Tell us more about the workplace
         </Heading>
 
@@ -106,7 +109,6 @@ const AddWorkplace = () => {
             </Flex>
           )}
         />
-
         <Controller
           name="foodRating"
           control={control}
@@ -136,7 +138,6 @@ const AddWorkplace = () => {
             />
           )}
         />
-
         <Button>Create {<Spinner />}</Button>
       </form>
     </div>
