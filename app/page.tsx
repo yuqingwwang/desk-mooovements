@@ -1,4 +1,4 @@
-import { SupabaseCall } from "@/utils/supabaseCall";
+import { SupabaseCall } from '@/utils/supabaseCall';
 
 type City = {
   id: number;
@@ -26,19 +26,16 @@ type Place = {
 export default async function Home() {
   let cities: City[] | null = null;
   let places: Place[] | null = null;
-  cities = await SupabaseCall("cities", "id,name,country");
+  cities = await SupabaseCall('cities', 'id,name,country');
 
-  places = await SupabaseCall("work_spaces", "id,name,address,image,city");
+  places = await SupabaseCall('work_spaces', 'id,name,address,image,city');
   return (
-    <main className="bg-black">
+
+    <main>
       <h1>Welcome to desk-mooovements!</h1>
       {/* {fetchError && <p>{fetchError}</p>} */}
-      {cities?.map((city) => (
-        <p key={city.name}>{city.name}</p>
-      ))}
-      {places?.map((place) => (
-        <p key={place.name}>{place.name}</p>
-      ))}
+      {cities?.map((city) => <p key={city.name}>{city.name}</p>)}
+      {places?.map((place) => <p key={place.name}>{place.name}</p>)}
     </main>
   );
 }
