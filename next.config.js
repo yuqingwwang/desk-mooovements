@@ -1,4 +1,11 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+
+nextConfig = {
+    // Other configuration options
+    experimental: {
+      __next_strict: false,
+    },
+  };
+
 
 module.exports = nextConfig;

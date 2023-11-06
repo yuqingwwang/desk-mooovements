@@ -1,6 +1,20 @@
-import { z } from 'zod';
 
-export const createAddWorkplaceForm = z.object({
-  name: z.string().min(1, 'The title is required').max(255),
-  city: z.string().min(1, 'The description is required'),
-});
+
+enum AmenitiesEnum {
+  quite = "quite",
+  access = "access",
+  social = "social",
+  yoga = 'yoga',
+  pet = "pet",
+  shower = "shower"
+}
+
+export type CreateAddWorkplaceForm = {
+  name: string,
+  city: string,
+  rating: number,
+  amenities: AmenitiesEnum,
+  workplaceRating: number,
+  foodRating: number,
+  comments: string,
+  }
