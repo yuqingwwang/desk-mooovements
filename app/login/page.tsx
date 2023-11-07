@@ -36,7 +36,6 @@ export default function Login() {
     }
 
     try {
-
       const response = await supabase.auth.signUp({
         email,
         password,
@@ -62,12 +61,26 @@ export default function Login() {
   };
 
   const handleSignIn = async () => {
-    await supabase.auth.signInWithPassword({
+    try {
+    const response = await supabase.auth.signInWithPassword({
       email,
       password,
     });
-    // check for error
-    // set success message
+
+    const errorMessagePattern = /"message":"(.*?)"/;
+    const match = errorMessagePattern.exec(JSON.stringify(response));
+
+    if (match && match[1]) {
+      setErrorMessage("Sign in failed. Please try again.");
+    } else {
+      setSuccessMessage('Sign in successful. Redirecting to home page...');
+      setTimeout(() => {
+        router.push('/');
+      }, 3000);
+    }
+  } catch (error) {
+    setErrorMessage('Sign in failed. Please try again.');
+  }
     router.refresh();
   };
 
