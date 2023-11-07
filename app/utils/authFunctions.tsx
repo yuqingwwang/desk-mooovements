@@ -14,7 +14,7 @@ export const useAutoClearMessage = (message: string | null, clearMessage: () => 
   }, [message, clearMessage]);
 };
 
-export function extractErrorMessage(response: any): string | null {
+export function extractErrorMessage(response: unknown): string | null {
   const errorMessagePattern = /"message":"(.*?)"/;
   const match = errorMessagePattern.exec(JSON.stringify(response));
   return match ? match[1] : null;
