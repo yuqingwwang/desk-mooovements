@@ -1,25 +1,31 @@
-import { TextField, Heading, Button } from "@radix-ui/themes";
-import React from "react";
+import { TextField } from '@radix-ui/themes';
 
-const AuthForm: React.FC<{ params: string }> = (props) => {
+interface FormInputProps {
+  name: string;
+  type: string;
+  placeholder: string;
+  value: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const FormInput: React.FC<FormInputProps> = ({
+  name,
+  type,
+  placeholder,
+  value,
+  onChange,
+}) => {
   return (
-    <div className="max-w-xl">
-      <Heading as="h1" className="py-3">
-        {props.params}
-      </Heading>
-      <form className="space-y-3">
-        <TextField.Root>
-          <TextField.Input placeholder="Username" />
-        </TextField.Root>
-
-        <TextField.Root>
-          <TextField.Input type="password" placeholder="Password" />
-        </TextField.Root>
-
-        <Button>Create</Button>
-      </form>
-    </div>
+    <TextField.Root>
+      <TextField.Input
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        onChange={onChange}
+        value={value}
+      />
+    </TextField.Root>
   );
 };
 
-export default AuthForm;
+export default FormInput;
