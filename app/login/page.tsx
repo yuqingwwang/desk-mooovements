@@ -3,46 +3,43 @@
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-
-import type { Database } from '../lib/supabase';
+import { Heading, Button } from '@radix-ui/themes';
+import FormInput from '../components/AuthForm';
 import ErrorMessage from '../components/ErrorMessage';
-import { TextField, Heading, Button } from '@radix-ui/themes';
+import SuccessMessage from '../components/SuccessMessage';
+import type { Database } from '../lib/supabase';
+import { useAutoClearMessage, extractErrorMessage } from '../utils/authFunctions';
+
+const supabase = createClientComponentClient<Database>();
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const router = useRouter();
+
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
+
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  const router = useRouter();
-  const supabase = createClientComponentClient<Database>();
   const [userId, setUserId] = useState('');
-
+  const [userName, setUserName] = useState('');
   const [CurrentPage, setCurrentPage] = useState('Sign up');
 
+  useAutoClearMessage(errorMessage, () => setErrorMessage(''));
+  useAutoClearMessage(successMessage, () => setSuccessMessage(''));
+
   useEffect(() => {
-    if (errorMessage) {
-      setTimeout(() => {
-        setErrorMessage('');
-      }, 3000);
+    async function getUserID() {
+      const user = await supabase.auth.getUser();
+      if (user.data?.user) {
+        setUserId(user.data.user.id);
+        setUserName(user.data.user.email|| '');
+      }
     }
-    if (successMessage) {
-      setTimeout(() => {
-        setSuccessMessage('');
-      }, 3000);
-    }
-  }, [errorMessage, successMessage]);
 
-  // check if there's a current user
-
-  const getUserID = async()=>
-  {
-    const user_id = (await supabase.auth.getUser()).data.user?.id;
-    if(user_id!=null){
-      setUserId(user_id)
-    }
-  }
-
-  getUserID();
+    getUserID();
+  }, []);
 
   useEffect(() => {
     if (userId!='') {
@@ -52,29 +49,34 @@ export default function Login() {
     }
   }, [userId]);
 
-  const handleSignUp = async () => {
-    if (password.length < 6) {
+  const redirectToHomePage = () => {
+    setTimeout(() => {
+      router.push('/');
+    }, 3000);
+  };
+
+  const handleSignUp = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (formData.password.length < 6) {
       setErrorMessage('Password must be at least 6 characters long');
       return;
     }
 
     try {
       const response = await supabase.auth.signUp({
-        email,
-        password,
+        email: formData.email,
+        password: formData.password,
       });
 
-      // TODO: This is a hacky way to get the error message from the response
-      const errorMessagePattern = /"message":"(.*?)"/;
-      const match = errorMessagePattern.exec(JSON.stringify(response));
-      if (match && match[1]) {
-        const errorMessage = match[1];
+      const errorMessage = extractErrorMessage(response);
+      if (errorMessage) {
         setErrorMessage(errorMessage);
-      } else {
+        return;
+      }
+      else {
         setSuccessMessage('Sign up successful. Redirecting to home page...');
-        setTimeout(() => {
-          router.push('/');
-        }, 3000);
+        redirectToHomePage();
       }
 
     } catch (error) {
@@ -83,36 +85,39 @@ export default function Login() {
     router.refresh();
   };
 
-  const handleSignIn = async () => {
+  const handleSignIn = async (e: React.FormEvent) => {
+    e.preventDefault();
+
     try {
-    const response = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+      const response = await supabase.auth.signInWithPassword({
+        email: formData.email,
+        password: formData.password,
+      });
 
-    const errorMessagePattern = /"message":"(.*?)"/;
-    const match = errorMessagePattern.exec(JSON.stringify(response));
-
-    if (match && match[1]) {
-      setErrorMessage("Sign in failed. Please try again.");
-    } else {
-      setSuccessMessage('Sign in successful. Redirecting to home page...');
-      setTimeout(() => {
-        router.push('/');
-      }, 3000);
-    }
-  } catch (error) {
+      const errorMessage = extractErrorMessage(response);
+      if (errorMessage) {
+        setErrorMessage("Sign in failed. Please try again.");
+        return;
+      } else {
+        setSuccessMessage('Sign in successful. Redirecting to home page...');
+        redirectToHomePage();
+      }
+    } catch (error) {
     setErrorMessage('Sign in failed. Please try again.');
-  }
-    router.refresh();
+    }
   };
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     setSuccessMessage('Sign out successful. Redirecting to home page...');
-    setTimeout(() => {
-      router.push('/');
-    }, 3000);
+    redirectToHomePage();
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   return (
@@ -121,41 +126,34 @@ export default function Login() {
         <ErrorMessage>{errorMessage}</ErrorMessage>
       )}
       {successMessage && (
-        <div className="success-message">{successMessage}</div>
+        <SuccessMessage>{successMessage}</SuccessMessage>
       )}
       <Heading as="h1" className="py-3">
-        {CurrentPage}
+        {userId ? `Welcome, ${userName}` : CurrentPage}
       </Heading>
       <div className="max-w-xl">
-        {userId ? (
-          <Button onClick={handleSignOut}>Sign out</Button>
-        ) : (
-          <form className="space-y-3" action="/auth/login" method="post">
-            <TextField.Root>
-              <TextField.Input
-                name="username"
-                placeholder="Username"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-              />
-            </TextField.Root>
-
-            <TextField.Root>
-              <TextField.Input
-                name="password"
-                type="password"
-                placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-              />
-            </TextField.Root>
-
-            <Button onClick={handleSignUp}>
-              Sign up
-            </Button>
-            <Button onClick={handleSignIn}>Sign in</Button>
-          </form>
-        )}
+      {userId ? (
+        <Button onClick={handleSignOut}>Sign out</Button>
+      ) : (
+        <form className="space-y-3" onSubmit={handleSignUp}>
+          <FormInput
+            name="email"
+            type="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+          <FormInput
+            name="password"
+            type="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+          />
+          <Button type="submit">Sign up</Button>
+          <Button onClick={handleSignIn}>Sign in</Button>
+        </form>
+      )}
       </div>
     </>
   );
