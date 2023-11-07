@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
@@ -8,7 +8,10 @@ import FormInput from '../components/AuthForm';
 import ErrorMessage from '../components/ErrorMessage';
 import SuccessMessage from '../components/SuccessMessage';
 import type { Database } from '../lib/supabase';
-import { useAutoClearMessage, extractErrorMessage } from '../utils/authFunctions';
+import {
+  useAutoClearMessage,
+  extractErrorMessage,
+} from '../utils/authFunctions';
 
 const supabase = createClientComponentClient<Database>();
 
@@ -34,7 +37,7 @@ export default function Login() {
       const user = await supabase.auth.getUser();
       if (user.data?.user) {
         setUserId(user.data.user.id);
-        setUserName(user.data.user.email|| '');
+        setUserName(user.data.user.email || '');
       }
     }
 
@@ -42,7 +45,7 @@ export default function Login() {
   }, []);
 
   useEffect(() => {
-    if (userId!='') {
+    if (userId != '') {
       setCurrentPage('Sign out');
     } else {
       setCurrentPage('Sign up');
@@ -73,12 +76,10 @@ export default function Login() {
       if (errorMessage) {
         setErrorMessage(errorMessage);
         return;
-      }
-      else {
+      } else {
         setSuccessMessage('Sign up successful. Redirecting to home page...');
         redirectToHomePage();
       }
-
     } catch (error) {
       setErrorMessage('Sign up failed. Please try again.');
     }
@@ -96,14 +97,14 @@ export default function Login() {
 
       const errorMessage = extractErrorMessage(response);
       if (errorMessage) {
-        setErrorMessage("Sign in failed. Please try again.");
+        setErrorMessage('Sign in failed. Please try again.');
         return;
       } else {
         setSuccessMessage('Sign in successful. Redirecting to home page...');
         redirectToHomePage();
       }
     } catch (error) {
-    setErrorMessage('Sign in failed. Please try again.');
+      setErrorMessage('Sign in failed. Please try again.');
     }
   };
 
@@ -122,38 +123,34 @@ export default function Login() {
 
   return (
     <>
-      {errorMessage && (
-        <ErrorMessage>{errorMessage}</ErrorMessage>
-      )}
-      {successMessage && (
-        <SuccessMessage>{successMessage}</SuccessMessage>
-      )}
-      <Heading as="h1" className="py-3">
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
+      <Heading as='h1' className='py-3'>
         {userId ? `Welcome, ${userName}` : CurrentPage}
       </Heading>
-      <div className="max-w-xl">
-      {userId ? (
-        <Button onClick={handleSignOut}>Sign out</Button>
-      ) : (
-        <form className="space-y-3" onSubmit={handleSignUp}>
-          <FormInput
-            name="email"
-            type="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          <FormInput
-            name="password"
-            type="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-          />
-          <Button type="submit">Sign up</Button>
-          <Button onClick={handleSignIn}>Sign in</Button>
-        </form>
-      )}
+      <div className='max-w-xl'>
+        {userId ? (
+          <Button onClick={handleSignOut}>Sign out</Button>
+        ) : (
+          <form className='space-y-3' onSubmit={handleSignUp}>
+            <FormInput
+              name='email'
+              type='email'
+              placeholder='Email'
+              value={formData.email}
+              onChange={handleChange}
+            />
+            <FormInput
+              name='password'
+              type='password'
+              placeholder='Password'
+              value={formData.password}
+              onChange={handleChange}
+            />
+            <Button type='submit'>Sign up</Button>
+            <Button onClick={handleSignIn}>Sign in</Button>
+          </form>
+        )}
       </div>
     </>
   );
