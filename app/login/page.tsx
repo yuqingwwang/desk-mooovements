@@ -15,6 +15,9 @@ export default function Login() {
   const [successMessage, setSuccessMessage] = useState('');
   const router = useRouter();
   const supabase = createClientComponentClient<Database>();
+  const [userId, setUserId] = useState('');
+
+  const [CurrentPage, setCurrentPage] = useState('Sign up');
 
   useEffect(() => {
     if (errorMessage) {
@@ -28,6 +31,26 @@ export default function Login() {
       }, 3000);
     }
   }, [errorMessage, successMessage]);
+
+  // check if there's a current user
+
+  const getUserID = async()=>
+  {
+    const user_id = (await supabase.auth.getUser()).data.user?.id;
+    if(user_id!=null){
+      setUserId(user_id)
+    }
+  }
+
+  getUserID();
+
+  useEffect(() => {
+    if (userId!='') {
+      setCurrentPage('Sign out');
+    } else {
+      setCurrentPage('Sign up');
+    }
+  }, [userId]);
 
   const handleSignUp = async () => {
     if (password.length < 6) {
@@ -86,8 +109,10 @@ export default function Login() {
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
-    // display success message
-    router.refresh();
+    setSuccessMessage('Sign out successful. Redirecting to home page...');
+    setTimeout(() => {
+      router.push('/');
+    }, 3000);
   };
 
   return (
@@ -99,35 +124,38 @@ export default function Login() {
         <div className="success-message">{successMessage}</div>
       )}
       <Heading as="h1" className="py-3">
-        Sign Up
+        {CurrentPage}
       </Heading>
       <div className="max-w-xl">
-        <form className="space-y-3" action="/auth/login" method="post">
-          <TextField.Root>
-            <TextField.Input
-              name="username"
-              placeholder="Username"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-            />
-          </TextField.Root>
-
-          <TextField.Root>
-            <TextField.Input
-              name="password"
-              type="password"
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-            />
-          </TextField.Root>
-
-          <Button formAction="/auth/sign-up" onClick={handleSignUp}>
-            Sign up
-          </Button>
-          <Button onClick={handleSignIn}>Sign in</Button>
+        {userId ? (
           <Button onClick={handleSignOut}>Sign out</Button>
-        </form>
+        ) : (
+          <form className="space-y-3" action="/auth/login" method="post">
+            <TextField.Root>
+              <TextField.Input
+                name="username"
+                placeholder="Username"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+              />
+            </TextField.Root>
+
+            <TextField.Root>
+              <TextField.Input
+                name="password"
+                type="password"
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+              />
+            </TextField.Root>
+
+            <Button onClick={handleSignUp}>
+              Sign up
+            </Button>
+            <Button onClick={handleSignIn}>Sign in</Button>
+          </form>
+        )}
       </div>
     </>
   );
