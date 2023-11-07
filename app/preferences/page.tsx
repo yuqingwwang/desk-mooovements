@@ -16,6 +16,14 @@ type CheckboxProps = {
   label: string;
 };
 
+const amenityOptions = [
+  { value: "room", label: "Meeting Rooms" },
+  { value: "access", label: "24/7 access" },
+  { value: "yoga", label: "Yoga" },
+  { value: "pet-friendly", label: "Pet Friendly" },
+  { value: "shower", label: "Shower" },
+];
+
 const Checkbox: React.FC<CheckboxProps> = ({ checked, onChange, label }) => {
   return (
     <label>
@@ -76,7 +84,7 @@ const AddPreference = () => {
           control={control}
           render={({ field }) => (
             <RadioGroup.Root
-              value={field.value||"dont-mind"}
+              value={field.value}
               onValueChange={field.onChange}
             >
               <Flex gap="2" direction="column">
@@ -92,7 +100,7 @@ const AddPreference = () => {
                 </Text>
                 <Text as="label" size="2">
                   <Flex gap="2">
-                    <RadioGroup.Item value="dont-mind" /> Do not Mind
+                    <RadioGroup.Item value="dont-mind"/> Do not Mind
                   </Flex>
                 </Text>
               </Flex>
@@ -105,40 +113,23 @@ const AddPreference = () => {
         </Heading>
 
         <Flex direction="column" gap="3">
-          <Checkbox
-            checked={selectedAmenities.includes("room")}
-            onChange={() => handleAmenityChange("room")}
-            label="Meeting Rooms"
-          />
-          <Checkbox
-            checked={selectedAmenities.includes("access")}
-            onChange={() => handleAmenityChange("access")}
-            label="24/7 access"
-          />
-          <Checkbox
-            checked={selectedAmenities.includes("yoga")}
-            onChange={() => handleAmenityChange("yoga")}
-            label="Yoga"
-          />
-          <Checkbox
-            checked={selectedAmenities.includes("pet-friendly")}
-            onChange={() => handleAmenityChange("pet-friendly")}
-            label="Pet Friendly"
-          />
-          <Checkbox
-            checked={selectedAmenities.includes("shower")}
-            onChange={() => handleAmenityChange("shower")}
-            label="Shower"
-          />
+          {amenityOptions.map((amenity) => (
+            <Checkbox
+              key={amenity.value}
+              checked={selectedAmenities.includes(amenity.value)}
+              onChange={() => handleAmenityChange(amenity.value)}
+              label={amenity.label}
+            />
+          ))}
         </Flex>
 
         <div>
-          <Button variant="ghost" color="indigo" onClick={handleSelectAllAmenities}>
+          <Button type="button" variant="ghost" color="indigo" onClick={handleSelectAllAmenities}>
             {selectAll ? "Select All Amenities" : "Unselect All Amenities"}
           </Button>
         </div>
 
-        <Button>Save</Button>
+        <Button type="submit">Save</Button>
       </form>
     </div>
   );
