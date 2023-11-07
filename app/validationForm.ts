@@ -17,4 +17,5 @@ export type CreateAddWorkplaceForm = {
   workplaceRating: number,
   foodRating: number,
   comments: string,
+  
   }
