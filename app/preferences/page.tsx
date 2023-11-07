@@ -7,22 +7,10 @@ import {
   Flex,
   Text,
 } from "@radix-ui/themes";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
-
-type CheckboxProps = {
-  checked: boolean;
-  onChange: () => void;
-  label: string;
-};
-
-const amenityOptions = [
-  { value: "room", label: "Meeting Rooms" },
-  { value: "access", label: "24/7 access" },
-  { value: "yoga", label: "Yoga" },
-  { value: "pet-friendly", label: "Pet Friendly" },
-  { value: "shower", label: "Shower" },
-];
+import { amenityOptions, allAmenities } from "../utils/constants"
+import { CheckboxProps } from "../utils/types";
 
 const Checkbox: React.FC<CheckboxProps> = ({ checked, onChange, label }) => {
   return (
@@ -33,19 +21,19 @@ const Checkbox: React.FC<CheckboxProps> = ({ checked, onChange, label }) => {
 };
 
 const AddPreference = () => {
+  const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
+  const [selectAll, setSelectAll] = useState(true);
+
   const { control, handleSubmit } = useForm<{
     preference: string;
     amenities: string[];
   }>();
 
+  // TODO: Save the data to the database
   const onSubmit: SubmitHandler<{ preference: string; amenities: string[] }> =
     (data) => console.log(data, selectedAmenities);
 
-  const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
-  const [selectAll, setSelectAll] = useState(true);
-
   const handleSelectAllAmenities = () => {
-    const allAmenities = ["room", "access", "yoga", "pet-friendly", "shower"];
 
     if (selectAll) {
       setSelectedAmenities(allAmenities);
