@@ -1,3 +1,4 @@
+import SeeMore from '@/app/components/SeeMore';
 import { SupabaseCall } from '@/utils/supabaseCall';
 
 type Place = {
@@ -22,13 +23,13 @@ export default async function WorkSpaces({ params }) {
    
      let place: Place[] | null = null;
      const id = params.id
-  place = await SupabaseCall("work_spaces","id,name,address,image,cities ( name )","id",id )
+  place = await SupabaseCall("work_spaces","id,name,address,image,cities ( name ),pet_friendly,opens_till_late,has_wifi,has_socket,has_shower,has_meeting_room,has_phone_booth,has_locker","id",id )
 console.log(place)
 return (
    <div>
      {place && place.length > 0 ? (
        <>
-         {/* Uncomment when you handle the image rendering issue.
+         {/* Uncomment when we have images
          <Image
            src={place[0].image}
            alt="image of the workspace"
@@ -40,7 +41,7 @@ return (
          <p>Name: {place[0].name}</p>
          <p>Address: {place[0].address}</p>
          <p>City: {place[0].cities.name}</p>
-         <button>See more</button>
+         <SeeMore place = {place}/>
        </>
      ) : (
        <p>Loading or no data available...</p> // Display a loading indicator or a no-data message
