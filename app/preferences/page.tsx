@@ -34,10 +34,18 @@ const AddPreference = () => {
     (data) => console.log(data, selectedAmenities);
 
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
+  const [selectAll, setSelectAll] = useState(true);
 
   const handleSelectAllAmenities = () => {
     const allAmenities = ["room", "access", "yoga", "pet-friendly", "shower"];
-    setSelectedAmenities(allAmenities);
+
+    if (selectAll) {
+      setSelectedAmenities(allAmenities);
+    } else {
+      setSelectedAmenities([]);
+    }
+
+    setSelectAll(!selectAll); // Toggle the selectAll state
   };
 
   const handleAmenityChange = (amenity: string) => {
@@ -125,7 +133,9 @@ const AddPreference = () => {
         </Flex>
 
         <div>
-          <Button variant="ghost" color="indigo" onClick={handleSelectAllAmenities}>Select All</Button>
+          <Button variant="ghost" color="indigo" onClick={handleSelectAllAmenities}>
+            {selectAll ? "Select All Amenities" : "Unselect All Amenities"}
+          </Button>
         </div>
 
         <Button>Save</Button>
