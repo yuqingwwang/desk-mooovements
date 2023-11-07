@@ -26,7 +26,7 @@ type Place = {
 export default async function Home() {
   let cities: City[] | null = null;
   let places: Place[] | null = null;
-  cities = await SupabaseCall('cities', 'id,name,country',"","");
+  cities = await SupabaseCall('cities', 'id,name,country','',"");
 
   places = await SupabaseCall('work_spaces', 'id,name,address,image,city',"","");
   return (
