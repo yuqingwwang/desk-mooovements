@@ -33,6 +33,7 @@ export interface Database {
           food_reviews: string | null
           id: number
           place_id: number | null
+          user_id: string | null
           vibe_rating: number | null
           vibe_reviews: string | null
         }
@@ -41,6 +42,7 @@ export interface Database {
           food_reviews?: string | null
           id?: number
           place_id?: number | null
+          user_id?: string | null
           vibe_rating?: number | null
           vibe_reviews?: string | null
         }
@@ -49,6 +51,7 @@ export interface Database {
           food_reviews?: string | null
           id?: number
           place_id?: number | null
+          user_id?: string | null
           vibe_rating?: number | null
           vibe_reviews?: string | null
         }
@@ -59,33 +62,22 @@ export interface Database {
             isOneToOne: false
             referencedRelation: "work_spaces"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reviews_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
           }
         ]
-      }
-      users: {
-        Row: {
-          created_at: string
-          id: number
-          username: string | null
-        }
-        Insert: {
-          created_at?: string
-          id?: number
-          username?: string | null
-        }
-        Update: {
-          created_at?: string
-          id?: number
-          username?: string | null
-        }
-        Relationships: []
       }
       work_spaces: {
         Row: {
           address: string | null
           city: number | null
           created_at: string | null
-          created_by: number | null
+          created_by: string | null
           has_locker: boolean | null
           has_meeting_room: boolean | null
           has_phone_booth: boolean | null
@@ -102,7 +94,7 @@ export interface Database {
           address?: string | null
           city?: number | null
           created_at?: string | null
-          created_by?: number | null
+          created_by?: string | null
           has_locker?: boolean | null
           has_meeting_room?: boolean | null
           has_phone_booth?: boolean | null
@@ -119,7 +111,7 @@ export interface Database {
           address?: string | null
           city?: number | null
           created_at?: string | null
-          created_by?: number | null
+          created_by?: string | null
           has_locker?: boolean | null
           has_meeting_room?: boolean | null
           has_phone_booth?: boolean | null
@@ -138,6 +130,13 @@ export interface Database {
             columns: ["city"]
             isOneToOne: false
             referencedRelation: "cities"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "work_spaces_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
             referencedColumns: ["id"]
           }
         ]
