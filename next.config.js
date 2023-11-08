@@ -2,14 +2,24 @@
 
 nextConfig = {
   images: {
-    domains: ['lh3.googleusercontent.com', 'media.rightmove.co.uk', 'www.thebeijinger.com', 'lh5.googleusercontent.com', 'images.unsplash.com', 'media1.popsugar-assets.com', 'encrypted-tbn0.gstatic.com', 'media.istockphoto.com'],
+    domains: [
+      'lh3.googleusercontent.com',
+      'media.rightmove.co.uk',
+      'www.thebeijinger.com',
+      'lh5.googleusercontent.com',
+      'images.unsplash.com',
+      'media1.popsugar-assets.com',
+      'encrypted-tbn0.gstatic.com',
+      'media.istockphoto.com',
+      'img.tagvenue.com',
+      'fastly.4sqi.net',
+    ],
   },
 };
 
-
 // Injected content via Sentry wizard below
 
-const { withSentryConfig } = require("@sentry/nextjs");
+const { withSentryConfig } = require('@sentry/nextjs');
 
 module.exports = withSentryConfig(
   module.exports,
@@ -19,8 +29,8 @@ module.exports = withSentryConfig(
 
     // Suppresses source map uploading logs during build
     silent: true,
-    org: "fac-162bdad2",
-    project: "desk-mooovment",
+    org: 'fac-162bdad2',
+    project: 'desk-mooovment',
   },
   {
     // For all available options, see:
@@ -33,7 +43,7 @@ module.exports = withSentryConfig(
     transpileClientSDK: true,
 
     // Routes browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers (increases server load)
-    tunnelRoute: "/monitoring",
+    tunnelRoute: '/monitoring',
 
     // Hides source maps from generated client bundles
     hideSourceMaps: true,
@@ -42,6 +52,5 @@ module.exports = withSentryConfig(
     disableLogger: true,
   }
 );
-
 
 module.exports = nextConfig;
