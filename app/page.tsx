@@ -1,12 +1,6 @@
 import DisplayCities from './components/DisplayCities';
 import Link from 'next/link';
 
-// import { SupabaseCall } from '@/utils/supabaseCall';
-// import Carousel from './components/Carousel';
-
-// type City = Database['public']['Tables']['cities'];
-// type Place = Database['public']['Tables']['work_spaces'];
-
 export default async function ServerComponent() {
   return (
     <main>

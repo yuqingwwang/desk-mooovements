@@ -1,13 +1,10 @@
 /** @type {import('next').NextConfig} */
 
 nextConfig = {
-  // Other configuration options
-  // experimental: {
-  //   __next_strict: false,
-  // },
+  images: {
+    domains: ['lh3.googleusercontent.com', 'media.rightmove.co.uk', 'www.thebeijinger.com', 'lh5.googleusercontent.com', 'images.unsplash.com', 'media1.popsugar-assets.com', 'encrypted-tbn0.gstatic.com', 'media.istockphoto.com'],
+  },
 };
-
-module.exports = nextConfig;
 
 
 // Injected content via Sentry wizard below
@@ -45,3 +42,6 @@ module.exports = withSentryConfig(
     disableLogger: true,
   }
 );
+
+
+module.exports = nextConfig;

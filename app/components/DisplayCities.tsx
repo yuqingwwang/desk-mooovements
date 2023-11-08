@@ -37,7 +37,7 @@ const DisplayCities = () => {
     const fetchData = async () => {
       const citiesResult = await SupabaseCall(
         'cities',
-        'id,name,country,work_spaces(count)',
+        'id,name,country,work_spaces(count),image',
         '',
         ''
       );
@@ -56,11 +56,9 @@ const DisplayCities = () => {
 
   return (
     <div>
-      {/* {cities?.map((city) => <p key={city.name}>{city.name}</p>)}
-      {places?.map((place) => <p key={place.name}>{place.name}</p>)} */}
       <div
         id='popularCities'
-        className='flex flex-wrap justify-between border-4 border-double border-yellow-500'
+        className='flex flex-wrap flex-col content-center  border-4 border-double border-yellow-500'
       >
         <Carousel places={places} />
         <Carousel cities={cities} />

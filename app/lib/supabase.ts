@@ -14,16 +14,19 @@ export interface Database {
           country: string | null
           id: number
           name: string | null
+          image: string | null
         }
         Insert: {
           country?: string | null
           id?: number
           name?: string | null
+          image?: string | null
         }
         Update: {
           country?: string | null
           id?: number
           name?: string | null
+          image?: string | null
         }
         Relationships: []
       }
