@@ -19,7 +19,7 @@ import { CreateAddWorkplaceForm } from '../validationForm';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import ErrorMessage from '../components/ErrorMessage';
 import * as Label from '@radix-ui/react-label';
-
+import Link from 'next/link';
 const AddWorkplace = () => {
   const {
     register,
@@ -182,6 +182,14 @@ const AddWorkplace = () => {
           Create {isSubmitting && <Spinner />}
         </Button>
       </form>
+      <Link href={'/'}>
+      <div className="m-3">
+            <button
+              className="w-32 bg-white tracking-wide text-gray-800 font-bold rounded border-b-2 border-blue-500 hover:border-blue-600 hover:bg-blue-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center">
+              <span className="mx-auto">Home</span>
+            </button>
+          </div>
+      </Link>
     </div>
   );
 };

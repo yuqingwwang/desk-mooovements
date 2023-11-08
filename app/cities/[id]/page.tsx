@@ -1,4 +1,5 @@
 import { SupabaseCall } from "@/utils/supabaseCall";
+import Link from "next/link";
 
 type City = {
   id: number;
@@ -26,6 +27,14 @@ export default async function cities({ params }: any) {
          */}
           <p>Name: {city[0].name}</p>
           <p>Country: {city[0].country}</p>
+          <Link href={'/'}>
+      <div className="m-3">
+            <button
+              className="w-32 bg-white tracking-wide text-gray-800 font-bold rounded border-b-2 border-blue-500 hover:border-blue-600 hover:bg-blue-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center">
+              <span className="mx-auto">Home</span>
+            </button>
+          </div>
+      </Link>
         </>
       ) : (
         <p>Loading or no data available...</p> // Display a loading indicator or a no-data message
