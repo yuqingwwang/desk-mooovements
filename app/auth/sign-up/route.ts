@@ -21,7 +21,6 @@ export async function POST(request: Request) {
   })
   if(error) {
     const errorMessage = error.message
-
     const redirectUrl = `${requestUrl.origin}/error?message=${encodeURIComponent(errorMessage)}`
     return NextResponse.redirect(redirectUrl, {
       status: 301,
@@ -29,12 +28,16 @@ export async function POST(request: Request) {
 
   }
   else {
-    const userID = data?.user?.id
-    const email = data?.user?.email
-    console.log(userID, email)
-    return NextResponse.redirect(requestUrl.origin, {
+    // const userID = data?.user?.id ?? ''
+    const email = data?.user?.email ?? ''
+    const redirectUrl = `${requestUrl.origin}/login?success=true&email=${encodeURIComponent(email)}`
+
+    
+
+    return NextResponse.redirect(redirectUrl, {
     status: 301,
-  })
+    }
+  )
   }
 
 }
