@@ -1,8 +1,5 @@
 'use client';
 
-// import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-// import { useRouter } from 'next/navigation';
-// import { useEffect, useState } from 'react';
 import { Button } from '@radix-ui/themes';
 import FormInput from '../components/AuthForm';
 

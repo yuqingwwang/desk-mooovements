@@ -1,4 +1,4 @@
-import supabase from '../app/config/supabaseclient';
+import newClient from '../app/config/supabaseclient';
 
 export async function SupabaseCall(
   callFrom: string,
@@ -10,6 +10,7 @@ export async function SupabaseCall(
   columnCriteria = columnCriteria ? columnCriteria : '';
   console.log(typeof columnName);
   let fetchError: string | null = null;
+  const supabase = newClient();
   const { data, error } = await supabase
     .from(callFrom)
     .select(selectThis)
