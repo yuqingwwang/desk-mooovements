@@ -37,7 +37,7 @@ const DisplayCities = () => {
     const fetchData = async () => {
       const citiesResult = await SupabaseCall(
         'cities',
-        'id,name,country',
+        'id,name,country,work_spaces(count)',
         '',
         ''
       );
