@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
 import {
@@ -140,7 +139,7 @@ const AddWorkplace = () => {
             <Flex direction='column' gap='4' style={{ maxWidth: 300 }}>
               <label>Workplace Rating: {field.value}</label>
               <Slider
-                value={field.value}
+                value={[field.value]}
                 onValueChange={field.onChange}
                 defaultValue={[4]}
                 min={1}
@@ -157,7 +156,7 @@ const AddWorkplace = () => {
             <Flex direction='column' gap='4' style={{ maxWidth: 300 }}>
               <label>Food Rating: {field.value}</label>
               <Slider
-                value={field.value}
+                value={[field.value]}
                 onValueChange={field.onChange}
                 defaultValue={[3]}
                 min={1}
