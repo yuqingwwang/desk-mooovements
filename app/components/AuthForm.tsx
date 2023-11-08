@@ -4,16 +4,12 @@ interface FormInputProps {
   name: string;
   type: string;
   placeholder: string;
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const FormInput: React.FC<FormInputProps> = ({
   name,
   type,
   placeholder,
-  value,
-  onChange,
 }) => {
   return (
     <TextField.Root>
@@ -21,8 +17,6 @@ const FormInput: React.FC<FormInputProps> = ({
         name={name}
         type={type}
         placeholder={placeholder}
-        onChange={onChange}
-        value={value}
       />
     </TextField.Root>
   );
