@@ -1,52 +1,17 @@
-'use client';
+import WholeForm from '../components/AuthForm';
+import AddProfile from '../components/AddProfile';
 
-import { Button, Heading, Link } from '@radix-ui/themes';
-import FormInput from '../components/AuthForm';
-import { useSearchParams } from 'next/navigation';
+import { cookies } from 'next/headers';
 
 export default function Login() {
-  const searchParams = useSearchParams()
-  const success = searchParams.get('success')
-  const userEmail = searchParams.get('email')
+  const cookieStore = cookies();
 
-  // how do i check if a user is logged in when they go to /login
-  // if they are not logged in, show the login form
-  // if they are logged in, show a welcome message and a logout button
-
-
-  if(success==='true') {
-    return (
-      <>
-        <Heading>Welcome {userEmail} !</Heading>
-        <Link href='/'>Go Home</Link>
-        <Button formAction="/auth/logout">Logout</Button>
-      </>
-    )
+  // if the user is already logged in, render the add profile
+  const currentToken = cookieStore.get('sb-tkvonehonrmtoeqojhjs-auth-token');
+  if (currentToken) {
+    return <AddProfile />;
   }
 
-  else {
-    return (
-      <>
-        <div className='max-w-xl'>
-          <form
-            className='space-y-3'
-            action="auth/login"
-            method="post">
-            <FormInput
-              name='email'
-              type='email'
-              placeholder='Email'
-            />
-            <FormInput
-              name='password'
-              type='password'
-              placeholder='Password'
-            />
-              <Button>Sign in</Button>
-              <Button formAction="/auth/sign-up">Sign up</Button>
-            </form>
-        </div>
-      </>
-    );
-  }
+  // else render the login/signup form
+  return <WholeForm />;
 }

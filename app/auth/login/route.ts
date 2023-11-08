@@ -1,37 +1,38 @@
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
-import { NextResponse } from 'next/server'
+import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
+import { NextResponse } from 'next/server';
 
-import type { Database } from '../../lib/supabase'
+import type { Database } from '../../lib/supabase';
 
 export async function POST(request: Request) {
-  const requestUrl = new URL(request.url)
-  const formData = await request.formData()
-  const email = String(formData.get('email'))
-  const password = String(formData.get('password'))
-  const cookieStore = cookies()
-  const supabase = createRouteHandlerClient<Database>({ cookies: () => cookieStore })
+  const requestUrl = new URL(request.url);
+  const formData = await request.formData();
+  const email = String(formData.get('email'));
+  const password = String(formData.get('password'));
+  const cookieStore = cookies();
+  const supabase = createRouteHandlerClient<Database>({
+    cookies: () => cookieStore,
+  });
 
-  const {data, error} = await supabase.auth.signInWithPassword({
+  const { error } = await supabase.auth.signInWithPassword({
     email,
     password,
-  })
+  });
 
-  if(error) {
-    const errorMessage = error.message
+  if (error) {
+    const errorMessage = error.message;
 
-    const redirectUrl = `${requestUrl.origin}/error?message=${encodeURIComponent(errorMessage)}`
+    const redirectUrl = `${
+      requestUrl.origin
+    }/error?message=${encodeURIComponent(errorMessage)}`;
     return NextResponse.redirect(redirectUrl, {
       status: 301,
-    })
-
-  }
-  else {
-    const email = data?.user?.email ?? ''
-    const redirectUrl = `${requestUrl.origin}/login?success=true&email=${encodeURIComponent(email)}`
+    });
+  } else {
+    const redirectUrl = `${requestUrl.origin}/login`;
 
     return NextResponse.redirect(redirectUrl, {
-    status: 301,
-    })
+      status: 301,
+    });
   }
 }
