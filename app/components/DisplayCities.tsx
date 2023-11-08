@@ -1,7 +1,8 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from "react";
-import { SupabaseCall } from "@/utils/supabaseCall";
+import { useEffect, useState } from 'react';
+import { SupabaseCall } from '@/utils/supabaseCall';
+import Carousel from './Carousel';
 
 type Place = {
   id: number;
@@ -28,32 +29,42 @@ type City = {
 };
 
 const DisplayCities = () => {
-//   let cities: City[] | null = null;
-//   let places: Place[] | null = null;
+  //   let cities: City[] | null = null;
+  //   let places: Place[] | null = null;
   const [cities, setCities] = useState<City[] | undefined>(undefined);
   const [places, setPlaces] = useState<Place[] | undefined>(undefined);
   useEffect(() => {
-
     const fetchData = async () => {
-        const citiesResult = await SupabaseCall('cities', 'id,name,country', '', '');
-        setCities(citiesResult ?? undefined);
+      const citiesResult = await SupabaseCall(
+        'cities',
+        'id,name,country',
+        '',
+        ''
+      );
+      setCities(citiesResult ?? undefined);
 
-        const placesResult = await SupabaseCall(
-          'work_spaces',
-          'id,name,address,image,city',
-          '',
-          ''
-        );
-        setPlaces(placesResult ?? undefined);
+      const placesResult = await SupabaseCall(
+        'work_spaces',
+        'id,name,address,image,city',
+        '',
+        ''
+      );
+      setPlaces(placesResult ?? undefined);
     };
     fetchData();
-  }, [])
+  }, []);
 
-  
   return (
     <div>
-        {cities?.map((city) => <p key={city.name}>{city.name}</p>)}
-        {places?.map((place) => <p key={place.name}>{place.name}</p>)}
+      {/* {cities?.map((city) => <p key={city.name}>{city.name}</p>)}
+      {places?.map((place) => <p key={place.name}>{place.name}</p>)} */}
+      <div
+        id='popularCities'
+        className='flex flex-wrap justify-between border-4 border-double border-yellow-500'
+      >
+        <Carousel places={places} />
+        <Carousel cities={cities} />
+      </div>
     </div>
   );
 };
