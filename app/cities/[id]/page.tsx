@@ -6,7 +6,7 @@ type City = {
   country: string;
 };
 
-export default async function cities({ params }) {
+export default async function cities({ params }: any) {
   let city: City[] | null = null;
   const id = params.id;
   city = await SupabaseCall("cities", "id,name,country", "id", id);

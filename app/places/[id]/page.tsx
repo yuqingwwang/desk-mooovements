@@ -18,9 +18,8 @@ type Place = {
   has_phone_booth: boolean;
   has_locker: boolean;
 };
-export default async function WorkSpaces({ params }) {
 
-   
+export default async function WorkSpaces({ params }: any) {
      let place: Place[] | null = null;
      const id = params.id
   place = await SupabaseCall("work_spaces","id,name,address,image,cities ( name ),pet_friendly,opens_till_late,has_wifi,has_socket,has_shower,has_meeting_room,has_phone_booth,has_locker","id",id )
@@ -40,7 +39,7 @@ return (
          */}
          <p>Name: {place[0].name}</p>
          <p>Address: {place[0].address}</p>
-         <p>City: {place[0].cities.name}</p>
+         {/* <p>City: {place[0].cities.name}</p> */}
          <SeeMore place = {place}/>
        </>
      ) : (
