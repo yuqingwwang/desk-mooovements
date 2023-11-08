@@ -1,4 +1,6 @@
-import { TextField } from '@radix-ui/themes';
+'use client';
+
+import { Button, TextField } from '@radix-ui/themes';
 
 interface FormInputProps {
   name: string;
@@ -6,20 +8,27 @@ interface FormInputProps {
   placeholder: string;
 }
 
-const FormInput: React.FC<FormInputProps> = ({
-  name,
-  type,
-  placeholder,
-}) => {
+const FormInput: React.FC<FormInputProps> = ({ name, type, placeholder }) => {
   return (
     <TextField.Root>
-      <TextField.Input
-        name={name}
-        type={type}
-        placeholder={placeholder}
-      />
+      <TextField.Input name={name} type={type} placeholder={placeholder} />
     </TextField.Root>
   );
 };
 
-export default FormInput;
+export const WholeForm: React.FC = () => {
+  return (
+    <>
+      <div className='max-w-xl'>
+        <form className='space-y-3' action='auth/login' method='post'>
+          <FormInput name='email' type='email' placeholder='Email' />
+          <FormInput name='password' type='password' placeholder='Password' />
+          <Button>Sign in</Button>
+          <Button formAction='/auth/sign-up'>Sign up</Button>
+        </form>
+      </div>
+    </>
+  );
+};
+
+export default WholeForm;
