@@ -1,3 +1,4 @@
+
 // "use client";
 
 // import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
@@ -10,7 +11,6 @@
 // import type { Database } from '../lib/supabase';
 // import { useAutoClearMessage, extractErrorMessage } from '../utils/authFunctions';
 
-// export const revalidate = 0
 
 // export default function Login() {
 //   const router = useRouter();
@@ -30,6 +30,7 @@
 //   useAutoClearMessage(errorMessage, () => setErrorMessage(''));
 //   useAutoClearMessage(successMessage, () => setSuccessMessage(''));
 
+
 //   useEffect(() => {
 //     async function getUserID() {
 //       const user = await supabase.auth.getUser();
@@ -38,6 +39,7 @@
 //         setUserName(user.data.user.email|| '');
 //       }
 //     }
+
 
 //     getUserID();
 //   }, []);
@@ -49,6 +51,7 @@
 //       setCurrentPage('Sign up');
 //     }
 //   }, [userId]);
+
 
 //   const redirectToHomePage = () => {
 //     setTimeout(() => {
@@ -69,6 +72,7 @@
 //         email: formData.email,
 //         password: formData.password,
 //       });
+
 
 //       const errorMessage = extractErrorMessage(response);
 //       if (errorMessage) {
@@ -165,8 +169,9 @@ import React from 'react'
 
 const page = () => {
   return (
+
     <div>page</div>
   )
-}
 
-export default page
+
+export default page;
