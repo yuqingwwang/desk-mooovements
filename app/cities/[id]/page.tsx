@@ -1,41 +1,101 @@
-import { City, PageByIDParams } from '@/app/utils/types';
+import { CityPage, PageByIDParams, Amenities } from '@/app/utils/types';
 import { SupabaseCall } from '@/utils/supabaseCall';
-import Link from 'next/link';
 import Navbar from '@/app/components/NavBar';
+// import Image from 'next/image';
+import { Heading, Text, Button, Flex, Box } from '@radix-ui/themes';
+import { useState } from 'react';
+import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
 
 export default async function cities({ params }: PageByIDParams) {
-  let city: City[] | null = null;
-  const id = params.id;
-  city = await SupabaseCall('cities', 'id,name,country', 'id', id);
+  let city: CityPage[] | null = null;
+
+  city = await SupabaseCall(
+    'cities',
+    'id, name, country, work_spaces(*)',
+    'id',
+    params.id
+  );
+
+  const workSpacesData = city && city[0]['work_spaces'];
+  const spaceNames =
+    workSpacesData && workSpacesData.map((space) => space.name);
+  console.log(city && city[0]);
+  // console.log(workSpacesData)
+
+  const amenitiesStats: Amenities[] | undefined = workSpacesData?.map(
+    (space) => ({
+      id: space.id,
+      pet_friendly: space.pet_friendly,
+      opens_till_late: space.opens_till_late,
+      has_wifi: space.has_wifi,
+      has_socket: space.has_socket,
+      has_shower: space.has_shower,
+      has_meeting_room: space.has_meeting_room,
+      has_phone_booth: space.has_phone_booth,
+      has_locker: space.has_locker,
+    })
+  );
+
+  // const trueAmenities: string[][] | undefined = amenitiesStats?.map((amenity) =>
+  // Object.keys(amenity).filter((key) => amenity[key] === true))
+
+  const trueAmenitiesWithId: { id: string; amenities: string[] }[] | undefined =
+    amenitiesStats?.map((amenity: any) => {
+      const amenities = Object.keys(amenity).filter(
+        (key) => amenity[key] === true
+      );
+      return {
+        id: amenity.id,
+        amenities: amenities as string[],
+      };
+    });
+
+  console.log(trueAmenitiesWithId);
   return (
     <>
       <Navbar />
-      <div>
+      <Flex direction='column' gap='3'>
         {city && city.length > 0 ? (
           <>
-            {/* Uncomment when you handle the image rendering issue.
-          <Image
+            <Box width='auto' height='auto' bottom='50%'>
+              <Heading as='h1' size='8'>
+                {city[0].name}
+              </Heading>
+              <Text as='p' size='4'>
+                Country: {city[0].country}
+              </Text>
+              {/* <Image
             src={city[0].image}
             alt="image of the workspace"
             width={200}
             height={200}
             priority
-          />
-          */}
-            <p>Name: {city[0].name}</p>
-            <p>Country: {city[0].country}</p>
-            <Link href={'/'}>
-              <div className='m-3'>
-                <button className='inline-flex w-32 items-center rounded border-b-2 border-blue-500 bg-white px-6 py-2 font-bold tracking-wide text-gray-800 shadow-md hover:border-blue-600 hover:bg-blue-500 hover:text-white'>
-                  <span className='mx-auto'>Home</span>
-                </button>
-              </div>
-            </Link>
+          /> */}
+            </Box>
+            <Heading as='h2' size='5'>
+              {workSpacesData && workSpacesData.length} Work Spaces
+            </Heading>
+            {workSpacesData &&
+              workSpacesData.map((space) => (
+                <>
+                  <DisplayPlaceCard
+                    key={space.name}
+                    pageRoute={`places/${space.id}`}
+                    imageLink={space.image}
+                    placeName={space.name}
+                    // flavourText={space.address}
+                    flavourText={`${trueAmenitiesWithId?.find(
+                      (amenity) =>
+                        amenity.id === (space.id as unknown as string)
+                    )?.amenities}`}
+                  />
+                </>
+              ))}
           </>
         ) : (
           <p>Loading or no data available...</p> // Display a loading indicator or a no-data message
         )}
-      </div>
+      </Flex>
     </>
   );
 }
