@@ -1,6 +1,5 @@
 import newClient from "../config/supabaseclient";
 
-
 export async function SupabaseCall(
   callFrom: string,
   selectThis: string,
