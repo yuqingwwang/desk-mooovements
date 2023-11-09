@@ -2,49 +2,49 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { PopularCarousel } from '../utils/types';
 
-export default function Carousel(props: any) {
+export default function Carousel({ cities, places }: PopularCarousel) {
   function AddToSlide() {
-    const length = props.places ? props.places.length : props.cities.length;
+    const length = places ? places.length : cities ? cities.length : 0;
     if (slide >= length - 1) setSlide(0);
     else setSlide(slide + 1);
   }
   function SubtractFromSlide() {
-    const length = props.places ? props.places.length : props.cities.length;
-    if (slide <= 0) setSlide(length -1);
+    const length = places ? places.length : cities ? cities.length : 0;
+    if (slide <= 0) setSlide(length - 1);
     else setSlide(slide - 1);
   }
   const [slide, setSlide] = useState(0);
-  // console.log(props)
   return (
     <div className='my-7'>
-      {props.places && (
-        <Link href={`/places/${props.places[slide].id}`}>
+      {places && (
+        <Link href={`/places/${places[slide].id}`}>
           <div className='w-fit border-4 border-double border-yellow-500'>
             <Image
-              src={props.places[slide].image}
+              src={places[slide].image ?? ''}
               alt='Picture of a workspace'
               width={200}
               height={200}
               priority={true}
             />
-            <p>{props.places[slide].name}</p>
-            <p>{props.places[slide].address}</p>
+            <p>{places[slide].name}</p>
+            <p>{places[slide].address}</p>
           </div>
         </Link>
       )}
-      {props.cities && (
-        <Link href={`cities/${props.cities[slide].id}`}>
+      {cities && (
+        <Link href={`cities/${cities[slide].id}`}>
           <div className='w-fit border-4 border-double border-yellow-500'>
-          <Image
-              src={props.cities[slide].image}
+            <Image
+              src={cities[slide].image ?? ''}
               alt='Picture of a workspace'
               width={200}
               height={200}
               priority={true}
             />
-            <p>{props.cities[slide].name}</p>
-            <p>{props.cities[slide]['work_spaces'][0]['count']}</p>
+            <p>{cities[slide].name}</p>
+            <p>{cities[slide]['work_spaces'][0]['count']}</p>
           </div>
         </Link>
       )}
@@ -64,7 +64,6 @@ export default function Carousel(props: any) {
             SubtractFromSlide();
           }
         }}
-        
       >
         Prev
       </button>
