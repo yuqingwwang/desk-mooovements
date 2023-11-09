@@ -1,5 +1,6 @@
 import WholeForm from '../components/AuthForm';
 import AddProfile from '../components/AddProfile';
+import Navbar from '../components/NavBar';
 
 import { cookies } from 'next/headers';
 
@@ -13,5 +14,10 @@ export default function Login() {
   }
 
   // else render the login/signup form
-  return <WholeForm />;
+  return (
+    <>
+      <Navbar />
+      <WholeForm />
+    </>
+  );
 }
