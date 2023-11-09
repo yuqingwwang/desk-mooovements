@@ -1,4 +1,5 @@
-import newClient from '../app/config/supabaseclient';
+import newClient from "../config/supabaseclient";
+
 
 export async function SupabaseCall(
   callFrom: string,
