@@ -1,6 +1,9 @@
 # Introduction   
 What are you building?  
-Why are you building it?  
+- We are building an app that simplify the search with a tailored database of places that suit digital nomads' unique needs.
+  
+Why are you building it? 
+- Digital nomads often struggle to find flexible workspaces without long memberships and those open at unconventional hours.
 # Project scope   
 What are you not building?  
 How did you decide what features were important?  
