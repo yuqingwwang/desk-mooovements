@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/page.tsx",
-    "app/config/supabaseclient.ts"
+    "app/config/supabaseclient.ts",
+    "next.config.js"
   ],
   "exclude": ["node_modules"]
 }
