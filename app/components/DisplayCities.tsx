@@ -3,36 +3,11 @@
 import { useEffect, useState } from 'react';
 import { SupabaseCall } from '@/utils/supabaseCall';
 import Carousel from './Carousel';
-
-type Place = {
-  id: number;
-  created_at: string;
-  created_by: number;
-  name: string;
-  address: string;
-  image: string;
-  city: number;
-  pet_friendly: boolean;
-  opens_till_late: boolean;
-  has_wifi: boolean;
-  has_socket: boolean;
-  has_shower: boolean;
-  has_meeting_room: boolean;
-  has_phone_booth: boolean;
-  has_locker: boolean;
-};
-
-type City = {
-  id: number;
-  name: string;
-  country: string;
-};
+import { City, Workspace } from '../utils/types';
 
 const DisplayCities = () => {
-  //   let cities: City[] | null = null;
-  //   let places: Place[] | null = null;
   const [cities, setCities] = useState<City[] | undefined>(undefined);
-  const [places, setPlaces] = useState<Place[] | undefined>(undefined);
+  const [places, setPlaces] = useState<Workspace[] | undefined>(undefined);
   useEffect(() => {
     const fetchData = async () => {
       const citiesResult = await SupabaseCall(
@@ -41,7 +16,7 @@ const DisplayCities = () => {
         '',
         ''
       );
-      setCities(citiesResult ?? undefined);
+      setCities(citiesResult ?? []);
 
       const placesResult = await SupabaseCall(
         'work_spaces',
@@ -49,7 +24,7 @@ const DisplayCities = () => {
         '',
         ''
       );
-      setPlaces(placesResult ?? undefined);
+      setPlaces(placesResult ?? []);
     };
     fetchData();
   }, []);
@@ -58,7 +33,7 @@ const DisplayCities = () => {
     <div>
       <div
         id='popularCities'
-        className='flex flex-wrap flex-col content-center  border-4 border-double border-yellow-500'
+        className='flex flex-col flex-wrap content-center  border-4 border-double border-yellow-500'
       >
         <Carousel places={places} />
         <Carousel cities={cities} />

@@ -1,17 +1,11 @@
-import { SupabaseCall } from "@/utils/supabaseCall";
-import Link from "next/link";
+import { City, PageByIDParams } from '@/app/utils/types';
+import { SupabaseCall } from '@/utils/supabaseCall';
+import Link from 'next/link';
 
-type City = {
-  id: number;
-  name: string;
-  country: string;
-};
-
-export default async function cities({ params }: any) {
+export default async function cities({ params }: PageByIDParams) {
   let city: City[] | null = null;
   const id = params.id;
-  city = await SupabaseCall("cities", "id,name,country", "id", id);
-  console.log(city);
+  city = await SupabaseCall('cities', 'id,name,country', 'id', id);
   return (
     <div>
       {city && city.length > 0 ? (
@@ -28,13 +22,12 @@ export default async function cities({ params }: any) {
           <p>Name: {city[0].name}</p>
           <p>Country: {city[0].country}</p>
           <Link href={'/'}>
-      <div className="m-3">
-            <button
-              className="w-32 bg-white tracking-wide text-gray-800 font-bold rounded border-b-2 border-blue-500 hover:border-blue-600 hover:bg-blue-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center">
-              <span className="mx-auto">Home</span>
-            </button>
-          </div>
-      </Link>
+            <div className='m-3'>
+              <button className='inline-flex w-32 items-center rounded border-b-2 border-blue-500 bg-white px-6 py-2 font-bold tracking-wide text-gray-800 shadow-md hover:border-blue-600 hover:bg-blue-500 hover:text-white'>
+                <span className='mx-auto'>Home</span>
+              </button>
+            </div>
+          </Link>
         </>
       ) : (
         <p>Loading or no data available...</p> // Display a loading indicator or a no-data message
