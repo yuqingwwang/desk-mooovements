@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { Avatar, Box, Card, Flex, Text } from '@radix-ui/themes';
 import { PopularCarousel } from '../utils/types';
 
-
 export default function Carousel({ cities, places }: PopularCarousel) {
   function AddToSlide() {
     const length = places ? places.length : cities ? cities.length : 0;
@@ -13,7 +12,6 @@ export default function Carousel({ cities, places }: PopularCarousel) {
     else setSlide(slide + 1);
   }
   function SubtractFromSlide() {
-
     const length = places ? places.length : cities ? cities.length : 0;
 
     if (slide <= 0) setSlide(length - 1);
@@ -22,52 +20,51 @@ export default function Carousel({ cities, places }: PopularCarousel) {
   const [slide, setSlide] = useState(0);
   return (
     <div className='my-7'>
-      {props.places && (
+      {places && (
         <Card style={{ minWidth: 400, minHeight: 250 }}>
-        <Link href={`/places/${props.places[slide].id}`}>
-          <Flex gap='9' align='center'>
-            <Avatar
-              size='9'
-              src={props.places[slide].image}
-              radius='full'
-              fallback="T"
-              className='mt-8 ml-4'
-            />
-            <Box>
-              <Text as='div' size='8' weight='bold'>
-              {props.places[slide].name}
-              </Text>
-              <Text as='div' size='6' color='gray'>
-              {props.places[slide].address}
-              </Text>
-            </Box>
-          </Flex>
-        </Link>
-      </Card>
-      )}
-      {props.cities && (
-        <Card style={{ minWidth: 400, minHeight: 250 }}>
-          <Link href={`cities/${props.cities[slide].id}`}>
+          <Link href={`/places/${places[slide].id}`}>
             <Flex gap='9' align='center'>
               <Avatar
                 size='9'
-                src={props.cities[slide].image}
+                src={places[slide].image ?? ''}
                 radius='full'
-                fallback="T"
-                className='mt-8 ml-4'
+                fallback='T'
+                className='ml-4 mt-8'
               />
               <Box>
                 <Text as='div' size='8' weight='bold'>
-                  {props.cities[slide].name}
+                  {places[slide].name}
                 </Text>
                 <Text as='div' size='6' color='gray'>
-                  {props.cities[slide]['work_spaces'][0]['count']}
+                  {places[slide].address}
                 </Text>
               </Box>
             </Flex>
           </Link>
         </Card>
-
+      )}
+      {cities && (
+        <Card style={{ minWidth: 400, minHeight: 250 }}>
+          <Link href={`cities/${cities[slide].id}`}>
+            <Flex gap='9' align='center'>
+              <Avatar
+                size='9'
+                src={cities[slide].image ?? ''}
+                radius='full'
+                fallback='T'
+                className='ml-4 mt-8'
+              />
+              <Box>
+                <Text as='div' size='8' weight='bold'>
+                  {cities[slide].name}
+                </Text>
+                <Text as='div' size='6' color='gray'>
+                  {cities[slide]['work_spaces'][0]['count']}
+                </Text>
+              </Box>
+            </Flex>
+          </Link>
+        </Card>
       )}
       <button
         onClick={() => {
