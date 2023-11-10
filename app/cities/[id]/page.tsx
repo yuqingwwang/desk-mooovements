@@ -58,7 +58,7 @@ export default async function cities({ params }: PageByIDParams) {
         {city && city.length > 0 ? (
           <>
             <Box width='auto' height='auto' bottom='50%'>
-              <Heading 'city-name' as='h1' size='8'>
+              <Heading data-testid='city-name' as='h1' size='8'>
                 {city[0].name}
               </Heading>
               <Text as='p' size='4'>
@@ -91,7 +91,6 @@ export default async function cities({ params }: PageByIDParams) {
                   />
                 </>
               ))}
-
           </>
         ) : (
           <p>Loading or no data available...</p> // Display a loading indicator or a no-data message
