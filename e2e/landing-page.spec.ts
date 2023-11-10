@@ -15,7 +15,9 @@ test.describe('landing page renders correctly', () => {
     ).toBeVisible();
   });
   test('Renders login button', async ({ page }) => {
-    await expect(page.getByRole('button', { name: 'Login' })).toBeVisible();
+    await expect(
+      page.getByRole('button', { name: 'Login' }).first()
+    ).toBeVisible();
   });
   test('Renders popular cities card', async ({ page }) => {
     await expect(page.getByTestId('cities')).toBeVisible;
@@ -26,56 +28,105 @@ test.describe('landing page renders correctly', () => {
 });
 
 test.describe('Landing page interactivity works', () => {
-  test('next button on cities carousel moves to new city', async ({ page }) => {
-    const firstCity = await page.getByTestId('places').locator('div').first();
-    await page
-      .getByTestId('places')
-      .getByRole('button', { name: 'Next' })
-      .click();
-    const secondCity = await page.getByTestId('places').locator('div').first();
-    expect(firstCity).toBeHidden;
-    expect(secondCity).toBeVisible;
+  test.describe('Carousel works correctly', () => {
+    test('next button on cities carousel moves to new city', async ({
+      page,
+    }) => {
+      const firstCity = await page.getByTestId('places').locator('div').first();
+      await page
+        .getByTestId('places')
+        .getByRole('button', { name: 'Next' })
+        .click();
+      const secondCity = await page
+        .getByTestId('places')
+        .locator('div')
+        .first();
+      expect(firstCity).toBeHidden;
+      expect(secondCity).toBeVisible;
+    });
+    test('Prev button on cities carousel moves to new city', async ({
+      page,
+    }) => {
+      const firstCity = await page.getByTestId('places').locator('div').first();
+      await page
+        .getByTestId('places')
+        .getByRole('button', { name: 'Prev' })
+        .click();
+      const secondCity = await page
+        .getByTestId('places')
+        .locator('div')
+        .first();
+      expect(firstCity).toBeHidden;
+      expect(secondCity).toBeVisible;
+    });
+    test('next button on cities carousel moves to Prev city', async ({
+      page,
+    }) => {
+      const firstCity = await page.getByTestId('places').locator('div').first();
+      await page
+        .getByTestId('places')
+        .getByRole('button', { name: 'Prev' })
+        .click();
+      const secondCity = await page
+        .getByTestId('places')
+        .locator('div')
+        .first();
+      await page
+        .getByTestId('places')
+        .getByRole('button', { name: 'Next' })
+        .click();
+      expect(firstCity).toBeVisible;
+      expect(secondCity).toBeHidden;
+    });
+    test('Prev button on cities carousel moves to Prev city', async ({
+      page,
+    }) => {
+      const firstCity = await page.getByTestId('places').locator('div').first();
+      await page
+        .getByTestId('places')
+        .getByRole('button', { name: 'Next' })
+        .click();
+      const secondCity = await page
+        .getByTestId('places')
+        .locator('div')
+        .first();
+      await page
+        .getByTestId('places')
+        .getByRole('button', { name: 'Prev' })
+        .click();
+      expect(firstCity).toBeVisible;
+      expect(secondCity).toBeHidden;
+    });
   });
-  test('Prev button on cities carousel moves to new city', async ({ page }) => {
-    const firstCity = await page.getByTestId('places').locator('div').first();
-    await page
-      .getByTestId('places')
-      .getByRole('button', { name: 'Prev' })
-      .click();
-    const secondCity = await page.getByTestId('places').locator('div').first();
-    expect(firstCity).toBeHidden;
-    expect(secondCity).toBeVisible;
-  });
-  test('next button on cities carousel moves to Prev city', async ({
-    page,
-  }) => {
-    const firstCity = await page.getByTestId('places').locator('div').first();
-    await page
-      .getByTestId('places')
-      .getByRole('button', { name: 'Prev' })
-      .click();
-    const secondCity = await page.getByTestId('places').locator('div').first();
-    await page
-      .getByTestId('places')
-      .getByRole('button', { name: 'Next' })
-      .click();
-    expect(firstCity).toBeVisible;
-    expect(secondCity).toBeHidden;
-  });
-  test('Prev button on cities carousel moves to Prev city', async ({
-    page,
-  }) => {
-    const firstCity = await page.getByTestId('places').locator('div').first();
-    await page
-      .getByTestId('places')
-      .getByRole('button', { name: 'Next' })
-      .click();
-    const secondCity = await page.getByTestId('places').locator('div').first();
-    await page
-      .getByTestId('places')
-      .getByRole('button', { name: 'Prev' })
-      .click();
-    expect(firstCity).toBeVisible;
-    expect(secondCity).toBeHidden;
+  test.describe('Links all lead to correct place', () => {
+    test('Add workplace button leads to correct page', async ({ page }) => {
+      await page.getByRole('button', { name: 'Add Workplace' }).click();
+      await expect(page.getByRole('heading', { name: 'Add a place' }))
+        .toBeVisible;
+    });
+    test('Place carousel link leads to correct place page', async ({
+      page,
+    }) => {
+      const place = await page
+        .getByTestId('places')
+        .locator('div')
+        .nth(1)
+        .innerText();
+      await page.getByTestId('places').locator('div').nth(1).click();
+      const placePage = await page.getByTestId('place-name').innerText();
+      const cleanedPlacePage = placePage.replace('Name: ', '');
+      expect(place).toContain(cleanedPlacePage);
+    });
+    test('City carousel link leads to correct city page', async ({ page }) => {
+      const place = await page
+        .getByTestId('cities')
+        .locator('div')
+        .nth(1)
+        .innerText();
+      await page.getByTestId('cities').locator('div').nth(1).click();
+      const placePage = await page.getByTestId('city-name').innerText();
+      const cleanedPlacePage = placePage.replace('Name: ', '');
+      expect(place).toContain(cleanedPlacePage);
+    });
   });
 });

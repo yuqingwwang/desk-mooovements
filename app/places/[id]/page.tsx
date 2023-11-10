@@ -29,7 +29,7 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
            priority
          />
          */}
-            <p>Name: {place[0].name}</p>
+            <p data-testid='place-name'>Name: {place[0].name}</p>
             <p>Address: {place[0].address}</p>
             {/* <p>City: {place[0].cities.name}</p> */}
             <SeeMore place={place} />
