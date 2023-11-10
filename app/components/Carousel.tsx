@@ -18,7 +18,10 @@ export default function Carousel({ cities, places }: PopularCarousel) {
   }
   const [slide, setSlide] = useState(0);
   return (
-    <div className='my-7'>
+    <div
+      className='my-7'
+      data-testid={places ? 'places' : cities ? 'cities' : ''}
+    >
       {places && (
         <DisplayPlaceCard
           pageRoute={`places/${places[slide].id}`}

@@ -4,15 +4,13 @@ import {
   TextField,
   Heading,
   Button,
-  Flex,
   Text,
   Strong,
-  Slider,
-  TextArea,
   Callout,
   Checkbox,
+  DropdownMenu,
 } from '@radix-ui/themes';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Spinner from '../components/Spiner';
 import { useRouter } from 'next/navigation';
 import { CreateAddWorkplaceForm } from '../validationForm';
@@ -20,6 +18,9 @@ import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import ErrorMessage from '../components/ErrorMessage';
 import * as Label from '@radix-ui/react-label';
 import Link from 'next/link';
+import newClient from '../config/supabaseclient';
+import { SupabaseCall } from '../utils/supabaseCall';
+
 const AddWorkplace = () => {
   const {
     register,
@@ -31,8 +32,8 @@ const AddWorkplace = () => {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setSubmitting] = useState(false);
-
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
+  const [cities, setCities] = useState<{ name: string }[]>([]);
 
   const handleAmenityChange = (amenity: string) => {
     if (selectedAmenities.includes(amenity)) {
@@ -41,35 +42,39 @@ const AddWorkplace = () => {
       setSelectedAmenities([...selectedAmenities, amenity]);
     }
   };
-  const validateAmenities = () => {
-    if (selectedAmenities.length === 0) {
-      return 'Please select at least one amenity';
-    }
-    return true;
-  };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const citiesResult = await SupabaseCall('cities', 'name', '', '');
+      setCities(citiesResult ?? []);
+    };
+    fetchData();
+  }, []);
+ 
   const onSubmit: SubmitHandler<CreateAddWorkplaceForm> = async (data) => {
-    const amenitiesValidation = validateAmenities();
-
-    if (amenitiesValidation !== true) {
-      setError(amenitiesValidation);
-      return;
-    }
-
+    const supabase = newClient();
     try {
       setSubmitting(true);
 
-      // Combine all the form data, including selected amenities
-      const formData = {
-        ...data,
-        amenities: selectedAmenities,
-      };
+      const { error } = await supabase
+        .from('work_spaces')
+        .insert({
+          id: 583,
+          name: data.name,
+          created_by: '04811e1f-463f-46cd-b791-75355da3fcad',
+          address: data.address,
+          image: data.image,
+          pet_friendly: selectedAmenities.includes('pet-friendly'),
+          opens_till_late: selectedAmenities.includes('open till late'),
+          has_wifi: selectedAmenities.includes('wifi'),
+          has_socket: selectedAmenities.includes('charging outlets'),
+          has_shower: selectedAmenities.includes('shower'),
+          has_meeting_room: selectedAmenities.includes('meeting rooms'),
+          has_phone_booth: selectedAmenities.includes('phone booth'),
+          has_locker: selectedAmenities.includes('lockers'),
+        })
+        .select();
 
-      console.log(formData);
-
-      // Send the data to the database
-      // await ...
-      // Redirect to a new page
       router.push('/');
     } catch (error) {
       setSubmitting(false);
@@ -89,6 +94,18 @@ const AddWorkplace = () => {
       )}
 
       <form className='space-y-3' onSubmit={handleSubmit(onSubmit)}>
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger>
+            <Button variant='soft' color='indigo'>
+              Cities
+            </Button>
+          </DropdownMenu.Trigger>
+          <DropdownMenu.Content variant='soft' color='indigo'>
+            {cities.map((city) => (
+              <DropdownMenu.Item key={city.name}>{city.name}</DropdownMenu.Item>
+            ))}
+          </DropdownMenu.Content>
+        </DropdownMenu.Root>
         <TextField.Root>
           <TextField.Input
             placeholder='Name'
@@ -99,25 +116,35 @@ const AddWorkplace = () => {
 
         <TextField.Root>
           <TextField.Input
-            placeholder='City'
-            {...register('city', { required: 'City is required' })}
+            placeholder='Address'
+            {...register('address', { required: 'Address is required' })}
           />
         </TextField.Root>
-        <ErrorMessage>{errors.city?.message}</ErrorMessage>
+        <ErrorMessage>{errors.address?.message}</ErrorMessage>
+
+        <TextField.Root>
+          <TextField.Input
+            placeholder='Image'
+            {...register('image', { required: 'Image is required' })}
+          />
+        </TextField.Root>
+        <ErrorMessage>{errors.image?.message}</ErrorMessage>
 
         <Heading as='h2' className='py-3'>
           Tell us more about the workplace
         </Heading>
         <Text as='div'>
-          <Strong>Amenities</Strong> (select at least one)
+          <Strong>Amenities</Strong>
         </Text>
         {[
-          'quite',
+          'open till late',
+          'wifi',
+          'charging outlets',
+          'meeting rooms',
           'shower',
+          'phone booth',
+          'lockers',
           'pet-friendly',
-          '24/7 access',
-          'yoga',
-          'social space',
         ].map((amenity) => (
           <div key={amenity} className='p-1'>
             <Label.Root>
@@ -132,63 +159,16 @@ const AddWorkplace = () => {
         ))}
         <ErrorMessage>{errors.amenities?.message}</ErrorMessage>
 
-        <Controller
-          name='workplaceRating'
-          control={control}
-          render={({ field }) => (
-            <Flex direction='column' gap='4' style={{ maxWidth: 300 }}>
-              <label>Workplace Rating: {field.value}</label>
-              <Slider
-                value={[field.value]}
-                onValueChange={field.onChange}
-                defaultValue={[4]}
-                min={1}
-                max={5}
-                color='crimson'
-              />
-            </Flex>
-          )}
-        />
-        <Controller
-          name='foodRating'
-          control={control}
-          render={({ field }) => (
-            <Flex direction='column' gap='4' style={{ maxWidth: 300 }}>
-              <label>Food Rating: {field.value}</label>
-              <Slider
-                value={[field.value]}
-                onValueChange={field.onChange}
-                defaultValue={[3]}
-                min={1}
-                max={5}
-                color='crimson'
-              />
-            </Flex>
-          )}
-        />
-
-        <Controller
-          name='comments'
-          control={control}
-          render={({ field }) => (
-            <TextArea
-              value={field.value}
-              onChange={field.onChange}
-              placeholder='Your comment here'
-            />
-          )}
-        />
         <Button disabled={isSubmitting}>
           Create {isSubmitting && <Spinner />}
         </Button>
       </form>
       <Link href={'/'}>
-      <div className="m-3">
-            <button
-              className="w-32 bg-white tracking-wide text-gray-800 font-bold rounded border-b-2 border-blue-500 hover:border-blue-600 hover:bg-blue-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center">
-              <span className="mx-auto">Home</span>
-            </button>
-          </div>
+        <div className='m-3'>
+          <button className='inline-flex w-32 items-center rounded border-b-2 border-blue-500 bg-white px-6 py-2 font-bold tracking-wide text-gray-800 shadow-md hover:border-blue-600 hover:bg-blue-500 hover:text-white'>
+            <span className='mx-auto'>Home</span>
+          </button>
+        </div>
       </Link>
     </div>
   );
