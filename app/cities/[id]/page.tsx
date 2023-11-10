@@ -22,7 +22,7 @@ export default async function cities({ params }: PageByIDParams) {
             priority
           />
           */}
-            <p>Name: {city[0].name}</p>
+            <p data-testid='city-name'>Name: {city[0].name}</p>
             <p>Country: {city[0].country}</p>
             <Link href={'/'}>
               <div className='m-3'>
