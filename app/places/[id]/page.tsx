@@ -3,6 +3,10 @@ import { PageByIDParams, Workspace } from '@/app/utils/types';
 import { SupabaseCall } from '@/utils/supabaseCall';
 import Link from 'next/link';
 import Navbar from '@/app/components/NavBar';
+import AddToWishList from '@/app/components/AddToWishlist';
+import { cookies } from 'next/headers';
+import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { Database } from '../../lib/supabase';
 
 export default async function WorkSpaces({ params }: PageByIDParams) {
   let place: Workspace[] | null = null;
@@ -13,6 +17,14 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
     'id',
     id
   );
+  const cookieStore = cookies();
+  const supabase = createRouteHandlerClient<Database>({
+    cookies: () => cookieStore,
+  });
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  console.log({ user });
   return (
     <>
       <Navbar />
@@ -29,11 +41,12 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
            priority
          />
          */}
-            <p>Name: {place[0].name}</p>
+            <p data-testid='place-name'>Name: {place[0].name}</p>
             <p>Address: {place[0].address}</p>
             {/* <p>City: {place[0].cities.name}</p> */}
             <SeeMore place={place} />
             <Link href={'/'}>
+              <AddToWishList id={parseInt(id)} user={user && user.id} />
               <div className='m-3'>
                 <button className='inline-flex w-32 items-center rounded border-b-2 border-blue-500 bg-white px-6 py-2 font-bold tracking-wide text-gray-800 shadow-md hover:border-blue-600 hover:bg-blue-500 hover:text-white'>
                   <span className='mx-auto'>Home</span>

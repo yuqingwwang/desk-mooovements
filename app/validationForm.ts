@@ -11,7 +11,8 @@ enum AmenitiesEnum {
 
 export type CreateAddWorkplaceForm = {
   name: string,
-  city: string,
+  image: string,
+  address: string,
   rating: number,
   amenities: AmenitiesEnum,
   workplaceRating: number,
