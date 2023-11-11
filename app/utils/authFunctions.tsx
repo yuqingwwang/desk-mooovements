@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 
-export const useAutoClearMessage = (message: string | null, clearMessage: () => void) => {
+export const useAutoClearMessage = (
+  message: string | null,
+  clearMessage: () => void
+) => {
   useEffect(() => {
     if (message) {
       const timer = setTimeout(() => {
@@ -18,4 +21,4 @@ export function extractErrorMessage(response: unknown): string | null {
   const errorMessagePattern = /"message":"(.*?)"/;
   const match = errorMessagePattern.exec(JSON.stringify(response));
   return match ? match[1] : null;
-};
+}
