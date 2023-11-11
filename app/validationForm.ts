@@ -1,22 +1,19 @@
-
-
 enum AmenitiesEnum {
-  quite = "quite",
-  access = "access",
-  social = "social",
+  quite = 'quite',
+  access = 'access',
+  social = 'social',
   yoga = 'yoga',
-  pet = "pet",
-  shower = "shower"
+  pet = 'pet',
+  shower = 'shower',
 }
 
 export type CreateAddWorkplaceForm = {
-  name: string,
-  image: string,
-  address: string,
-  rating: number,
-  amenities: AmenitiesEnum,
-  workplaceRating: number,
-  foodRating: number,
-  comments: string,
-  
-  }
+  name: string;
+  image: string;
+  address: string;
+  rating: number;
+  amenities: AmenitiesEnum;
+  workplaceRating: number;
+  foodRating: number;
+  comments: string;
+};
