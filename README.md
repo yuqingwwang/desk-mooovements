@@ -26,10 +26,15 @@ Recommendations and conclusions
 Was the project a success?  
 Software Development Lifecycle stages   
 # Planning    
-What roles did your team take on?  
+What roles did your team take on? 
 Explain the roles and responsibilities of all people working within the software development lifecycle, and how they relate to the project (K2)  
-
 Did these roles help your team work effectively?  
+- Shaughn Scrum Facilitator, Yuqing UI/UX, Jame QA, Ellana DevOps
+- Within our organization scum facilitation means mostly leading stand ups and organizing planning the project was not strictly guided since we spent time planning together before the start
+- UI/UX meant making sure the layout and way that you moved around the web site was handled in keeping with our intended user experience and prototype
+- QA meant designing tests for the routes and key functions in our project
+- Dev Ops was getting deployment to work and making sure all code would work on deployment
+
 Outline how teams work effectively to produce software and how to contribute appropriately (K6) Compare and contrast the requirements of a software development team, and how they would ensure that each member (including themselves) were able to make a contribution (K6)
 
 Analysis   
@@ -81,12 +86,6 @@ First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -95,5 +94,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Deploy on Vercel
 
 Deployed app here [Vercel Platform](https://desk-mooovements-1b004ndx5-elenas-projects-f436e785.vercel.app/).
+
 
 
