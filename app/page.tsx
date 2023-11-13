@@ -15,7 +15,7 @@ export default async function ServerComponent({ params }: PageByIDParams) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
+  console.log('This is the user from the home page', user);
   return (
     <>
       <main>
@@ -28,7 +28,7 @@ export default async function ServerComponent({ params }: PageByIDParams) {
             <span className='mx-auto'>Add Workplace</span>
           </button>
         </Link>
-        <Navbar />
+        <Navbar user={user && user.id} />
       </main>
     </>
   );
