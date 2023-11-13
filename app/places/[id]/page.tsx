@@ -47,7 +47,7 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
           <p>Loading or no data available...</p> // Display a loading indicator or a no-data message
         )}
       </div>
-      <Navbar />
+      <Navbar user={user && user.id} />
     </>
   );
 }

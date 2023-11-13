@@ -5,6 +5,9 @@ import Navbar from '@/app/components/NavBar';
 import { Heading, Text, Button, Flex, Box } from '@radix-ui/themes';
 import { useState } from 'react';
 import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
+import { Database } from '@/database.types';
+import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
 
 export default async function cities({ params }: PageByIDParams) {
   let city: CityPage[] | null = null;
@@ -16,6 +19,13 @@ export default async function cities({ params }: PageByIDParams) {
     params.id
   );
 
+  const cookieStore = cookies();
+  const supabase = createRouteHandlerClient<Database>({
+    cookies: () => cookieStore,
+  });
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   const workSpacesData = city && city[0]['work_spaces'];
   const spaceNames =
     workSpacesData && workSpacesData.map((space) => space.name);
@@ -95,7 +105,7 @@ export default async function cities({ params }: PageByIDParams) {
           <p>Loading or no data available...</p> // Display a loading indicator or a no-data message
         )}
       </Flex>
-      <Navbar />
+      <Navbar user={user && user.id} />
     </>
   );
 }
