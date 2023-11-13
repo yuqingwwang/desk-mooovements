@@ -12,34 +12,31 @@ const DisplayCities = async () => {
       '',
       ''
     )) || [];
-  
-  if (cities) {
-        // sort by number of workspaces
-        cities.sort(
-          (a, b) => b.work_spaces[0].count - a.work_spaces[0].count
-        );
 
-        // keep up to 3 cities
-        cities.splice(3);
-      }
+  if (cities) {
+    // sort by number of workspaces
+    cities.sort((a, b) => b.work_spaces[0].count - a.work_spaces[0].count);
+
+    // keep up to 3 cities
+    cities.splice(3);
+  }
 
   const places: Workspace[] =
     (await SupabaseCall(
-        'work_spaces',
-        'id, name, address, image, city, reviews(count)',
-        '',
-        ''
-      ) ||
-    [];
-  
-  if (placesResult) {
-        // sort by number of reviews
-        placesResult.sort((a, b) => b.reviews[0].count - a.reviews[0].count);
+      'work_spaces',
+      'id, name, address, image, city, reviews(count)',
+      '',
+      ''
+    )) || [];
 
-        // keep up to 3 places
-        placesResult.splice(3);
-      }
-  
+  if (places) {
+    // sort by number of reviews
+    places.sort((a, b) => b.reviews[0].count - a.reviews[0].count);
+
+    // keep up to 3 places
+    places.splice(3);
+  }
+
   return (
     <div>
       <SearchBar cities={cities ?? []} />
