@@ -50,7 +50,7 @@ const AddWorkplace = () => {
     };
     fetchData();
   }, []);
- 
+
   const onSubmit: SubmitHandler<CreateAddWorkplaceForm> = async (data) => {
     const supabase = newClient();
     try {
