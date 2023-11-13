@@ -13,50 +13,71 @@ export interface Database {
         Row: {
           country: string | null;
           id: number;
-          name: string | null;
           image: string | null;
+          name: string | null;
         };
         Insert: {
           country?: string | null;
           id?: number;
-          name?: string | null;
           image?: string | null;
+          name?: string | null;
         };
         Update: {
           country?: string | null;
           id?: number;
-          name?: string | null;
           image?: string | null;
+          name?: string | null;
+        };
+        Relationships: [];
+      };
+      profiles: {
+        Row: {
+          amenity_preference: string | null;
+          created_at: string;
+          id: string;
+          social_preference: string | null;
+          wish_list: number[] | null;
+        };
+        Insert: {
+          amenity_preference?: string | null;
+          created_at?: string;
+          id?: string;
+          social_preference?: string | null;
+          wish_list?: number[] | null;
+        };
+        Update: {
+          amenity_preference?: string | null;
+          created_at?: string;
+          id?: string;
+          social_preference?: string | null;
+          wish_list?: number[] | null;
         };
         Relationships: [];
       };
       reviews: {
         Row: {
+          comments: string | null;
           food_rating: number | null;
-          food_reviews: string | null;
           id: number;
           place_id: number | null;
           user_id: string | null;
           vibe_rating: number | null;
-          vibe_reviews: string | null;
         };
         Insert: {
+          comments?: string | null;
           food_rating?: number | null;
-          food_reviews?: string | null;
           id?: number;
           place_id?: number | null;
           user_id?: string | null;
           vibe_rating?: number | null;
-          vibe_reviews?: string | null;
         };
         Update: {
+          comments?: string | null;
           food_rating?: number | null;
-          food_reviews?: string | null;
           id?: number;
           place_id?: number | null;
           user_id?: string | null;
           vibe_rating?: number | null;
-          vibe_reviews?: string | null;
         };
         Relationships: [
           {

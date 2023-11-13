@@ -6,7 +6,7 @@ import Navbar from '@/app/components/NavBar';
 import AddToWishList from '@/app/components/AddToWishlist';
 import { cookies } from 'next/headers';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
-import { Database } from '../../lib/supabase';
+import { Database } from '../../../database.types';
 
 export default async function WorkSpaces({ params }: PageByIDParams) {
   let place: Workspace[] | null = null;
