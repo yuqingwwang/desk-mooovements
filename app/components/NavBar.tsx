@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Button } from '@radix-ui/themes';
 
 // ... (your existing imports)
@@ -11,6 +12,11 @@ export default function NavBar({ user }: { user: string | null }) {
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
+  };
+  const router = useRouter();
+
+  const handleLoginButtonClick = () => {
+    router.push('/login');
   };
 
   return (
@@ -43,31 +49,26 @@ export default function NavBar({ user }: { user: string | null }) {
                     >
                       Wish List
                     </Link>
+                    <Link
+                      href='/add-workplace'
+                      className='block rounded px-4 py-2 text-gray-900 hover:bg-gray-100'
+                    >
+                      Add Workplace
+                    </Link>
                   </li>
                 </>
               )}
-              <li>
-                {user ? (
-                  <form method='post' action='/auth/logout'>
-                    <Button
-                      type='submit'
-                      className=' bg-blue-500 font-bold text-white hover:bg-blue-700'
-                    >
-                      Logout
-                    </Button>
-                  </form>
-                ) : (
-                  <Link
-                    href='/login'
-                    className='block rounded px-4 py-2 text-gray-900 hover:bg-gray-100'
-                  >
-                    Login
-                  </Link>
-                )}
-              </li>
+              <li></li>
             </ul>
           </div>
           <div className='flex md:order-2'>
+            {user ? (
+              <form method='post' action='/auth/logout'>
+                <Button type='submit'>Log Out</Button>
+              </form>
+            ) : (
+              <Button onClick={handleLoginButtonClick}>Log In</Button>
+            )}
             <button
               type='button'
               className='inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden'
