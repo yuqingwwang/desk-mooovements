@@ -55,7 +55,7 @@ export const SearchBar: React.FC<{
   };
 
   return (
-    <div className='searchmargintop flex justify-center'>
+    <div className='searchmargintop mt-2 flex justify-center'>
       <form
         onSubmit={handleSubmit}
         className='flex opacity-70 transition-opacity duration-200 focus-within:opacity-90'
