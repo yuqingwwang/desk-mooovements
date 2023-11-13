@@ -98,9 +98,9 @@ export interface Database {
       };
       work_spaces: {
         Row: {
-          [x: string]: any;
           address: string | null;
           city: number | null;
+          coordinates: string | null;
           created_at: string | null;
           created_by: string | null;
           has_locker: boolean | null;
@@ -118,6 +118,7 @@ export interface Database {
         Insert: {
           address?: string | null;
           city?: number | null;
+          coordinates?: string | null;
           created_at?: string | null;
           created_by?: string | null;
           has_locker?: boolean | null;
@@ -126,7 +127,7 @@ export interface Database {
           has_shower?: boolean | null;
           has_socket?: boolean | null;
           has_wifi?: boolean | null;
-          id: number;
+          id?: number;
           image?: string | null;
           name?: string | null;
           opens_till_late?: boolean | null;
@@ -135,6 +136,7 @@ export interface Database {
         Update: {
           address?: string | null;
           city?: number | null;
+          coordinates?: string | null;
           created_at?: string | null;
           created_by?: string | null;
           has_locker?: boolean | null;

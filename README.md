@@ -1,8 +1,11 @@
 # Introduction
+
 What are you building?
+
 - We are building an app that simplify the search with a tailored database of places that suit digital nomads' unique needs.
 
 Why are you building it?
+
 - Digital nomads often struggle to find flexible workspaces without long memberships and those open at unconventional hours.
 
 # Project scope
@@ -21,12 +24,15 @@ How did user research inform your plan?
 How will you ensure your project is accessible to as many users as possible?
 Are there any legal or regulatory requirements you should consider?
 Project learnings
+
 # Did your team work effectively?
+
 What would you do differently next time?
 Research and findings
 What did you find out from user testing?
 
 # Project outcomes
+
 Were your assumptions right or wrong?
 Recommendations and conclusions
 
@@ -91,11 +97,7 @@ Could a new person quickly be onboarded to contribute?
 Establishes a logical thinking approach to areas of work which require valid reasoning and/or justified decision making (B2)
 Describes how they have maintained a productive, professional and secure working environment throughout the project activity (B3)
 
-
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-
-
 
 ## Getting Started
 

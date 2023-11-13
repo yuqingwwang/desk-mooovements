@@ -1,7 +1,6 @@
-import { CityPage, PageByIDParams, Amenities } from '@/app/utils/types';
-import { SupabaseCall } from '@/utils/supabaseCall';
+import { CityData, PageByIDParams } from '@/app/utils/types';
 import Navbar from '@/app/components/NavBar';
-// import Image from 'next/image';
+
 import { Heading, Text, Button, Flex, Box } from '@radix-ui/themes';
 import { useState } from 'react';
 import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
@@ -9,15 +8,19 @@ import { Database } from '@/database.types';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 
-export default async function cities({ params }: PageByIDParams) {
-  let city: CityPage[] | null = null;
+import allData from '@/app/utils/getData';
+import DisplayCityPage from '@/app/components/cityPageComponents/DisplayCityPage';
 
-  city = await SupabaseCall(
-    'cities',
-    'id, name, country, work_spaces(*)',
-    'id',
+async function fetchData(id: string): Promise<CityData> {
+  const result = (await allData(id)) as CityData;
+  return result;
+}
+
+export default async function cities({ params }: PageByIDParams) {
+  const { city, workSpacesData, trueAmenitiesWithId } = await fetchData(
     params.id
   );
+
 
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient<Database>({

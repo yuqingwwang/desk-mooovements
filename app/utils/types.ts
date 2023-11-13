@@ -1,3 +1,4 @@
+import { type } from 'os';
 import { Database } from '../../database.types';
 
 export type CheckboxProps = {
@@ -18,7 +19,11 @@ export type PopularCarousel = {
   cities?: City[];
   places?: Workspace[];
 };
-
+export type WishlistDisplay = {
+  places?: Workspace[] | null;
+  wishlist?: number[] | null;
+};
+export type Profile = Database['public']['Tables']['profiles']['Row'];
 export type FormInputProps = {
   name: string;
   type: string;
@@ -36,6 +41,7 @@ export type PlaceCardParams = {
   imageLink: string | null;
   placeName: string | null;
   flavourText: string | number | null;
+  amenityList?: string | null;
 };
 
 export interface Amenities {
@@ -54,3 +60,19 @@ export interface AddProfileProps {
   email: string;
   id: string;
 }
+
+export interface CityData {
+  city: CityPage[];
+  workSpacesData: Workspace[];
+  trueAmenitiesWithId: { id: string; amenities: string[] }[];
+}
+
+export type ColorKey =
+  | 'pet_friendly'
+  | 'opens_till_late'
+  | 'has_wifi'
+  | 'has_socket'
+  | 'has_shower'
+  | 'has_meeting_room'
+  | 'has_phone_booth'
+  | 'has_locker';
