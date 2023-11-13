@@ -1,8 +1,20 @@
 import DisplayCities from './components/DisplayCities';
 import Link from 'next/link';
 import Navbar from '@/app/components/NavBar';
+import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
+import { Database } from './lib/supabase';
+import { PageByIDParams } from './utils/types';
 
-export default async function ServerComponent() {
+export default async function ServerComponent({ params }: PageByIDParams) {
+  const cookieStore = cookies();
+  const supabase = createRouteHandlerClient<Database>({
+    cookies: () => cookieStore,
+  });
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
     <>
       <Navbar />
