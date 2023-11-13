@@ -54,3 +54,9 @@ export interface AddProfileProps {
   email: string;
   id: string;
 }
+
+export interface CityData {
+  city: CityPage[];
+  workSpacesData: Workspace[];
+  trueAmenitiesWithId: { id: string; amenities: string[] }[];
+}
