@@ -1,14 +1,16 @@
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import { Avatar, Box, Card, Flex, Text } from '@radix-ui/themes';
-import { PlaceCardParams } from '../utils/types';
+import { Avatar, Box, Card, Flex, Text, Badge } from '@radix-ui/themes';
+import { PlaceCardParams } from '@/app/utils/types';
+import { getColorByKey } from '@/app/utils/getColor';
 
 export function DisplayPlaceCard({
   pageRoute,
   imageLink,
   placeName,
   flavourText,
+  amenityList,
 }: PlaceCardParams) {
   return (
     <Card style={{ minWidth: 400, minHeight: 250 }}>
@@ -25,7 +27,18 @@ export function DisplayPlaceCard({
             <Text as='div' size='8' weight='bold'>
               {placeName}
             </Text>
-            <Text as='div' size='6' color='gray'>
+
+            {amenityList?.split(',').map((item: any, index: number) => (
+              <Badge
+                className='mr-2'
+                color={getColorByKey(item)}
+                key={item + index}
+              >
+                {item}
+              </Badge>
+            ))}
+
+            <Text as='div' size='3' color='gray'>
               {flavourText}
             </Text>
           </Box>
