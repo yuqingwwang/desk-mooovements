@@ -22,7 +22,7 @@ export default async function Login() {
   // else render the login/signup form
   return (
     <>
-      <Navbar />
+      <Navbar user={user && user} />
       <WholeForm />
     </>
   );
