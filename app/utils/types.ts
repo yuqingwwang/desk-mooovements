@@ -1,3 +1,4 @@
+import { type } from 'os';
 import { Database } from '../lib/supabase';
 
 export type CheckboxProps = {
@@ -18,7 +19,7 @@ export type PopularCarousel = {
   cities?: City[];
   places?: Workspace[];
 };
-
+export type Wishlist = Database;
 export type FormInputProps = {
   name: string;
   type: string;

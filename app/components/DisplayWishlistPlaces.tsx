@@ -27,6 +27,7 @@ export default function DisplayWishlistPlaces({ places, wishlist }) {
         amenities: amenities as string[],
       };
     });
+  console.log(wishlist);
   return (
     // {places.filter((place)=>wishlist.some(x => x === place.id)).map((place, index) => (
 
@@ -39,9 +40,10 @@ export default function DisplayWishlistPlaces({ places, wishlist }) {
         {places && places.length > 0 ? (
           <>
             <Heading as='h2' size='5'>
-              {places && wishlist.length} Work Spaces
+              {wishlist && wishlist.length} Work Spaces
             </Heading>
             {places &&
+              wishlist &&
               places
                 .filter((space) => wishlist.some((x) => x === space.id))
                 .map((space) => (
