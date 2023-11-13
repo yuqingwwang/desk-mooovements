@@ -1,55 +1,45 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import { SupabaseCall } from '@/utils/supabaseCall';
 import Carousel from './Carousel';
 import { City, Workspace } from '../utils/types';
 import { SearchBar } from './SearchBar';
 import { Flex } from '@radix-ui/themes';
 
-const DisplayCities = () => {
-  const [cities, setCities] = useState<City[] | undefined>(undefined);
-  const [places, setPlaces] = useState<Workspace[] | undefined>(undefined);
-  useEffect(() => {
-    const fetchData = async () => {
-      const citiesResult = await SupabaseCall(
-        'cities',
-        'id, name, country, work_spaces(count), image',
-        '',
-        ''
-      );
-
-      if (citiesResult) {
+const DisplayCities = async () => {
+  const cities: City[] =
+    (await SupabaseCall(
+      'cities',
+      'id,name,country,work_spaces(count),image',
+      '',
+      ''
+    )) || [];
+  
+  if (cities) {
         // sort by number of workspaces
-        citiesResult.sort(
+        cities.sort(
           (a, b) => b.work_spaces[0].count - a.work_spaces[0].count
         );
 
         // keep up to 3 cities
-        citiesResult.splice(3);
+        cities.splice(3);
       }
 
-      setCities(citiesResult ?? []);
-
-      const placesResult = await SupabaseCall(
+  const places: Workspace[] =
+    (await SupabaseCall(
         'work_spaces',
         'id, name, address, image, city, reviews(count)',
         '',
         ''
-      );
-
-      if (placesResult) {
+      ) ||
+    [];
+  
+  if (placesResult) {
         // sort by number of reviews
         placesResult.sort((a, b) => b.reviews[0].count - a.reviews[0].count);
 
         // keep up to 3 places
         placesResult.splice(3);
       }
-      setPlaces(placesResult ?? []);
-    };
-    fetchData();
-  }, []);
-
+  
   return (
     <div>
       <SearchBar cities={cities ?? []} />
