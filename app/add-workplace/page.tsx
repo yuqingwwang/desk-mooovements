@@ -2,7 +2,7 @@ import React from 'react';
 import AddWorkplace from '../components/New-worplace';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-import { Database } from '../lib/supabase';
+import { Database } from '@/database.types';
 
 const FormAddingWorkplace = async () => {
   const cookieStore = cookies();
@@ -10,7 +10,6 @@ const FormAddingWorkplace = async () => {
     cookies: () => cookieStore,
   });
   const {
-
     data: { user },
   } = await supabase.auth.getUser();
 
