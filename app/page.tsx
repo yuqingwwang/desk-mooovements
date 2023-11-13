@@ -4,8 +4,8 @@ import Navbar from '@/app/components/NavBar';
 import { Heading } from '@radix-ui/themes';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-import { Database } from './lib/supabase';
 import { PageByIDParams } from './utils/types';
+import { Database } from '@/database.types';
 
 export default async function ServerComponent({ params }: PageByIDParams) {
   const cookieStore = cookies();
