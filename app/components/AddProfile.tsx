@@ -7,21 +7,18 @@ import {
   Flex,
   Text,
   Link,
+  Checkbox,
 } from '@radix-ui/themes';
 import { useState } from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { amenityOptions, allAmenities } from '../utils/constants';
-import { CheckboxProps } from '../utils/types';
+import { AddProfileProps } from '../utils/types';
+import newClient from '../config/supabaseclient';
 
-const Checkbox: React.FC<CheckboxProps> = ({ checked, onChange, label }) => {
-  return (
-    <label>
-      <input type='checkbox' checked={checked} onChange={onChange} /> {label}
-    </label>
-  );
-};
-
-const AddProfile = () => {
+const AddProfile: React.FC<AddProfileProps> = ({
+  email,
+  id,
+}: AddProfileProps) => {
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
   const [selectAll, setSelectAll] = useState(true);
 
@@ -30,10 +27,27 @@ const AddProfile = () => {
     amenities: string[];
   }>();
 
-  // TODO: Save the data to the database
-  const onSubmit: SubmitHandler<{ preference: string; amenities: string[] }> = (
-    data
-  ) => console.log(data, selectedAmenities);
+  const onSubmit: SubmitHandler<{
+    preference: string;
+    amenities: string[];
+  }> = async (data) => {
+    const supabase = newClient();
+
+    const { error } = await supabase
+      .from('profiles')
+      .upsert({
+        id: id,
+        created_at: new Date(),
+        social_preference: data.preference || 'dont-mind',
+        amenity_preference: selectedAmenities || [],
+      })
+      .select();
+
+    if (error) {
+      console.log(error);
+      return;
+    }
+  };
 
   const handleSelectAllAmenities = () => {
     if (selectAll) {
@@ -60,16 +74,18 @@ const AddProfile = () => {
   return (
     <div className='max-w-xl'>
       <Link href='/'>Go Home</Link>
-      <form method='post' action='/auth/logout'>
-        <Button type='submit'>Logout</Button>
-      </form>
       <Heading as='h1' className='py-3'>
-        Preference
+        Welcome, {email}
       </Heading>
+      <form method='post' action='/auth/logout'>
+        <Button type='submit' className='bg-transparent'>
+          Logout
+        </Button>
+      </form>
 
       <form className='space-y-3' onSubmit={handleSubmit(onSubmit)}>
         <Heading as='h2' className='py-3'>
-          I prefer to
+          I prefer to work
         </Heading>
 
         <Controller
@@ -78,17 +94,17 @@ const AddProfile = () => {
           render={({ field }) => (
             <RadioGroup.Root value={field.value} onValueChange={field.onChange}>
               <Flex gap='2' direction='column'>
-                <Text as='label' size='2'>
+                <Text as='label' size='3'>
                   <Flex gap='2'>
                     <RadioGroup.Item value='solo' /> Solo
                   </Flex>
                 </Text>
-                <Text as='label' size='2'>
+                <Text as='label' size='3'>
                   <Flex gap='2'>
                     <RadioGroup.Item value='social' /> Social
                   </Flex>
                 </Text>
-                <Text as='label' size='2'>
+                <Text as='label' size='3'>
                   <Flex gap='2'>
                     <RadioGroup.Item value='dont-mind' /> Do not Mind
                   </Flex>
@@ -102,16 +118,31 @@ const AddProfile = () => {
           I am looking for
         </Heading>
 
-        <Flex direction='column' gap='3'>
-          {amenityOptions.map((amenity) => (
-            <Checkbox
-              key={amenity.value}
-              checked={selectedAmenities.includes(amenity.value)}
-              onChange={() => handleAmenityChange(amenity.value)}
-              label={amenity.label}
-            />
-          ))}
-        </Flex>
+        <Controller
+          name='amenities'
+          control={control}
+          render={({ field }) => (
+            <Flex direction='column' gap='3'>
+              {amenityOptions.map((amenity) => (
+                <label key={amenity.value}>
+                  <Checkbox
+                    checked={selectedAmenities.includes(amenity.value)}
+                    onCheckedChange={() => handleAmenityChange(amenity.value)}
+                    variant='soft'
+                    className='pr-2'
+                    size='2'
+                  />
+                  {amenity.label}
+                </label>
+              ))}
+              <input
+                type='hidden'
+                {...field}
+                value={selectedAmenities.join(',')}
+              />
+            </Flex>
+          )}
+        />
 
         <div>
           <Button
@@ -124,7 +155,9 @@ const AddProfile = () => {
           </Button>
         </div>
 
-        <Button type='submit'>Save</Button>
+        <Button type='submit' className='bg-transparent'>
+          Save
+        </Button>
       </form>
     </div>
   );

@@ -53,7 +53,6 @@ export default async function cities({ params }: PageByIDParams) {
   console.log(trueAmenitiesWithId);
   return (
     <>
-      <Navbar />
       <Flex direction='column' gap='3'>
         {city && city.length > 0 ? (
           <>
@@ -96,6 +95,7 @@ export default async function cities({ params }: PageByIDParams) {
           <p>Loading or no data available...</p> // Display a loading indicator or a no-data message
         )}
       </Flex>
+      <Navbar />
     </>
   );
 }

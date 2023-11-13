@@ -8,8 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "format:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,css,scss}\"",
-    "format": "prettier --check",
-    "prepare": "husky install"
+    "format": "prettier --write .",
+    "prepare": "husky install",
+    "update": "supabase gen types typescript --project-id tkvonehonrmtoeqojhjs > database.types.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
@@ -24,6 +25,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.48.2",
+    "react-icons": "^4.11.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {

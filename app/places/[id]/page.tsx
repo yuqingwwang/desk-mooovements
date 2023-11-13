@@ -6,7 +6,7 @@ import Navbar from '@/app/components/NavBar';
 import AddToWishList from '@/app/components/AddToWishlist';
 import { cookies } from 'next/headers';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
-import { Database } from '../../lib/supabase';
+import { Database } from '../../../database.types';
 
 export default async function WorkSpaces({ params }: PageByIDParams) {
   let place: Workspace[] | null = null;
@@ -24,26 +24,15 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  console.log({ user });
+
   return (
     <>
-      <Navbar />
       <div>
         <p>{JSON.stringify({ params })}</p>
         {place && place.length > 0 ? (
           <>
-            {/* Uncomment when we have images
-         <Image
-           src={place[0].image}
-           alt="image of the workspace"
-           width={200}
-           height={200}
-           priority
-         />
-         */}
             <p data-testid='place-name'>Name: {place[0].name}</p>
             <p>Address: {place[0].address}</p>
-            {/* <p>City: {place[0].cities.name}</p> */}
             <SeeMore place={place} />
             <Link href={'/'}>
               <AddToWishList id={parseInt(id)} user={user && user.id} />
@@ -58,6 +47,7 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
           <p>Loading or no data available...</p> // Display a loading indicator or a no-data message
         )}
       </div>
+      <Navbar />
     </>
   );
 }
