@@ -10,6 +10,7 @@ const FormAddingWorkplace = async () => {
     cookies: () => cookieStore,
   });
   const {
+
     data: { user },
   } = await supabase.auth.getUser();
 

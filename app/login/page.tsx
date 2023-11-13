@@ -3,14 +3,20 @@ import AddProfile from '../components/AddProfile';
 import Navbar from '../components/NavBar';
 
 import { cookies } from 'next/headers';
+import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { Database } from '../../database.types';
 
-export default function Login() {
+export default async function Login() {
   const cookieStore = cookies();
+  const supabase = createRouteHandlerClient<Database>({
+    cookies: () => cookieStore,
+  });
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  // if the user is already logged in, render the add profile
-  const currentToken = cookieStore.get('sb-tkvonehonrmtoeqojhjs-auth-token');
-  if (currentToken) {
-    return <AddProfile />;
+  if (user) {
+    return <AddProfile email={user?.email || ''} id={user?.id || ''} />;
   }
 
   // else render the login/signup form

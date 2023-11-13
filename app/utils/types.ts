@@ -1,4 +1,4 @@
-import { Database } from '../lib/supabase';
+import { Database } from '../../database.types';
 
 export type CheckboxProps = {
   checked: boolean;
@@ -48,4 +48,9 @@ export interface Amenities {
   has_meeting_room: boolean | null;
   has_phone_booth: boolean | null;
   has_locker: boolean | null;
+}
+
+export interface AddProfileProps {
+  email: string;
+  id: string;
 }

@@ -6,7 +6,7 @@ import Navbar from '@/app/components/NavBar';
 import AddToWishList from '@/app/components/AddToWishlist';
 import { cookies } from 'next/headers';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
-import { Database } from '../../lib/supabase';
+import { Database } from '../../../database.types';
 
 export default async function WorkSpaces({ params }: PageByIDParams) {
   let place: Workspace[] | null = null;
@@ -27,7 +27,6 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
 
   return (
     <>
-      <Navbar />
       <div>
         <p>{JSON.stringify({ params })}</p>
         {place && place.length > 0 ? (
@@ -48,6 +47,7 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
           <p>Loading or no data available...</p> // Display a loading indicator or a no-data message
         )}
       </div>
+      <Navbar />
     </>
   );
 }

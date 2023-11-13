@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 
 const ReviewWorkplace = () => {
   return (
     <div>
-        <h1>Add a review to a workplace</h1>
-        {/* <Controller
+      <h1>Add a review to a workplace</h1>
+      {/* <Controller
           name='workplaceRating'
           control={control}
           render={({ field }) => (
@@ -39,7 +39,7 @@ const ReviewWorkplace = () => {
           )}
         /> */}
 
-        {/* <Controller
+      {/* <Controller
           name='comments'
           control={control}
           render={({ field }) => (
@@ -51,7 +51,7 @@ const ReviewWorkplace = () => {
           )}
         /> */}
     </div>
-  )
-}
+  );
+};
 
 export default ReviewWorkplace;
