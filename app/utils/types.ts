@@ -61,3 +61,13 @@ export interface CityData {
   workSpacesData: Workspace[];
   trueAmenitiesWithId: { id: string; amenities: string[] }[];
 }
+
+export type ColorKey =
+  | 'pet_friendly'
+  | 'opens_till_late'
+  | 'has_wifi'
+  | 'has_socket'
+  | 'has_shower'
+  | 'has_meeting_room'
+  | 'has_phone_booth'
+  | 'has_locker';

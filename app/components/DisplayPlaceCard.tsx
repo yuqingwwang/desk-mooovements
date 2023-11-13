@@ -2,23 +2,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { Avatar, Box, Card, Flex, Text, Badge } from '@radix-ui/themes';
-import { PlaceCardParams } from '../utils/types';
-
-type ColorKey = 'room' | 'access' | 'yoga' | 'pet-friendly' | 'shower';
-
-const getColorByKey = (key: ColorKey) => {
-  const colors: any = {
-    pet_friendly: 'indigo',
-    opens_till_late: 'cyan',
-    has_wifi: 'orange',
-    has_socket: 'crimson',
-    has_shower: 'Violet',
-    has_meeting_room: 'tomato',
-    has_phone_booth: 'mint',
-    has_locker: 'Teal',
-  };
-  return (colors[key] as any) || 'gray'; // Default to gray if the key doesn't match
-};
+import { PlaceCardParams } from '@/app/utils/types';
+import { getColorByKey } from '@/app/utils/getColor';
 
 export function DisplayPlaceCard({
   pageRoute,

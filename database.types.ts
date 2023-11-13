@@ -98,6 +98,7 @@ export interface Database {
       };
       work_spaces: {
         Row: {
+          [x: string]: any;
           address: string | null;
           city: number | null;
           created_at: string | null;

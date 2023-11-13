@@ -1,38 +1,42 @@
-import { Heading, Text, Flex, Box } from '@radix-ui/themes';
+'use client';
+
+import { useEffect, useState } from 'react';
+
+import { Heading, Flex } from '@radix-ui/themes';
 import { CityData } from '@/app/utils/types';
 import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
+import FilterButtons from './FilterButtons';
+import CityHeader from './CityHeader';
 
 export default function DisplayCityPage({
   city,
   workSpacesData,
   trueAmenitiesWithId,
 }: CityData) {
+  const [selectedFilter, setSelectedFilter] = useState('all') as any;
+  const [workSpaceState, setWorkSpaceState] = useState(workSpacesData);
+  useEffect(() => {
+    const filteredWorkspace = workSpacesData.filter((space) => {
+      if (selectedFilter === 'all') return true;
+      return space[`${selectedFilter}`];
+    });
+    setWorkSpaceState(filteredWorkspace);
+  }, [selectedFilter, workSpacesData]);
+
   return (
     <>
       <Flex direction='column' gap='3'>
         {city && city.length > 0 ? (
           <>
-            <Box width='auto' height='auto' bottom='50%'>
-              <Heading data-testid='city-name' as='h1' size='8'>
-                {city[0].name}
-              </Heading>
-              <Text as='p' size='4'>
-                Country: {city[0].country}
-              </Text>
-              {/* <Image
-            src={city[0].image}
-            alt="image of the workspace"
-            width={200}
-            height={200}
-            priority
-          /> */}
-            </Box>
+            <CityHeader city={city} />
+            <FilterButtons setSelectedFilter={setSelectedFilter} />
+
             <Heading as='h2' size='5'>
-              {workSpacesData && workSpacesData.length} Work Spaces
+              {workSpacesData && workSpaceState.length} Work Spaces
             </Heading>
 
             {workSpacesData &&
-              workSpacesData.map((space) => (
+              workSpaceState.map((space) => (
                 <>
                   <DisplayPlaceCard
                     key={space.name}
@@ -49,7 +53,7 @@ export default function DisplayCityPage({
               ))}
           </>
         ) : (
-          <p>Loading or no data available...</p> // Display a loading indicator or a no-data message
+          <p>Loading...</p>
         )}
       </Flex>
     </>
