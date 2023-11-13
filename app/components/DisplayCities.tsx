@@ -3,7 +3,6 @@ import Carousel from './Carousel';
 import { City, Workspace } from '../utils/types';
 import { SearchBar } from './SearchBar';
 
-
 const DisplayCities = async () => {
   const cities: City[] =
     (await SupabaseCall(
