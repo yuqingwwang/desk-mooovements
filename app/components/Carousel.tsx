@@ -1,62 +1,55 @@
 'use client';
 import React, { useState } from 'react';
-import Image from 'next/image';
-import { PopularCarousel } from '../utils/types';
 import { DisplayPlaceCard } from './DisplayPlaceCard';
+import { Button, Flex, Heading } from '@radix-ui/themes';
 
-export default function Carousel({ cities, places }: PopularCarousel) {
-  function AddToSlide() {
-    const length = places ? places.length : cities ? cities.length : 0;
+export default function Carousel({ title, data }: any) {
+  function addToSlide() {
+    const length = data ? data.length : 0;
     if (slide >= length - 1) setSlide(0);
     else setSlide(slide + 1);
   }
-  function SubtractFromSlide() {
-    const length = places ? places.length : cities ? cities.length : 0;
-
+  function subtractFromSlide() {
+    const length = data ? data.length : 0;
     if (slide <= 0) setSlide(length - 1);
     else setSlide(slide - 1);
   }
   const [slide, setSlide] = useState(0);
+
   return (
-    <div
-      className='my-7'
-      data-testid={places ? 'places' : cities ? 'cities' : ''}
-    >
-      {places && (
-        <DisplayPlaceCard
-          pageRoute={`places/${places[slide].id}`}
-          imageLink={places[slide].image}
-          placeName={places[slide].name}
-          flavourText={places[slide].address}
-        />
+    <Flex className='my-7' direction='column' data-testid={data ? 'data' : ''}>
+      {data && (
+        <>
+          <Heading as='h2' size='6' align='center'>
+            Popular {title}
+          </Heading>
+          <DisplayPlaceCard
+            pageRoute={`${title}/${data[slide].id}`}
+            imageLink={data[slide]['image']}
+            placeName={data[slide]['name']}
+            flavourText={
+              title === 'cities'
+                ? data[slide]['work_spaces'][0]['count'] + ' workspaces'
+                : data[slide]['address']
+            }
+          />
+        </>
       )}
-      {cities && (
-        <DisplayPlaceCard
-          pageRoute={`cities/${cities[slide].id}`}
-          imageLink={cities[slide].image}
-          placeName={cities[slide].name}
-          flavourText={cities[slide]['work_spaces'][0]['count']}
-        />
-      )}
-      <button
-        onClick={() => {
-          {
-            SubtractFromSlide();
-          }
-        }}
-        className='mx-1'
+
+      <Flex
+        align='stretch'
+        justify='center'
+        display='inline-flex'
+        className='m-4'
+        gap='9'
       >
-        Prev
-      </button>
-      <button
-        onClick={() => {
-          {
-            AddToSlide();
-          }
-        }}
-      >
-        Next
-      </button>
-    </div>
+        <Button onClick={() => subtractFromSlide()} className='mx-1' size='3'>
+          Prev
+        </Button>
+        <Button onClick={() => addToSlide()} size='3'>
+          Next
+        </Button>
+      </Flex>
+    </Flex>
   );
 }

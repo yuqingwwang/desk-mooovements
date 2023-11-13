@@ -5,6 +5,7 @@ import { SupabaseCall } from '@/utils/supabaseCall';
 import Carousel from './Carousel';
 import { City, Workspace } from '../utils/types';
 import { SearchBar } from './SearchBar';
+import { Flex, Heading } from '@radix-ui/themes';
 
 const DisplayCities = () => {
   const [cities, setCities] = useState<City[] | undefined>(undefined);
@@ -34,13 +35,17 @@ const DisplayCities = () => {
   return (
     <div>
       <SearchBar cities={cities ?? []} />
-      <div
+      <Flex
         id='popularCities'
-        className='mt-5 flex flex-col flex-wrap content-center border-4 border-double border-yellow-500'
+        className='mt-5
+        flex flex-col flex-wrap
+        content-center border-4
+        border-double
+        border-yellow-500'
       >
-        <Carousel places={places} />
-        <Carousel cities={cities} />
-      </div>
+        <Carousel title='cities' data={cities} />
+        <Carousel title='places' data={places} />
+      </Flex>
     </div>
   );
 };
