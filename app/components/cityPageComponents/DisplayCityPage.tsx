@@ -30,6 +30,7 @@ export default function DisplayCityPage({
             <Heading as='h2' size='5'>
               {workSpacesData && workSpacesData.length} Work Spaces
             </Heading>
+
             {workSpacesData &&
               workSpacesData.map((space) => (
                 <>
@@ -38,8 +39,8 @@ export default function DisplayCityPage({
                     pageRoute={`places/${space.id}`}
                     imageLink={space.image}
                     placeName={space.name}
-                    // flavourText={space.address}
-                    flavourText={`${trueAmenitiesWithId?.find(
+                    flavourText={space.address}
+                    amenityList={`${trueAmenitiesWithId?.find(
                       (amenity) =>
                         amenity.id === (space.id as unknown as string)
                     )?.amenities}`}

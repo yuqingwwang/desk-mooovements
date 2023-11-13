@@ -36,6 +36,7 @@ export type PlaceCardParams = {
   imageLink: string | null;
   placeName: string | null;
   flavourText: string | number | null;
+  amenityList?: string | null;
 };
 
 export interface Amenities {
