@@ -3,7 +3,7 @@ import {
   PageByIDParams,
   Amenities,
   Workspace,
-  Wishlist,
+  Profile,
 } from '@/app/utils/types';
 import { SupabaseCall } from '@/utils/supabaseCall';
 import Navbar from '@/app/components/NavBar';
@@ -25,7 +25,7 @@ export default async function wishlist() {
   } = await supabase.auth.getUser();
   // console.log({ user });
 
-  let wishlistArray: Wishlist[] | null = null;
+  let wishlistArray: Profile[] | null = null;
   wishlistArray = await SupabaseCall('profiles', 'wish_list', 'id', user?.id);
   console.log(wishlistArray);
 

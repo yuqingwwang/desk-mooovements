@@ -19,7 +19,11 @@ export type PopularCarousel = {
   cities?: City[];
   places?: Workspace[];
 };
-export type Wishlist = Database;
+export type WishlistDisplay = {
+  places?: Workspace[] | null;
+  wishlist?: number[] | null;
+};
+export type Profile = Database['public']['Tables']['profiles']['Row'];
 export type FormInputProps = {
   name: string;
   type: string;

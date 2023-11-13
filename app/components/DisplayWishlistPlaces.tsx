@@ -4,8 +4,12 @@ import { Amenities } from '../utils/types';
 import Navbar from '@/app/components/NavBar';
 import { Heading, Text, Button, Flex, Box } from '@radix-ui/themes';
 import { useState } from 'react';
+import { WishlistDisplay } from '../utils/types';
 import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
-export default function DisplayWishlistPlaces({ places, wishlist }) {
+export default function DisplayWishlistPlaces({
+  places,
+  wishlist,
+}: WishlistDisplay) {
   const amenitiesStats: Amenities[] | undefined = places?.map((space) => ({
     id: space.id,
     pet_friendly: space.pet_friendly,
