@@ -7,6 +7,7 @@ import {
   Flex,
   Text,
   Link,
+  Checkbox,
 } from '@radix-ui/themes';
 import { useState } from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
@@ -14,13 +15,13 @@ import { amenityOptions, allAmenities } from '../utils/constants';
 import { CheckboxProps, AddProfileProps } from '../utils/types';
 import newClient from '../config/supabaseclient';
 
-const Checkbox: React.FC<CheckboxProps> = ({ checked, onChange, label }) => {
-  return (
-    <label>
-      <input type='checkbox' checked={checked} onChange={onChange} /> {label}
-    </label>
-  );
-};
+// const Checkbox: React.FC<CheckboxProps> = ({ checked, onChange, label }) => {
+//   return (
+//     <label>
+//       <input type='checkbox' checked={checked} onChange={onChange} /> {label}
+//     </label>
+//   );
+// };
 
 const AddProfile: React.FC<AddProfileProps> = ({
   email,
@@ -129,12 +130,15 @@ const AddProfile: React.FC<AddProfileProps> = ({
           render={({ field }) => (
             <Flex direction='column' gap='3'>
               {amenityOptions.map((amenity) => (
-                <Checkbox
-                  key={amenity.value}
-                  checked={selectedAmenities.includes(amenity.value)}
-                  onChange={() => handleAmenityChange(amenity.value)}
-                  label={amenity.label}
-                />
+                <label key={amenity.value}>
+                  <Checkbox
+                    checked={selectedAmenities.includes(amenity.value)}
+                    onCheckedChange={() => handleAmenityChange(amenity.value)}
+                    variant='soft'
+                    className='pr-2'
+                  />
+                  {amenity.label}
+                </label>
               ))}
               <input
                 type='hidden'

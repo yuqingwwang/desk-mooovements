@@ -150,6 +150,7 @@ const AddWorkplace = () => {
             <Label.Root>
               <Checkbox
                 className='p-3'
+                variant='soft'
                 checked={selectedAmenities.includes(amenity)}
                 onCheckedChange={() => handleAmenityChange(amenity)}
               />
