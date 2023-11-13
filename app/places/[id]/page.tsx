@@ -27,7 +27,6 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
   console.log({ user });
   return (
     <>
-      <Navbar />
       <div>
         <p>{JSON.stringify({ params })}</p>
         {place && place.length > 0 ? (
@@ -58,6 +57,7 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
           <p>Loading or no data available...</p> // Display a loading indicator or a no-data message
         )}
       </div>
+      <Navbar />
     </>
   );
 }
