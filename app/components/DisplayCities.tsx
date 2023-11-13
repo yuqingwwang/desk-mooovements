@@ -1,35 +1,21 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import { SupabaseCall } from '@/utils/supabaseCall';
 import Carousel from './Carousel';
 import { City, Workspace } from '../utils/types';
 import { SearchBar } from './SearchBar';
 
-const DisplayCities = () => {
-  const [cities, setCities] = useState<City[] | undefined>(undefined);
-  const [places, setPlaces] = useState<Workspace[] | undefined>(undefined);
-  useEffect(() => {
-    const fetchData = async () => {
-      const citiesResult = await SupabaseCall(
-        'cities',
-        'id,name,country,work_spaces(count),image',
-        '',
-        ''
-      );
-      setCities(citiesResult ?? []);
 
-      const placesResult = await SupabaseCall(
-        'work_spaces',
-        'id,name,address,image,city',
-        '',
-        ''
-      );
-      setPlaces(placesResult ?? []);
-    };
-    fetchData();
-  }, []);
+const DisplayCities = async () => {
+  const cities: City[] =
+    (await SupabaseCall(
+      'cities',
+      'id,name,country,work_spaces(count),image',
+      '',
+      ''
+    )) || [];
 
+  const places: Workspace[] =
+    (await SupabaseCall('work_spaces', 'id,name,address,image,city', '', '')) ||
+    [];
   return (
     <div>
       <SearchBar cities={cities ?? []} />
@@ -37,8 +23,8 @@ const DisplayCities = () => {
         id='popularCities'
         className='mt-5 flex flex-col flex-wrap content-center border-4 border-double border-yellow-500'
       >
-        <Carousel places={places} />
-        <Carousel cities={cities} />
+        <Carousel places={places && places} />
+        <Carousel cities={cities && cities} />
       </div>
     </div>
   );

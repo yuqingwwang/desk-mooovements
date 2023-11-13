@@ -39,7 +39,6 @@ export default function DisplayWishlistPlaces({
     // ))}
 
     <>
-      <Navbar />
       <Flex direction='column' gap='3'>
         {places && places.length > 0 ? (
           <>

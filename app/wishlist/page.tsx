@@ -1,15 +1,6 @@
-import {
-  CityPage,
-  PageByIDParams,
-  Amenities,
-  Workspace,
-  Profile,
-} from '@/app/utils/types';
+import { Workspace, Profile } from '@/app/utils/types';
 import { SupabaseCall } from '@/utils/supabaseCall';
 import Navbar from '@/app/components/NavBar';
-import { Heading, Text, Button, Flex, Box } from '@radix-ui/themes';
-import { useState } from 'react';
-import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
 import { cookies } from 'next/headers';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { Database } from '../lib/supabase';
@@ -45,6 +36,7 @@ export default async function wishlist() {
         places={places}
         wishlist={wishlistArray && wishlistArray[0].wish_list}
       />
+      <Navbar user={user && user.id} />
     </div>
   );
 }
