@@ -18,7 +18,6 @@ const DisplayCities = () => {
         ''
       );
       setCities(citiesResult ?? []);
-      console.log(citiesResult);
 
       const placesResult = await SupabaseCall(
         'work_spaces',
