@@ -16,12 +16,20 @@ export default function AddToWishList({
     const wishlistArray: Profile[] | null = null;
     const wishListArr = await SupabaseCall('profiles', 'wish_list', 'id', user);
 
-    if (wishListArr && wishListArr[0]['wish_list'] && wishListArr[0]['wish_list'].includes(id))
+    if (
+      wishListArr &&
+      wishListArr[0]['wish_list'] &&
+      wishListArr[0]['wish_list'].includes(id)
+    )
       return;
-    const updatedWishList = wishListArr && wishListArr[0]['wish_list']
-      ? [...wishListArr[0]['wish_list'], id]
-      : [id];
-   
+    const updatedWishList =
+      wishListArr && wishListArr[0]['wish_list']
+        ? [...wishListArr[0]['wish_list'], id]
+        : [id];
+    await supabase
+      .from('profiles')
+      .update({ wish_list: updatedWishList })
+      .eq('id', user);
   }
   return (
     <>
