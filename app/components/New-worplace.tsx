@@ -7,7 +7,7 @@ import {
   Strong,
   Callout,
   Checkbox,
-  DropdownMenu,
+  Select,
 } from '@radix-ui/themes';
 import React, { useEffect, useState } from 'react';
 import Spinner from './Spiner';
@@ -19,8 +19,11 @@ import * as Label from '@radix-ui/react-label';
 import Link from 'next/link';
 import newClient from '../config/supabaseclient';
 import { SupabaseCall } from '../utils/supabaseCall';
+import NavBar from './NavBar';
+import getCityIds from '../utils/fetchCityId';
+import { CityWithId } from '@/app/utils/types';
 
-const AddWorkplace = ({ user }: { user: string | null }) => {
+export default function AddWorkplace({ user }: { user: string | null }) {
   const {
     register,
     control,
@@ -32,7 +35,8 @@ const AddWorkplace = ({ user }: { user: string | null }) => {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setSubmitting] = useState(false);
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
-  const [cities, setCities] = useState<{ name: string }[]>([]);
+  const [cities, setCities] = useState<{ name: string; id: number }[]>([]);
+  const [selectedCity, setSelectedCity] = useState(0);
 
   const handleAmenityChange = (amenity: string) => {
     if (selectedAmenities.includes(amenity)) {
@@ -42,9 +46,16 @@ const AddWorkplace = ({ user }: { user: string | null }) => {
     }
   };
 
+  const handleSelectedCityChange = (city: any) => {
+    console.log('selected city is', city);
+    setSelectedCity(city.id);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
-      const citiesResult = await SupabaseCall('cities', 'name', '', '');
+      const citiesResult =
+        (await SupabaseCall('cities', 'name,id', '', '')) || [];
+      citiesResult.sort((a: any, b: any) => (a.id > b.id ? 1 : -1));
       setCities(citiesResult ?? []);
     };
     fetchData();
@@ -56,6 +67,7 @@ const AddWorkplace = ({ user }: { user: string | null }) => {
       setError('You need to log in');
       return;
     }
+    console.log(formData);
     try {
       setSubmitting(true);
       const supabase = newClient();
@@ -67,6 +79,7 @@ const AddWorkplace = ({ user }: { user: string | null }) => {
             created_by: user,
             address: formData.address,
             image: formData.image,
+            city: selectedCity,
             pet_friendly: selectedAmenities.includes('pet-friendly'),
             opens_till_late: selectedAmenities.includes('open till late'),
             has_wifi: selectedAmenities.includes('wifi'),
@@ -97,22 +110,26 @@ const AddWorkplace = ({ user }: { user: string | null }) => {
       )}
 
       <form className='space-y-3' onSubmit={handleSubmit(onSubmit)}>
-        <DropdownMenu.Root>
-          <DropdownMenu.Trigger>
-            <Button variant='soft' color='indigo'>
-              Cities
-            </Button>
-          </DropdownMenu.Trigger>
-          <DropdownMenu.Content variant='soft' color='indigo'>
-            {cities.map((city) => (
-              <DropdownMenu.Item key={city.name}>{city.name}</DropdownMenu.Item>
+        <Select.Root>
+          <Select.Trigger />
+          <Select.Content>
+            {cities.map((city: any) => (
+              <div key={city.id} className='p-1'>
+                <Select.Item
+                  onClick={() => handleSelectedCityChange(city)}
+                  value={city.id}
+                >
+                  {city.name}
+                </Select.Item>
+              </div>
             ))}
-          </DropdownMenu.Content>
-        </DropdownMenu.Root>
+          </Select.Content>
+        </Select.Root>
+
         <TextField.Root>
           <TextField.Input
             placeholder='Name'
-            {...register('name', { required: 'Name is required' })}
+            {...register('name', { required: 'name is required' })}
           />
         </TextField.Root>
         <ErrorMessage>{errors.name?.message}</ErrorMessage>
@@ -166,15 +183,7 @@ const AddWorkplace = ({ user }: { user: string | null }) => {
           Create {isSubmitting && <Spinner />}
         </Button>
       </form>
-      <Link href={'/'}>
-        <div className='m-3'>
-          <button className='inline-flex w-32 items-center rounded border-b-2 border-blue-500 bg-white px-6 py-2 font-bold tracking-wide text-gray-800 shadow-md hover:border-blue-600 hover:bg-blue-500 hover:text-white'>
-            <span className='mx-auto'>Home</span>
-          </button>
-        </div>
-      </Link>
+      <NavBar user={user && user.id} />
     </div>
   );
-};
-
-export default AddWorkplace;
+}

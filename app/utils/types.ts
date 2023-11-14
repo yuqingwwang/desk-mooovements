@@ -76,3 +76,8 @@ export type ColorKey =
   | 'has_meeting_room'
   | 'has_phone_booth'
   | 'has_locker';
+
+export interface CityWithId {
+  name: string;
+  id: number;
+}
