@@ -20,13 +20,21 @@ export default function NavBar({ user }: { user: string | null }) {
   return (
     <>
       <div className='mb-[5rem]'></div>
-      <nav className='fixed bottom-0 left-0 z-20 w-full border-t border-gray-200 bg-white dark:border-gray-600 dark:bg-gray-900'>
+      <nav
+        data-testid='navbar'
+        className='fixed bottom-0 left-0 z-20 w-full border-t border-gray-200 bg-white dark:border-gray-600 dark:bg-gray-900'
+      >
         <div className='mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4'>
-          <a href='/' className='flex items-center'>
+          <a
+            data-testid='navbar-home-link'
+            href='/'
+            className='flex items-center'
+          >
             <span className='self-center whitespace-nowrap text-2xl font-semibold dark:text-white'>
               DeskMooovement
             </span>
           </a>
+          {/* desktop view */}
           <div className='hidden md:flex'>
             <ul className='mt-4 flex space-x-8 rounded-lg border border-gray-100 bg-gray-50 p-0 font-medium'>
               {!isMenuOpen && (
@@ -60,6 +68,7 @@ export default function NavBar({ user }: { user: string | null }) {
               )}
             </ul>
           </div>
+          {/* mobile view burger menu closed */}
           <div className='flex md:order-2'>
             {user ? (
               <form method='post' action='/auth/logout'>
@@ -97,6 +106,7 @@ export default function NavBar({ user }: { user: string | null }) {
               </svg>
             </button>
           </div>
+          {/* mobile view burger menu opened */}
           {isMenuOpen && (
             <div
               className='w-full items-center justify-between md:order-1 md:flex md:w-auto'

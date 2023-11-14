@@ -16,6 +16,7 @@ export function DisplayPlaceCard({
       variant='surface'
       className='w-auto py-2 md:w-[600px] lg:w-[850px]'
     >
+
       <Link href={`/${pageRoute}`}>
         <Flex gap='1' align='center'>
           <Avatar

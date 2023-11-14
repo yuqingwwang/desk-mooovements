@@ -47,7 +47,7 @@ export default function AddToWishList({
         </Button>
       ) : (
         <Link href={'/login'}>
-          <Button className='mb-3 mt-5'>Add to Wishlist </Button>
+          <Button>Add to Wishlist </Button>
         </Link>
       )}
     </>
