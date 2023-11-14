@@ -1,5 +1,3 @@
-'use client';
-import React from 'react';
 import Link from 'next/link';
 import { Avatar, Box, Card, Flex, Text, Badge } from '@radix-ui/themes';
 import { PlaceCardParams } from '@/app/utils/types';
@@ -13,11 +11,18 @@ export function DisplayPlaceCard({
   amenityList,
 }: PlaceCardParams) {
   return (
-    <Card style={{ maxWidth: 380 }} variant='ghost' className='py-10'>
+    <Card
+      asChild
+      variant='surface'
+      className='w-auto py-2 md:w-[600px] lg:w-[850px]'
+    >
       <Link href={`/${pageRoute}`}>
-        <Flex gap='1' align='start'>
+        <Flex gap='1' align='center'>
           <Avatar
-            size='8'
+            size={{
+              initial: '8',
+              md: '9',
+            }}
             src={imageLink ?? ''}
             radius='full'
             fallback='T'
