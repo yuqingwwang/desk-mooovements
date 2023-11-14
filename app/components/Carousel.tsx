@@ -20,9 +20,14 @@ export default function Carousel({ title, data }: any) {
     <Flex className='my-7' direction='column' data-testid={data ? 'data' : ''}>
       {data && (
         <>
-          <Heading as='h2' size='6' align='center' style={{
-      marginBottom: '30px',
-    }}>
+          <Heading
+            as='h2'
+            size='6'
+            align='center'
+            style={{
+              marginBottom: '30px',
+            }}
+          >
             Popular {title}
           </Heading>
           <DisplayPlaceCard

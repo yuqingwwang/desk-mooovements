@@ -25,19 +25,18 @@ export default function DisplayCityPage({
 
   return (
     <>
-      <Flex direction='column' gap='3'>
+      <Flex direction='column' gap='3' align='center'>
         {city && city.length > 0 ? (
           <>
-            <CityHeader city={city} />
+            <CityHeader data-testid='city-header' city={city} />
             <FilterButtons setSelectedFilter={setSelectedFilter} />
 
-            <Heading as='h2' size='5'>
+            <Heading data-testid='city-workspaces' as='h2' size='5'>
               {workSpacesData && workSpaceState.length} Work Spaces
             </Heading>
-
-            {workSpacesData &&
-              workSpaceState.map((space) => (
-                <>
+            <div data-testid='place-card-container'>
+              {workSpacesData &&
+                workSpaceState.map((space) => (
                   <DisplayPlaceCard
                     key={space.name}
                     pageRoute={`places/${space.id}`}
@@ -49,8 +48,8 @@ export default function DisplayCityPage({
                         amenity.id === (space.id as unknown as string)
                     )?.amenities}`}
                   />
-                </>
-              ))}
+                ))}
+            </div>
           </>
         ) : (
           <p>Loading...</p>

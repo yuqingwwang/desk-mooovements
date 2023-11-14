@@ -10,6 +10,7 @@ enum AmenitiesEnum {
 export type CreateAddWorkplaceForm = {
   name: string;
   image: string;
+  city: number;
   address: string;
   rating: number;
   amenities: AmenitiesEnum;
