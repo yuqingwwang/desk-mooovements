@@ -2,6 +2,7 @@ import { SupabaseCall } from '@/utils/supabaseCall';
 import Carousel from './Carousel';
 import { City, Workspace } from '../utils/types';
 import { SearchBar } from './SearchBar';
+import { Flex } from '@radix-ui/themes';
 
 const DisplayCities = async () => {
   const cities: City[] =
@@ -12,19 +13,44 @@ const DisplayCities = async () => {
       ''
     )) || [];
 
+  if (cities) {
+    // sort by number of workspaces
+    cities.sort((a, b) => b.work_spaces[0].count - a.work_spaces[0].count);
+
+    // keep up to 3 cities
+    cities.splice(3);
+  }
+
   const places: Workspace[] =
-    (await SupabaseCall('work_spaces', 'id,name,address,image,city', '', '')) ||
-    [];
+    (await SupabaseCall(
+      'work_spaces',
+      'id, name, address, image, city, reviews(count)',
+      '',
+      ''
+    )) || [];
+
+  if (places) {
+    // sort by number of reviews
+    places.sort((a, b) => b.reviews[0].count - a.reviews[0].count);
+
+    // keep up to 3 places
+    places.splice(3);
+  }
+
   return (
     <div>
       <SearchBar cities={cities ?? []} />
-      <div
+      <Flex
         id='popularCities'
-        className='mt-5 flex flex-col flex-wrap content-center border-4 border-double border-yellow-500'
+        className='mt-5
+        flex flex-col flex-wrap
+        content-center border-4
+        border-double
+        border-yellow-500'
       >
-        <Carousel places={places && places} />
-        <Carousel cities={cities && cities} />
-      </div>
+        <Carousel title='cities' data={cities} />
+        <Carousel title='places' data={places} />
+      </Flex>
     </div>
   );
 };
