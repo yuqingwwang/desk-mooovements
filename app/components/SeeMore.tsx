@@ -1,4 +1,5 @@
 'use client';
+import { Button, Text } from '@radix-ui/themes';
 import React, { useState } from 'react';
 export default function SeeMore(props: any) {
   const place = props.place[0];
@@ -10,7 +11,7 @@ export default function SeeMore(props: any) {
 
   return (
     <div>
-      <button
+      <Button
         onClick={() => {
           {
             ShowMore();
@@ -18,11 +19,13 @@ export default function SeeMore(props: any) {
         }}
       >
         {show === true ? 'Show Less' : 'Show More'}
-      </button>
+      </Button>
 
       {show === true && (
-        <div>
-          <p>Pets: {place.pet_friendly === true ? 'Yes' : 'No'}</p>
+        <div className='mt-1'>
+          <p>
+            <strong>Pets: {place.pet_friendly === true ? 'Yes' : 'No'}</strong>
+          </p>
         </div>
       )}
     </div>

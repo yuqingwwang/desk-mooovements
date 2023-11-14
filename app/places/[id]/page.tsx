@@ -7,6 +7,8 @@ import AddToWishList from '@/app/components/AddToWishlist';
 import { cookies } from 'next/headers';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { Database } from '../../../database.types';
+import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
+import { Button } from '@radix-ui/themes';
 
 export default async function WorkSpaces({ params }: PageByIDParams) {
   let place: Workspace[] | null = null;
@@ -27,24 +29,25 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
 
   return (
     <>
-      <div>
-        <p>{JSON.stringify({ params })}</p>
+      <div className='mt-7'>
         {place && place.length > 0 ? (
           <>
-            <p data-testid='place-name'>Name: {place[0].name}</p>
-            <p>Address: {place[0].address}</p>
-            <SeeMore place={place} />
-            <Link href={'/'}>
-              <AddToWishList id={parseInt(id)} user={user && user.id} />
-              <div className='m-3'>
-                <button className='inline-flex w-32 items-center rounded border-b-2 border-blue-500 bg-white px-6 py-2 font-bold tracking-wide text-gray-800 shadow-md hover:border-blue-600 hover:bg-blue-500 hover:text-white'>
-                  <span className='mx-auto'>Home</span>
-                </button>
-              </div>
-            </Link>
+            <DisplayPlaceCard
+              imageLink={place[0].image}
+              placeName={place[0].name}
+              flavourText={place[0].address}
+            />
+
+            <div className='mb-3 mt-5 flex space-x-10'>
+              <SeeMore place={place} />
+
+              <Link href={'/'}>
+                <AddToWishList id={parseInt(id)} user={user && user.id} />
+              </Link>
+            </div>
           </>
         ) : (
-          <p>Loading or no data available...</p> // Display a loading indicator or a no-data message
+          <p>Loading or no data available...</p>
         )}
       </div>
       <Navbar user={user && user.id} />
