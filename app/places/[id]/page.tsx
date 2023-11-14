@@ -11,6 +11,7 @@ import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
 import { Button } from '@radix-ui/themes';
 import { MapView } from '@/app/components/detailPageComponents/MapView';
 import { Heading, Text } from '@radix-ui/themes';
+import { notFound } from 'next/navigation';
 
 export default async function WorkSpaces({ params }: PageByIDParams) {
   let place: Workspace[] | null = null;
@@ -25,6 +26,7 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
     'id',
     id
   );
+  if (place && place.length === 0) notFound();
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient<Database>({
     cookies: () => cookieStore,
