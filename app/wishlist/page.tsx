@@ -5,6 +5,7 @@ import { cookies } from 'next/headers';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { Database } from '@/database.types';
 import DisplayWishlistPlaces from '../components/DisplayWishlistPlaces';
+import { Heading } from '@radix-ui/themes';
 
 export default async function wishlist() {
   const cookieStore = cookies();
@@ -29,7 +30,9 @@ export default async function wishlist() {
 
   return (
     <div>
-      <h1>Wishlist</h1>
+      <Heading as='h1' align='center'>
+        Welcome to your wishlist!
+      </Heading>
       <DisplayWishlistPlaces
         places={places}
         wishlist={wishlistArray && wishlistArray[0].wish_list}

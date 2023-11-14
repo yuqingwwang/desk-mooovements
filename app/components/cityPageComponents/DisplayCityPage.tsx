@@ -37,19 +37,17 @@ export default function DisplayCityPage({
             <div data-testid='place-card-container'>
               {workSpacesData &&
                 workSpaceState.map((space) => (
-                  <>
-                    <DisplayPlaceCard
-                      key={space.name}
-                      pageRoute={`places/${space.id}`}
-                      imageLink={space.image}
-                      placeName={space.name}
-                      flavourText={space.address}
-                      amenityList={`${trueAmenitiesWithId?.find(
-                        (amenity) =>
-                          amenity.id === (space.id as unknown as string)
-                      )?.amenities}`}
-                    />
-                  </>
+                  <DisplayPlaceCard
+                    key={space.name}
+                    pageRoute={`places/${space.id}`}
+                    imageLink={space.image}
+                    placeName={space.name}
+                    flavourText={space.address}
+                    amenityList={`${trueAmenitiesWithId?.find(
+                      (amenity) =>
+                        amenity.id === (space.id as unknown as string)
+                    )?.amenities}`}
+                  />
                 ))}
             </div>
           </>
