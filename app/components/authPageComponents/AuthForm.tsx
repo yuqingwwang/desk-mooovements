@@ -14,9 +14,9 @@ const FormInput: React.FC<FormInputProps> = ({ name, type, placeholder }) => {
 export const WholeForm: React.FC = () => {
   return (
     <>
-      <div className='flex h-screen justify-center '>
+      <div className='sm:align-center flex max-w-xl sm:flex sm:h-[500px] sm:w-full sm:max-w-full sm:justify-center'>
         <form
-          className='mb-auto mt-auto w-2/12 space-y-3'
+          className='w-full space-y-3 sm:mb-auto sm:mt-auto sm:w-full sm:max-w-[400px]'
           action='auth/login'
           method='post'
         >
@@ -26,7 +26,7 @@ export const WholeForm: React.FC = () => {
           <FormInput name='email' type='email' placeholder='Email' />
           <FormInput name='password' type='password' placeholder='Password' />
 
-          <div className='flex justify-between'>
+          <div className='flex flex-wrap justify-around gap-8 sm:flex-nowrap sm:justify-start'>
             <Button>Sign in</Button>
             <Button formAction='/auth/sign-up'>Sign up</Button>
           </div>
