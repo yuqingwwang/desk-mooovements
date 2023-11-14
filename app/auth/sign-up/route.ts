@@ -32,9 +32,10 @@ export async function POST(request: Request) {
   } else {
     // const userID = data?.user?.id ?? ''
     const email = data?.user?.email ?? '';
-    const redirectUrl = `${
-      requestUrl.origin
-    }/login?success=true&email=${encodeURIComponent(email)}`;
+    // const redirectUrl = `${
+    //   requestUrl.origin
+    // }/login?success=true&email=${encodeURIComponent(email)}`;
+    const redirectUrl = `${requestUrl.origin}/`;
 
     return NextResponse.redirect(redirectUrl, {
       status: 301,

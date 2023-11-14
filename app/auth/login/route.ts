@@ -29,7 +29,7 @@ export async function POST(request: Request) {
       status: 301,
     });
   } else {
-    const redirectUrl = `${requestUrl.origin}/login`;
+    const redirectUrl = `${requestUrl.origin}/`;
 
     return NextResponse.redirect(redirectUrl, {
       status: 301,
