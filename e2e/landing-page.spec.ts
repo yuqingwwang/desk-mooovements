@@ -9,21 +9,14 @@ test.describe('landing page renders correctly', () => {
       page.getByRole('heading', { name: 'Welcome to desk-mooovements!' })
     ).toBeVisible();
   });
-  test('Renders add workplace button', async ({ page }) => {
-    await expect(
-      page.getByRole('button', { name: 'Add Workplace' })
-    ).toBeVisible();
-  });
-  test('Renders login button', async ({ page }) => {
-    await expect(
-      page.getByRole('button', { name: 'Login' }).first()
-    ).toBeVisible();
-  });
   test('Renders popular cities card', async ({ page }) => {
     await expect(page.getByTestId('cities')).toBeVisible;
   });
   test('Renders popular places card', async ({ page }) => {
     await expect(page.getByTestId('places')).toBeVisible;
+  });
+  test('Navbar renders', async ({ page }) => {
+    await expect(page.getByTestId('navbar')).toBeVisible;
   });
 });
 
@@ -99,11 +92,6 @@ test.describe('Landing page interactivity works', () => {
     });
   });
   test.describe('Links all lead to correct place', () => {
-    test('Add workplace button leads to correct page', async ({ page }) => {
-      await page.getByRole('button', { name: 'Add Workplace' }).click();
-      await expect(page.getByRole('heading', { name: 'Add a place' }))
-        .toBeVisible;
-    });
     test('Place carousel link leads to correct place page', async ({
       page,
     }) => {

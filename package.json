@@ -10,7 +10,8 @@
     "format:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,css,scss}\"",
     "format": "prettier --write .",
     "prepare": "husky install",
-    "update": "supabase gen types typescript --project-id tkvonehonrmtoeqojhjs > database.types.ts"
+    "update": "supabase gen types typescript --project-id tkvonehonrmtoeqojhjs > database.types.ts",
+    "test": "playwright test --workers 4"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
@@ -20,7 +21,6 @@
     "@sentry/nextjs": "^7.78.0",
     "@supabase/auth-helpers-nextjs": "^0.8.7",
     "@supabase/supabase-js": "^2.38.4",
-    "lint-staged": "^15.0.2",
     "next": "14.0.1",
     "react": "^18",
     "react-dom": "^18",
@@ -29,6 +29,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "lint-staged": "^15.0.2",
     "@flydotio/dockerfile": "^0.4.10",
     "@playwright/test": "^1.39.0",
     "@types/node": "^20",

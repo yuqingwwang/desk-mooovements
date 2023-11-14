@@ -13,7 +13,7 @@ export function DisplayPlaceCard({
   amenityList,
 }: PlaceCardParams) {
   return (
-    <Card style={{ minWidth: 400, minHeight: 250 }}>
+    <Card data-testid='place-card' style={{ minWidth: 400, minHeight: 250 }}>
       <Link href={`/${pageRoute}`}>
         <Flex gap='9' align='center'>
           <Avatar
