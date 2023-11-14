@@ -16,14 +16,12 @@ import { CreateAddWorkplaceForm } from '../validationForm';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import ErrorMessage from './ErrorMessage';
 import * as Label from '@radix-ui/react-label';
-import Link from 'next/link';
 import newClient from '../config/supabaseclient';
 import { SupabaseCall } from '../utils/supabaseCall';
 import NavBar from './NavBar';
-import getCityIds from '../utils/fetchCityId';
-import { CityWithId } from '@/app/utils/types';
+import { citiesWithId } from '@/app/utils/constants';
 
-export default function AddWorkplace({ user }: { user: string | null }) {
+export default function AddWorkplace({ user }: { user: any | null }) {
   const {
     register,
     control,
@@ -35,8 +33,7 @@ export default function AddWorkplace({ user }: { user: string | null }) {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setSubmitting] = useState(false);
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
-  const [cities, setCities] = useState<{ name: string; id: number }[]>([]);
-  const [selectedCity, setSelectedCity] = useState(0);
+  const [selectedCity, setSelectedCity] = useState('');
 
   const handleAmenityChange = (amenity: string) => {
     if (selectedAmenities.includes(amenity)) {
@@ -46,22 +43,12 @@ export default function AddWorkplace({ user }: { user: string | null }) {
     }
   };
 
-  const handleSelectedCityChange = (city: any) => {
-    console.log('selected city is', city);
-    setSelectedCity(city.id);
+  const getCityId = (cityName: string) => {
+    return citiesWithId.find((city) => city.name === selectedCity)?.id;
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const citiesResult =
-        (await SupabaseCall('cities', 'name,id', '', '')) || [];
-      citiesResult.sort((a: any, b: any) => (a.id > b.id ? 1 : -1));
-      setCities(citiesResult ?? []);
-    };
-    fetchData();
-  }, []);
-
   const onSubmit: SubmitHandler<CreateAddWorkplaceForm> = async (formData) => {
+    console.log('formdata', formData);
     if (!user) {
       // Display an error message if the user is null
       setError('You need to log in');
@@ -79,7 +66,7 @@ export default function AddWorkplace({ user }: { user: string | null }) {
             created_by: user,
             address: formData.address,
             image: formData.image,
-            city: selectedCity,
+            city: getCityId(selectedCity),
             pet_friendly: selectedAmenities.includes('pet-friendly'),
             opens_till_late: selectedAmenities.includes('open till late'),
             has_wifi: selectedAmenities.includes('wifi'),
@@ -110,18 +97,13 @@ export default function AddWorkplace({ user }: { user: string | null }) {
       )}
 
       <form className='space-y-3' onSubmit={handleSubmit(onSubmit)}>
-        <Select.Root>
-          <Select.Trigger />
+        <Select.Root value={selectedCity} onValueChange={setSelectedCity}>
+          <Select.Trigger placeholder='Select a City' />
           <Select.Content>
-            {cities.map((city: any) => (
-              <div key={city.id} className='p-1'>
-                <Select.Item
-                  onClick={() => handleSelectedCityChange(city)}
-                  value={city.id}
-                >
-                  {city.name}
-                </Select.Item>
-              </div>
+            {citiesWithId.map((city) => (
+              <Select.Item key={city.id} value={city.name}>
+                {city.name}
+              </Select.Item>
             ))}
           </Select.Content>
         </Select.Root>
@@ -183,6 +165,7 @@ export default function AddWorkplace({ user }: { user: string | null }) {
           Create {isSubmitting && <Spinner />}
         </Button>
       </form>
+
       <NavBar user={user && user.id} />
     </div>
   );
