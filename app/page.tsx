@@ -1,5 +1,4 @@
 import DisplayCities from './components/DisplayCities';
-import Link from 'next/link';
 import Navbar from '@/app/components/NavBar';
 import { Heading } from '@radix-ui/themes';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
