@@ -1,17 +1,16 @@
-import SeeMore from '@/app/components/SeeMore';
+import SeeMore from '@/app/components/detailPageComponents/SeeMore';
 import { PageByIDParams, Workspace } from '@/app/utils/types';
 import { SupabaseCall } from '@/utils/supabaseCall';
 import Link from 'next/link';
 import Navbar from '@/app/components/NavBar';
-import AddToWishList from '@/app/components/AddToWishlist';
+import AddToWishList from '@/app/components/detailPageComponents/AddToWishlist';
 import { cookies } from 'next/headers';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { Database } from '../../../database.types';
 import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
 import { Button } from '@radix-ui/themes';
-import { MapView } from '@/app/components/MapView';
+import { MapView } from '@/app/components/detailPageComponents/MapView';
 import { Heading, Text } from '@radix-ui/themes';
-
 
 export default async function WorkSpaces({ params }: PageByIDParams) {
   let place: Workspace[] | null = null;
@@ -44,7 +43,7 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
               placeName={place[0].name}
               flavourText={place[0].address}
             />
-  
+
             <div className='mb-3 mt-5 flex space-x-10'>
               <SeeMore place={place} />
 
@@ -53,7 +52,6 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
               </Link>
             </div>
             <MapView coordinates={place && place[0].coordinates} />
-
           </>
         ) : (
           <p>Loading or no data available...</p>
