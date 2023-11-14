@@ -24,7 +24,7 @@ export default function NavBar({ user }: { user: string | null }) {
         data-testid='navbar'
         className='fixed bottom-0 left-0 z-20 w-full border-t border-gray-200 bg-white dark:border-gray-600 dark:bg-gray-900'
       >
-        <div className='mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4'>
+        <div className='max-w-screen-xl mx-auto flex flex-wrap items-center justify-between p-4'>
           <a
             data-testid='navbar-home-link'
             href='/'

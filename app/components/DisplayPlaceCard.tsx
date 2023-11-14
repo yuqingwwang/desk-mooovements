@@ -22,7 +22,7 @@ export function DisplayPlaceCard({
     <Card
       asChild
       variant='surface'
-      className='w-auto py-2 md:w-[600px] lg:w-[850px]'
+      className='lg:w-[850px] w-auto py-2 md:w-[600px]'
     >
       {pageRoute ? (
         <Link href={`/${pageRoute}`}>
