@@ -1,4 +1,4 @@
-import WholeForm from '../components/AuthForm';
+import WholeForm from '../components/authPageComponents/AuthForm';
 import Navbar from '../components/NavBar';
 import { Heading } from '@radix-ui/themes';
 import { cookies } from 'next/headers';
