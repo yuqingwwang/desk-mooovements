@@ -19,3 +19,34 @@ export const allAmenities = [
   'has_phone_booth',
   'has_locker',
 ];
+
+export const citiesWithId = [
+  {
+    name: 'London',
+    id: 1,
+  },
+  {
+    name: 'Brighton',
+    id: 2,
+  },
+  {
+    name: 'Paris',
+    id: 3,
+  },
+  {
+    name: 'Beijing',
+    id: 4,
+  },
+  {
+    name: 'Madrid',
+    id: 5,
+  },
+  {
+    name: 'Rome',
+    id: 6,
+  },
+  {
+    name: 'Berlin',
+    id: 7,
+  },
+];
