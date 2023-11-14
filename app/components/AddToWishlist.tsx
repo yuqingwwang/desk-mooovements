@@ -3,7 +3,9 @@
 import { SupabaseCall } from '@/utils/supabaseCall';
 import newClient from '../config/supabaseclient';
 import Link from 'next/link';
+import { Button } from '@radix-ui/themes';
 import { Profile } from '../utils/types';
+
 export default function AddToWishList({
   id,
   user,
@@ -34,7 +36,7 @@ export default function AddToWishList({
   return (
     <>
       {user ? (
-        <button
+        <Button
           onClick={() => {
             {
               updateList();
@@ -42,10 +44,10 @@ export default function AddToWishList({
           }}
         >
           Add to Wishlist{' '}
-        </button>
+        </Button>
       ) : (
         <Link href={'/login'}>
-          <button>Add to Wishlist </button>
+          <Button className='mb-3 mt-5'>Add to Wishlist </Button>
         </Link>
       )}
     </>

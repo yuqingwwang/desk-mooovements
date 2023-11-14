@@ -7,8 +7,11 @@ import AddToWishList from '@/app/components/AddToWishlist';
 import { cookies } from 'next/headers';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { Database } from '../../../database.types';
+import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
+import { Button } from '@radix-ui/themes';
 import { MapView } from '@/app/components/MapView';
 import { Heading, Text } from '@radix-ui/themes';
+
 
 export default async function WorkSpaces({ params }: PageByIDParams) {
   let place: Workspace[] | null = null;
@@ -33,26 +36,27 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
 
   return (
     <>
-      <div>
+      <div className='mt-7'>
         {place && place.length > 0 ? (
           <>
-            <div>
-              <Heading data-testid='place-name'> {place[0].name}</Heading>
-              <Text>Address: {place[0].address}</Text>
+            <DisplayPlaceCard
+              imageLink={place[0].image}
+              placeName={place[0].name}
+              flavourText={place[0].address}
+            />
+  
+            <div className='mb-3 mt-5 flex space-x-10'>
+              <SeeMore place={place} />
+
+              <Link href={'/'}>
+                <AddToWishList id={parseInt(id)} user={user && user.id} />
+              </Link>
             </div>
             <MapView coordinates={place && place[0].coordinates} />
-            <SeeMore place={place} />
-            {/* <Link href={'/'}>
-              <AddToWishList id={parseInt(id)} user={user && user.id} />
-              <div className='m-3'>
-                <button className='inline-flex w-32 items-center rounded border-b-2 border-blue-500 bg-white px-6 py-2 font-bold tracking-wide text-gray-800 shadow-md hover:border-blue-600 hover:bg-blue-500 hover:text-white'>
-                  <span className='mx-auto'>Home</span>
-                </button>
-              </div>
-            </Link> */}
+
           </>
         ) : (
-          <p>Loading or no data available...</p> // Display a loading indicator or a no-data message
+          <p>Loading or no data available...</p>
         )}
       </div>
       <Navbar user={user && user.id} />

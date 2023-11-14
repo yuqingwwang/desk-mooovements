@@ -43,7 +43,7 @@ export type PageByIDParams = {
 };
 
 export type PlaceCardParams = {
-  pageRoute: string | null;
+  pageRoute?: string | null;
   imageLink: string | null;
   placeName: string | null;
   flavourText: string | number | null;
