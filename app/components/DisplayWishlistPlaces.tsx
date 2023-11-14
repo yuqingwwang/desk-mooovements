@@ -1,11 +1,10 @@
 'use client';
 import React from 'react';
 import { Amenities } from '../utils/types';
-import Navbar from '@/app/components/NavBar';
-import { Heading, Text, Button, Flex, Box } from '@radix-ui/themes';
-import { useState } from 'react';
+import { Heading, Flex } from '@radix-ui/themes';
 import { WishlistDisplay } from '../utils/types';
 import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
+
 export default function DisplayWishlistPlaces({
   places,
   wishlist,
@@ -31,13 +30,10 @@ export default function DisplayWishlistPlaces({
         amenities: amenities as string[],
       };
     });
-  console.log(wishlist);
+  console.log('This is the wishlist', wishlist);
+  if (wishlist === null) return <h1>Your wishlist is empty</h1>;
+
   return (
-    // {places.filter((place)=>wishlist.some(x => x === place.id)).map((place, index) => (
-
-    //   <p key={index}>{place.name + place.id}</p>
-    // ))}
-
     <>
       <Flex direction='column' gap='3'>
         {places && places.length > 0 ? (
@@ -50,19 +46,17 @@ export default function DisplayWishlistPlaces({
               places
                 .filter((space) => wishlist.some((x) => x === space.id))
                 .map((space) => (
-                  <>
-                    <DisplayPlaceCard
-                      key={space.name}
-                      pageRoute={`places/${space.id}`}
-                      imageLink={space.image}
-                      placeName={space.name}
-                      // flavourText={space.address}
-                      flavourText={`${trueAmenitiesWithId?.find(
-                        (amenity) =>
-                          amenity.id === (space.id as unknown as string)
-                      )?.amenities}`}
-                    />
-                  </>
+                  <DisplayPlaceCard
+                    key={space.name}
+                    pageRoute={`places/${space.id}`}
+                    imageLink={space.image}
+                    placeName={space.name}
+                    // flavourText={space.address}
+                    flavourText={`${trueAmenitiesWithId?.find(
+                      (amenity) =>
+                        amenity.id === (space.id as unknown as string)
+                    )?.amenities}`}
+                  />
                 ))}
           </>
         ) : (
