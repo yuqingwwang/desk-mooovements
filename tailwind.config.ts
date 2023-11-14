@@ -15,9 +15,9 @@ const config: Config = {
       },
     },
     screens: {
-      sm: '640px',
-      md: '768px',
-    },
+      'sm': '640px',
+      'md': '768px'
+    }
   },
   plugins: [],
 };
