@@ -1,6 +1,6 @@
 import { SupabaseCall } from '@/utils/supabaseCall';
 import Carousel from './Carousel';
-import { City, Workspace } from '../utils/types';
+import { City, Workspace, WorkspaceWithReviews } from '../utils/types';
 import { SearchBar } from './SearchBar';
 import { Flex } from '@radix-ui/themes';
 
@@ -21,7 +21,7 @@ const DisplayCities = async () => {
     cities.splice(3);
   }
 
-  const places: Workspace[] =
+  const places: WorkspaceWithReviews[] =
     (await SupabaseCall(
       'work_spaces',
       'id, name, address, image, city, reviews(count)',
