@@ -13,12 +13,13 @@ const DisplayCities = async () => {
       ''
     )) || [];
 
+  let topCities: City[] = [];
   if (cities) {
     // sort by number of workspaces
     cities.sort((a, b) => b.work_spaces[0].count - a.work_spaces[0].count);
-
     // keep up to 3 cities
-    cities.splice(3);
+    topCities = cities.slice();
+    topCities.splice(3);
   }
 
   const places: WorkspaceWithReviews[] =
@@ -48,7 +49,7 @@ const DisplayCities = async () => {
         border-double
         border-yellow-500'
       >
-        <Carousel title='cities' data={cities} />
+        <Carousel title='cities' data={topCities} />
         <Carousel title='places' data={places} />
       </Flex>
     </div>
