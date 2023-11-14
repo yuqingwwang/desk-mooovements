@@ -25,7 +25,7 @@ export default function DisplayCityPage({
 
   return (
     <>
-      <Flex direction='column' gap='3'>
+      <Flex direction='column' gap='3' align='center'>
         {city && city.length > 0 ? (
           <>
             <CityHeader city={city} />
