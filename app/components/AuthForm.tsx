@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, TextField } from '@radix-ui/themes';
+import { Button, TextField, Flex } from '@radix-ui/themes';
 import { FormInputProps } from '../utils/types';
 
 const FormInput: React.FC<FormInputProps> = ({ name, type, placeholder }) => {
@@ -18,8 +18,11 @@ export const WholeForm: React.FC = () => {
         <form className='space-y-3' action='auth/login' method='post'>
           <FormInput name='email' type='email' placeholder='Email' />
           <FormInput name='password' type='password' placeholder='Password' />
-          <Button>Sign in</Button>
-          <Button formAction='/auth/sign-up'>Sign up</Button>
+
+          <Flex gap='3'>
+            <Button>Sign in</Button>
+            <Button formAction='/auth/sign-up'>Sign up</Button>
+          </Flex>
         </form>
       </div>
     </>
