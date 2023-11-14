@@ -1,21 +1,6 @@
 /** @type {import('next').NextConfig} */
 
-nextConfig = {
-  images: {
-    domains: [
-      'lh3.googleusercontent.com',
-      'media.rightmove.co.uk',
-      'www.thebeijinger.com',
-      'lh5.googleusercontent.com',
-      'images.unsplash.com',
-      'media1.popsugar-assets.com',
-      'encrypted-tbn0.gstatic.com',
-      'media.istockphoto.com',
-      'img.tagvenue.com',
-      'fastly.4sqi.net',
-    ],
-  },
-};
+nextConfig = {};
 
 // Injected content via Sentry wizard below
 

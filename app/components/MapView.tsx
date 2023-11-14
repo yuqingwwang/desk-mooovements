@@ -13,7 +13,6 @@ export const MapView = ({ coordinates }: { coordinates: any }) => {
 
   // annoying bug for space 4
   if (isNaN(long) || isNaN(lat)) {
-    console.log(coordinates);
     const coordinateArray = coordinates.slice(1, -1).split(',');
     [long, lat] = coordinateArray.map((str: string) =>
       parseFloat(str.replace(/['"]/g, '').trim())
