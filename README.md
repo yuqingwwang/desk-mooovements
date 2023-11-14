@@ -2,18 +2,26 @@
 
 What are you building?
 
-- We are building an app that simplify the search with a tailored database of places that suit digital nomads' unique needs.
+- We are building an app with a tailored database of places that suit digital nomads' needs.
 
 Why are you building it?
 
-- Digital nomads often struggle to find flexible workspaces without long memberships and those open at unconventional hours.
+- Digital nomads often struggle to find flexible workspaces without long memberships and those open at unconventional hours. This app will help simplify their search for a place to work.
 
 # Project scope
 
-What are you not building?
-How did you decide what features were important?
+We are not building an exhaustive list of places to work at...
+
+Expect to find some hidden gems here, and please do contribute to the site with your favourite places to work!
 
 # Project plan
+
+Key components of the app:
+- Viewing places
+- Adding to wishlist
+- Contributing (adding new places)
+
+At the current stage you can see a few nice places handpicked by James
 
 How are you going to structure your sprints?
 What order are you going to build in?
@@ -21,14 +29,14 @@ How did user research inform your plan?
 
 # Requirement analysis
 
-How will you ensure your project is accessible to as many users as possible?
-Are there any legal or regulatory requirements you should consider?
-Project learnings
+We have a very intuitive design, and working on making the site accessible for all.
+
+There's no legal or regulatory requirements that we are aware of.
 
 # Did your team work effectively?
 
 What would you do differently next time?
-Research and findings
+
 What did you find out from user testing?
 
 # Project outcomes
@@ -48,7 +56,7 @@ Explain the roles and responsibilities of all people working within the software
 
 Did these roles help your team work effectively?
 
-- Shaughn Scrum Facilitator, Yuqing UI/UX, Jame QA, Ellana DevOps
+- Shaughn Scrum Facilitator, Yuqing UI/UX, Jame QA, Elena DevOps
 - Within our organization scum facilitation means mostly leading stand ups and organizing planning the project was not strictly guided since we spent time planning together before the start
 - UI/UX meant making sure the layout and way that you moved around the web site was handled in keeping with our intended user experience and prototype
 - QA meant designing tests for the routes and key functions in our project
@@ -58,6 +66,7 @@ Outline how teams work effectively to produce software and how to contribute app
 
 Analysis
 What might be the intended and unintended consequences of building this product?
+
 Design
 How did you plan a user experience?
 What technical decisions did you make?
@@ -83,17 +92,21 @@ How did you verify your project worked correctly?
 Identify and create test scenarios which satisfy the project specification (S6)
 
 Did writing automated tests catch any bugs?
-
-Analyse unit testing results and review the outcomes, correcting errors. (S4)
+- Ask James
 
 Deploy
 Where/how did you deploy your application?
-Review and justify their contribution to building, managing and deploying code into the relevant environment in accordance with the project specification (S10)
+- Ask Elena
 
 What problems did you encounter during deployment?
+- Fly didn't work;
+- and we used Vercel because we built a NexJS app.
+- 
 Maintain
+
 Is it easy for someone make changes to the codebase?
-Could a new person quickly be onboarded to contribute?
+Our codes are nicely structured and easy to read. It's easy for someone to make changes to the codebase, and a new person can quickly be onboarded to contribute.
+
 Establishes a logical thinking approach to areas of work which require valid reasoning and/or justified decision making (B2)
 Describes how they have maintained a productive, professional and secure working environment throughout the project activity (B3)
 
@@ -101,7 +114,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First, you'll need a few environmental variables to run it locally.
+
+Just ask us.
+
+Then run the development server:
 
 ```bash
 npm run dev
@@ -111,4 +128,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Deploy on Vercel
 
-Deployed app here [Vercel Platform](https://desk-mooovements-1b004ndx5-elenas-projects-f436e785.vercel.app/).
+Alternatively, view our deployed app here [on Vercel Platform](https://desk-mooovements-1b004ndx5-elenas-projects-f436e785.vercel.app/).
