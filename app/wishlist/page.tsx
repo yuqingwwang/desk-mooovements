@@ -14,11 +14,9 @@ export default async function wishlist() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  // console.log({ user });
 
   let wishlistArray: Profile[] | null = null;
   wishlistArray = await SupabaseCall('profiles', 'wish_list', 'id', user?.id);
-  console.log(wishlistArray);
 
   let places: Workspace[] | null = null;
   places = await SupabaseCall(
