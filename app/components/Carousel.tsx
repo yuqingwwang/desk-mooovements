@@ -51,12 +51,12 @@ export default function Carousel({ title, data }: any) {
         gap='9'
       >
         <div className='mt-5 flex justify-end'>
-        <Button onClick={() => subtractFromSlide()} size='3'>
-          Prev
-        </Button>
-        <Button onClick={() => addToSlide()} size='3'>
-          Next
-        </Button>
+          <Button onClick={() => subtractFromSlide()} size='3'>
+            Prev
+          </Button>
+          <Button onClick={() => addToSlide()} size='3'>
+            Next
+          </Button>
         </div>
       </Flex>
     </Flex>
