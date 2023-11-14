@@ -1,7 +1,7 @@
 import { SupabaseCall } from '@/utils/supabaseCall';
 import Carousel from './Carousel';
-import { City, Workspace, WorkspaceWithReviews } from '../utils/types';
-import { SearchBar } from './SearchBar';
+import { City, WorkspaceWithReviews } from '@/app/utils/types';
+import { SearchBar } from './homePageComponents/SearchBar';
 import { Flex } from '@radix-ui/themes';
 
 const DisplayCities = async () => {

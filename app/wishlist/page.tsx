@@ -3,7 +3,7 @@ import { SupabaseCall } from '@/utils/supabaseCall';
 import Navbar from '@/app/components/NavBar';
 import { cookies } from 'next/headers';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
-import { Database } from '../lib/supabase';
+import { Database } from '@/database.types';
 import DisplayWishlistPlaces from '../components/DisplayWishlistPlaces';
 
 export default async function wishlist() {
