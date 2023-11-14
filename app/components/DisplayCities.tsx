@@ -13,12 +13,14 @@ const DisplayCities = async () => {
       ''
     )) || [];
 
+  let topCities: City[] = [];
+
   if (cities) {
     // sort by number of workspaces
     cities.sort((a, b) => b.work_spaces[0].count - a.work_spaces[0].count);
 
     // keep up to 3 cities
-    let topCities = cities.toSpliced(3);
+    topCities = cities.toSpliced(3);
   }
 
   const places: WorkspaceWithReviews[] =
