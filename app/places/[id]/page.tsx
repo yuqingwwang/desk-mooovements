@@ -9,13 +9,20 @@ import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { Database } from '../../../database.types';
 import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
 import { Button } from '@radix-ui/themes';
+import { MapView } from '@/app/components/MapView';
+import { Heading, Text } from '@radix-ui/themes';
+
 
 export default async function WorkSpaces({ params }: PageByIDParams) {
   let place: Workspace[] | null = null;
   const id = params.id;
   place = await SupabaseCall(
     'work_spaces',
-    'id,name,address,image,cities ( name ),pet_friendly,opens_till_late,has_wifi,has_socket,has_shower,has_meeting_room,has_phone_booth,has_locker',
+    'id, name, address, image, \
+    cities (name), pet_friendly, \
+    opens_till_late, has_wifi, has_socket, \
+    has_shower, has_meeting_room, has_phone_booth, has_locker, \
+    coordinates',
     'id',
     id
   );
@@ -37,7 +44,7 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
               placeName={place[0].name}
               flavourText={place[0].address}
             />
-
+  
             <div className='mb-3 mt-5 flex space-x-10'>
               <SeeMore place={place} />
 
@@ -45,6 +52,8 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
                 <AddToWishList id={parseInt(id)} user={user && user.id} />
               </Link>
             </div>
+            <MapView coordinates={place && place[0].coordinates} />
+
           </>
         ) : (
           <p>Loading or no data available...</p>

@@ -15,6 +15,12 @@ export type CityPage = Database['public']['Tables']['cities']['Row'] & {
 };
 export type Workspace = Database['public']['Tables']['work_spaces']['Row'];
 export type Reviews = Database['public']['Tables']['reviews']['Row'];
+
+export type WorkspaceWithReviews = {
+  workspace: Workspace;
+  reviews: any;
+};
+
 export type PopularCarousel = {
   cities?: City[];
   places?: Workspace[];
