@@ -28,9 +28,6 @@ export default async function Login() {
   // else render the login/signup form
   return (
     <>
-      <Heading as='h1' className='py-3'>
-        Sign In or Sign Up
-      </Heading>
       <WholeForm />
       <Navbar user={user && user} />
     </>

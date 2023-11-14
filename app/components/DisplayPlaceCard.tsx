@@ -69,7 +69,6 @@ function CardContents({
         <Text as='div' size='5' weight='bold'>
           {placeName}
         </Text>
-
         {amenityList?.split(',').map((item: any, index: number) => (
           <Badge
             className='mr-2'
