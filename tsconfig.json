@@ -30,7 +30,7 @@
     "app/page.tsx",
     "app/config/supabaseclient.ts",
     "next.config.js",
-    "app/components/MapView.tsx"
+    "app/components/detailPageComponents/MapView.tsx"
   ],
   "exclude": ["node_modules"]
 }

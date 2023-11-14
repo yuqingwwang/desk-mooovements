@@ -1,10 +1,10 @@
 'use client';
 
 import { SupabaseCall } from '@/utils/supabaseCall';
-import newClient from '../config/supabaseclient';
+import newClient from '../../config/supabaseclient';
 import Link from 'next/link';
 import { Button } from '@radix-ui/themes';
-import { Profile } from '../utils/types';
+import { Profile } from '../../utils/types';
 
 export default function AddToWishList({
   id,

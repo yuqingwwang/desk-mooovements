@@ -1,5 +1,5 @@
 import React from 'react';
-import AddWorkplace from '../components/New-worplace';
+import AddWorkplace from '../components/addSpaceComponents/NewWorplace';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import { Database } from '@/database.types';
