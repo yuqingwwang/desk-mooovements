@@ -16,7 +16,7 @@ export default function DisplayCityPage({
   const [selectedFilter, setSelectedFilter] = useState('all') as any;
   const [workSpaceState, setWorkSpaceState] = useState(workSpacesData);
   useEffect(() => {
-    const filteredWorkspace = workSpacesData.filter((space) => {
+    const filteredWorkspace = workSpacesData.filter((space: any) => {
       if (selectedFilter === 'all') return true;
       return space[`${selectedFilter}`];
     });

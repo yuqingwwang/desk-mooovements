@@ -13,18 +13,18 @@ export function DisplayPlaceCard({
   amenityList,
 }: PlaceCardParams) {
   return (
-    <Card data-testid='place-card' style={{ minWidth: 400, minHeight: 250 }}>
+    <Card data-testid='place-card' style={{ maxWidth: 380 }} variant='ghost' className='py-10'>
       <Link href={`/${pageRoute}`}>
-        <Flex gap='9' align='center'>
+        <Flex gap='1' align='start'>
           <Avatar
-            size='9'
+            size='8'
             src={imageLink ?? ''}
             radius='full'
             fallback='T'
-            className='ml-4 mt-8'
+            className='mx-4 mt-8'
           />
           <Box>
-            <Text as='div' size='8' weight='bold'>
+            <Text as='div' size='5' weight='bold'>
               {placeName}
             </Text>
 

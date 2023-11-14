@@ -29,7 +29,8 @@
     ".next/types/**/*.ts",
     "app/page.tsx",
     "app/config/supabaseclient.ts",
-    "next.config.js"
+    "next.config.js",
+    "app/components/MapView.tsx"
   ],
   "exclude": ["node_modules"]
 }
