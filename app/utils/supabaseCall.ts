@@ -8,7 +8,7 @@ export async function SupabaseCall(
 ) {
   columnName = columnName ? columnName : '';
   columnCriteria = columnCriteria ? columnCriteria : '';
-  console.log(typeof columnName);
+
   let fetchError: string | null = null;
   const supabase = newClient();
   const { data, error } = await supabase
@@ -20,6 +20,5 @@ export async function SupabaseCall(
     console.log(error);
     return null;
   }
-  console.log({ tableName: callFrom, select: selectThis, data: data });
   return data as any[];
 }

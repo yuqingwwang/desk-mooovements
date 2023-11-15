@@ -1,7 +1,7 @@
 'use client';
 
-import { Button, TextField, Flex } from '@radix-ui/themes';
 import { FormInputProps } from '@/app/utils/types';
+import { Button, Heading, TextField } from '@radix-ui/themes';
 
 const FormInput: React.FC<FormInputProps> = ({ name, type, placeholder }) => {
   return (
@@ -14,15 +14,22 @@ const FormInput: React.FC<FormInputProps> = ({ name, type, placeholder }) => {
 export const WholeForm: React.FC = () => {
   return (
     <>
-      <div className='max-w-xl'>
-        <form className='space-y-3' action='auth/login' method='post'>
+      <div className='sm:align-center flex max-w-xl sm:flex sm:h-[500px] sm:w-full sm:max-w-full sm:justify-center'>
+        <form
+          className='w-full space-y-3 sm:mb-auto sm:mt-auto sm:w-full sm:max-w-[400px]'
+          action='auth/login'
+          method='post'
+        >
+          <Heading as='h1' className='ms:sm py-2'>
+            Sign In or Sign Up
+          </Heading>
           <FormInput name='email' type='email' placeholder='Email' />
           <FormInput name='password' type='password' placeholder='Password' />
 
-          <Flex gap='3'>
+          <div className='flex flex-wrap justify-around gap-8 sm:flex-nowrap sm:justify-start'>
             <Button>Sign in</Button>
             <Button formAction='/auth/sign-up'>Sign up</Button>
-          </Flex>
+          </div>
         </form>
       </div>
     </>

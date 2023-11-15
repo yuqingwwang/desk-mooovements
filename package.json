@@ -31,7 +31,6 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "lint-staged": "^15.0.2",
     "@flydotio/dockerfile": "^0.4.10",
     "@playwright/test": "^1.39.0",
     "@types/node": "^20",
@@ -44,8 +43,10 @@
     "eslint-config-next": "14.0.1",
     "eslint-config-prettier": "^9.0.0",
     "husky": "^8.0.3",
+    "lint-staged": "^15.0.2",
     "postcss": "^8",
     "prettier": "^3.0.3",
+    "prettier-plugin-organize-imports": "^3.2.4",
     "prettier-plugin-tailwindcss": "^0.5.6",
     "tailwindcss": "^3.3.0",
     "typescript": "^5.2.2"

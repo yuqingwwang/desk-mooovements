@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from 'react';
 
-import { Heading, Flex } from '@radix-ui/themes';
-import { CityData } from '@/app/utils/types';
 import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
-import FilterButtons from './FilterButtons';
+import { CityData } from '@/app/utils/types';
+import { Flex, Heading } from '@radix-ui/themes';
 import CityHeader from './CityHeader';
+import FilterButtons from './FilterButtons';
 
 export default function DisplayCityPage({
   city,
@@ -34,7 +34,10 @@ export default function DisplayCityPage({
             <Heading data-testid='city-workspaces' as='h2' size='5'>
               {workSpacesData && workSpaceState.length} Work Spaces
             </Heading>
-            <div data-testid='place-card-container'>
+            <div
+              data-testid='place-card-container'
+              className='flex gap-6 flex-col'
+            >
               {workSpacesData &&
                 workSpaceState.map((space) => (
                   <DisplayPlaceCard

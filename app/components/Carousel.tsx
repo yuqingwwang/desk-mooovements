@@ -1,7 +1,7 @@
 'use client';
-import React, { useState } from 'react';
-import { DisplayPlaceCard } from './DisplayPlaceCard';
 import { Button, Flex, Heading } from '@radix-ui/themes';
+import { useState } from 'react';
+import { DisplayPlaceCard } from './DisplayPlaceCard';
 
 export default function Carousel({ title, data }: any) {
   function addToSlide() {
@@ -17,7 +17,11 @@ export default function Carousel({ title, data }: any) {
   const [slide, setSlide] = useState(0);
 
   return (
-    <Flex className='my-7' direction='column' data-testid={data ? 'data' : ''}>
+    <Flex
+      className='my-7'
+      direction='column'
+      data-testid={title === 'cities' ? 'cities' : 'places'}
+    >
       {data && (
         <>
           <Heading
@@ -50,7 +54,7 @@ export default function Carousel({ title, data }: any) {
         className='m-4'
         gap='9'
       >
-        <Button onClick={() => subtractFromSlide()} className='mx-1' size='3'>
+        <Button onClick={() => subtractFromSlide()} size='3'>
           Prev
         </Button>
         <Button onClick={() => addToSlide()} size='3'>

@@ -1,9 +1,9 @@
-import WholeForm from '../components/authPageComponents/AuthForm';
-import Navbar from '../components/NavBar';
 import { Heading } from '@radix-ui/themes';
-import { cookies } from 'next/headers';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
 import { Database } from '../../database.types';
+import Navbar from '../components/NavBar';
+import WholeForm from '../components/authPageComponents/AuthForm';
 
 export default async function Login() {
   const cookieStore = cookies();
@@ -28,9 +28,6 @@ export default async function Login() {
   // else render the login/signup form
   return (
     <>
-      <Heading as='h1' className='py-3'>
-        Sign In or Sign Up
-      </Heading>
       <WholeForm />
       <Navbar user={user && user} />
     </>

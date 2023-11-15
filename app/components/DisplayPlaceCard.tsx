@@ -1,15 +1,15 @@
-import Link from 'next/link';
+import { getColorByKey } from '@/app/utils/getColor';
+import { PlaceCardParams } from '@/app/utils/types';
 import {
   Avatar,
+  Badge,
   Box,
   Card,
+  Container,
   Flex,
   Text,
-  Badge,
-  Container,
 } from '@radix-ui/themes';
-import { PlaceCardParams } from '@/app/utils/types';
-import { getColorByKey } from '@/app/utils/getColor';
+import Link from 'next/link';
 
 export function DisplayPlaceCard({
   pageRoute,
@@ -23,6 +23,7 @@ export function DisplayPlaceCard({
       asChild
       variant='surface'
       className='w-auto py-2 md:w-[600px] lg:w-[850px]'
+      data-testid='card-container'
     >
       {pageRoute ? (
         <Link href={`/${pageRoute}`}>
@@ -69,7 +70,6 @@ function CardContents({
         <Text as='div' size='5' weight='bold'>
           {placeName}
         </Text>
-
         {amenityList?.split(',').map((item: any, index: number) => (
           <Badge
             className='mr-2'

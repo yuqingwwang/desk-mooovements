@@ -1,17 +1,15 @@
-import SeeMore from '@/app/components/SeeMore';
+import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
+import Navbar from '@/app/components/NavBar';
+import AddToWishList from '@/app/components/detailPageComponents/AddToWishlist';
+import { MapView } from '@/app/components/detailPageComponents/MapView';
+import SeeMore from '@/app/components/detailPageComponents/SeeMore';
 import { PageByIDParams, Workspace } from '@/app/utils/types';
 import { SupabaseCall } from '@/utils/supabaseCall';
-import Link from 'next/link';
-import Navbar from '@/app/components/NavBar';
-import AddToWishList from '@/app/components/AddToWishlist';
-import { cookies } from 'next/headers';
+import { Heading } from '@radix-ui/themes';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
 import { Database } from '../../../database.types';
-import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
-import { Button } from '@radix-ui/themes';
-import { MapView } from '@/app/components/MapView';
-import { Heading, Text } from '@radix-ui/themes';
-
+import { notFound } from 'next/navigation';
 
 export default async function WorkSpaces({ params }: PageByIDParams) {
   let place: Workspace[] | null = null;
@@ -26,6 +24,7 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
     'id',
     id
   );
+  if (place && place.length === 0) notFound();
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient<Database>({
     cookies: () => cookieStore,
@@ -36,7 +35,10 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
 
   return (
     <>
-      <div className='mt-7'>
+      <div className='mt-7 flex flex-col items-center'>
+        <Heading as='h1' size='8' className='pb-4'>
+          Workplace
+        </Heading>
         {place && place.length > 0 ? (
           <>
             <DisplayPlaceCard
@@ -44,16 +46,13 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
               placeName={place[0].name}
               flavourText={place[0].address}
             />
-  
+
             <div className='mb-3 mt-5 flex space-x-10'>
               <SeeMore place={place} />
 
-              <Link href={'/'}>
-                <AddToWishList id={parseInt(id)} user={user && user.id} />
-              </Link>
+              <AddToWishList id={parseInt(id)} user={user && user.id} />
             </div>
             <MapView coordinates={place && place[0].coordinates} />
-
           </>
         ) : (
           <p>Loading or no data available...</p>

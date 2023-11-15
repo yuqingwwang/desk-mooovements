@@ -1,4 +1,4 @@
-import { Heading, Text, Box } from '@radix-ui/themes';
+import { Box, Heading, Text } from '@radix-ui/themes';
 
 export default function CityHeader({ city }: { city: any }) {
   return (

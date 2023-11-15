@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect } from 'react';
+import { Blockquote, Heading } from '@radix-ui/themes';
 import { useSearchParams } from 'next/navigation';
-import { Heading, Blockquote } from '@radix-ui/themes';
+import { useEffect } from 'react';
 
 const ErrorPage: React.FC = () => {
   const searchParams = useSearchParams();

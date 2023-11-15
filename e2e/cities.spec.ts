@@ -1,10 +1,10 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
   await page.goto('http://localhost:3000');
 });
 
-test.describe('landing page renders correctly', () => {
+test.describe('cities page renders correctly', () => {
   let expectedName = '';
   let expectedWorkplaces = '';
 
@@ -15,6 +15,8 @@ test.describe('landing page renders correctly', () => {
       .nth(1)
       .innerText();
     [expectedName, expectedWorkplaces] = inputString.split('\n');
+    const matches = inputString.match(/\d+/);
+    expectedWorkplaces = matches ? matches[0] : '0';
     await page.getByTestId('cities').locator('div').nth(1).click();
     await page.getByTestId('city-name').innerText();
   });
@@ -43,14 +45,13 @@ test.describe('landing page renders correctly', () => {
     expect(actualName).toContain(expectedName);
   });
   test('Renders correct count of workplaces', async ({ page }) => {
-    const actualName = await page.getByTestId('city-name').innerText();
     const actualWorkplaces = await page
       .getByTestId('city-workspaces')
       .innerText();
     expect(actualWorkplaces).toContain(expectedWorkplaces);
   });
   test('Renders correct number of workplace cards', async ({ page }) => {
-    const actualWorkplaces = await page.getByTestId('place-card').count();
+    const actualWorkplaces = await page.getByTestId('card-container').count();
     expect(parseInt(expectedWorkplaces)).toEqual(actualWorkplaces);
   });
 });

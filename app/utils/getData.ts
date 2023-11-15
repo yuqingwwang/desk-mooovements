@@ -1,5 +1,5 @@
+import { Amenities, CityPage } from '@/app/utils/types';
 import { SupabaseCall } from '@/utils/supabaseCall';
-import { CityPage, Amenities } from '@/app/utils/types';
 
 export default async function getAmenities(id: string) {
   let city: CityPage[] | null = null;
@@ -10,7 +10,8 @@ export default async function getAmenities(id: string) {
     'id',
     id
   );
-
+  if (city?.length === 0)
+    return { city: false, workSpacesData: false, trueAmenitiesWithId: false };
   const workSpacesData = city && city[0]['work_spaces'];
 
   const amenitiesStats: Amenities[] | undefined = workSpacesData?.map(
