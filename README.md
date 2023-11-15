@@ -55,15 +55,15 @@ What roles did your team take
 - Dev Ops was getting deployment to work and making sure all code would work on deployment
 
 How did you plan a user experience?
-- insert figma screenshot and link here
-
-<-What technical decisions did you make?
+- Here's our figma design: https://www.figma.com/file/NZccojtf3RhwXvdxG5C9FQ/Moooooooo?type=design&node-id=1%3A24&mode=design&t=GJhzZSfMuFg0gEDv-1
+  
+<!--- What technical decisions did you make?
 Server-render vs client-render vs both
 Relational or non-relational or no DB
 Self-hosted or platform-as-a-service
 Frontend first vs DB first
 Did you create a technical specification?
-Review methods of software design with reference to functional/technical specifications and apply a justified approach to software development (K11, S11, S12)->
+Review methods of software design with reference to functional/technical specifications and apply a justified approach to software development (K11, S11, S12)-->
 
 Implementation/Build
 How did you ensure your code was good?
