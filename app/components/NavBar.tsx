@@ -45,7 +45,7 @@ export default function NavBar({ user }: { user: string | null }) {
                       className='block rounded bg-blue-700 px-4 py-2 text-white'
                       aria-current='page'
                     >
-                      Search
+                      Home
                     </Link>
                   </li>
                   <li>

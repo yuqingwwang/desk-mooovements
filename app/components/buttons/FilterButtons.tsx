@@ -1,13 +1,10 @@
 import { allAmenities, amenityOptions } from '@/app/utils/constants';
 import { getColorByKey } from '@/app/utils/getColor';
-import { Button, Grid, Text } from '@radix-ui/themes';
+import { Button, Grid } from '@radix-ui/themes';
 
 export default function FilterButtons({ setSelectedFilter }: any) {
   return (
     <>
-      <Text as='p' size='3'>
-        Filter by
-      </Text>
       <Grid
         columns={{
           initial: '3',

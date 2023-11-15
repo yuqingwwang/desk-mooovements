@@ -31,7 +31,7 @@ export default function AddWorkplace({ user }: { user: any | null }) {
 
   return (
     <div className='max-w-xl'>
-      <Heading as='h1' className='py-3'>
+      <Heading as='h1' className='py-3' size='7'>
         Add a work place
       </Heading>
 
@@ -45,7 +45,7 @@ export default function AddWorkplace({ user }: { user: any | null }) {
         <SelectCity value={selectedCity} onChange={setSelectedCity} />
 
         <CustomTextField
-          placeholder='Name'
+          placeholder='Name of the place'
           name='name'
           register={register}
           errorMessage={errors.name?.message}

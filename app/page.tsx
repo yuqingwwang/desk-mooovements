@@ -18,7 +18,7 @@ export default async function ServerComponent({ params }: PageByIDParams) {
   return (
     <>
       <main>
-        <Heading as='h1' align='center'>
+        <Heading as='h1' size='8' align='center'>
           Welcome to desk-mooovements!
         </Heading>
         <DisplayCities />

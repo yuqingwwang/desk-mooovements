@@ -34,6 +34,13 @@ const AmenitiesCheckboxes: React.FC<AmenitiesCheckboxesProps> = ({
         <div key={amenity} className='p-1'>
           <Label.Root>
             <Checkbox
+              variant='soft'
+              style={{
+                border: '0.5px solid #000',
+                borderRadius: '5px',
+                padding: '0',
+                margin: '5px',
+              }}
               className='p-3'
               checked={selectedAmenities.includes(amenity)}
               onCheckedChange={() => handleAmenityChange(amenity)}
