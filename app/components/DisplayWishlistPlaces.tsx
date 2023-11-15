@@ -1,13 +1,9 @@
 'use client';
 
-import React from 'react';
-import { Amenities, Profile } from '../utils/types';
-import newClient from '../config/supabaseclient';
-import { SupabaseCall } from '@/utils/supabaseCall';
-import { useState } from 'react';
-import Router from 'next/router';
 import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
 import { Flex, Heading } from '@radix-ui/themes';
+import Router from 'next/router';
+import newClient from '../config/supabaseclient';
 import { Amenities, WishlistDisplay } from '../utils/types';
 
 export default function DisplayWishlistPlaces({
@@ -77,16 +73,16 @@ export default function DisplayWishlistPlaces({
                   <div key={space.name}>
                     {' '}
                     <DisplayPlaceCard
-                    key={space.name}
-                    pageRoute={`places/${space.id}`}
-                    imageLink={space.image}
-                    placeName={space.name}
-                    flavourText={space.address}
-                    amenityList={`${trueAmenitiesWithId?.find(
-                      (amenity) =>
-                        amenity.id === (space.id as unknown as string)
-                    )?.amenities}`}
-                  />
+                      key={space.name}
+                      pageRoute={`places/${space.id}`}
+                      imageLink={space.image}
+                      placeName={space.name}
+                      flavourText={space.address}
+                      amenityList={`${trueAmenitiesWithId?.find(
+                        (amenity) =>
+                          amenity.id === (space.id as unknown as string)
+                      )?.amenities}`}
+                    />
                     <button onClick={() => DeleteWorkPlace(space.id)}>
                       Delete
                     </button>
