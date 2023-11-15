@@ -23,12 +23,13 @@ export default function DisplayWishlistPlaces({
       const amenities = Object.keys(amenity).filter(
         (key) => amenity[key] === true
       );
+      console.log(amenities);
       return {
         id: amenity.id,
         amenities: amenities as string[],
       };
     });
-  console.log('This is the wishlist', wishlist);
+
   if (wishlist === null) return <h1>Your wishlist is empty</h1>;
 
   return (
@@ -49,8 +50,8 @@ export default function DisplayWishlistPlaces({
                     pageRoute={`places/${space.id}`}
                     imageLink={space.image}
                     placeName={space.name}
-                    // flavourText={space.address}
-                    flavourText={`${trueAmenitiesWithId?.find(
+                    flavourText={space.address}
+                    amenityList={`${trueAmenitiesWithId?.find(
                       (amenity) =>
                         amenity.id === (space.id as unknown as string)
                     )?.amenities}`}
