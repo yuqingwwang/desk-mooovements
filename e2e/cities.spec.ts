@@ -4,7 +4,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto('http://localhost:3000');
 });
 
-test.describe('landing page renders correctly', () => {
+test.describe('cities page renders correctly', () => {
   let expectedName = '';
   let expectedWorkplaces = '';
 
