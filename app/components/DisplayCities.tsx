@@ -8,16 +8,15 @@ const DisplayCities = async () => {
   const cities: City[] =
     (await SupabaseCall(
       'cities',
-      'id,name,country,work_spaces(count),image',
+      'id, name, country, work_spaces(count), image',
       '',
       ''
     )) || [];
 
   let topCities: City[] = [];
   if (cities) {
-    // sort by number of workspaces
+    // sort by number of workspaces and keep the top 3
     cities.sort((a, b) => b.work_spaces[0].count - a.work_spaces[0].count);
-    // keep up to 3 cities
     topCities = cities.slice();
     topCities.splice(3);
   }

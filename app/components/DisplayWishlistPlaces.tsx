@@ -1,10 +1,10 @@
 'use client';
 
-import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
+import { DisplayCard } from '@/app/components/cards/DisplayCard';
+import newClient from '@/app/config/supabaseclient';
+import { Amenities, WishlistDisplay } from '@/app/utils/types';
 import { Flex, Heading } from '@radix-ui/themes';
 import { useEffect, useState } from 'react';
-import newClient from '../config/supabaseclient';
-import { Amenities, WishlistDisplay } from '../utils/types';
 
 export default function DisplayWishlistPlaces({
   places,
@@ -53,6 +53,7 @@ export default function DisplayWishlistPlaces({
     has_phone_booth: space.has_phone_booth,
     has_locker: space.has_locker,
   }));
+
   const trueAmenitiesWithId: { id: string; amenities: string[] }[] | undefined =
     amenitiesStats?.map((amenity: any) => {
       const amenities = Object.keys(amenity).filter(
@@ -60,7 +61,7 @@ export default function DisplayWishlistPlaces({
       );
       return {
         id: amenity.id,
-        amenities: amenities as string[],
+        amenities: amenities,
       };
     });
 
@@ -81,7 +82,7 @@ export default function DisplayWishlistPlaces({
                 .map((space) => (
                   <div key={space.name}>
                     {' '}
-                    <DisplayPlaceCard
+                    <DisplayCard
                       key={space.name}
                       pageRoute={`places/${space.id}`}
                       imageLink={space.image}
@@ -103,7 +104,7 @@ export default function DisplayWishlistPlaces({
                 ))}
           </>
         ) : (
-          <p>Loading or no data available...</p> // Display a loading indicator or a no-data message
+          <p>Loading...</p>
         )}
       </Flex>
     </>

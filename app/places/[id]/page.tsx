@@ -1,7 +1,7 @@
-import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
 import { MapView } from '@/app/components/MapView';
 import Navbar from '@/app/components/NavBar';
 import AddToWishList from '@/app/components/buttons/AddToWishlist';
+import { DisplayCard } from '@/app/components/cards/DisplayCard';
 import { SupabaseCall } from '@/app/utils/supabaseCall';
 import { PageByIDParams, Workspace } from '@/app/utils/types';
 import { Heading } from '@radix-ui/themes';
@@ -40,7 +40,7 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
         </Heading>
         {place && place.length > 0 ? (
           <>
-            <DisplayPlaceCard
+            <DisplayCard
               imageLink={place[0].image}
               placeName={place[0].name}
               flavourText={place[0].address}

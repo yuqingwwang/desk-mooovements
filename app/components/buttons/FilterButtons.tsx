@@ -1,6 +1,6 @@
 import { allAmenities, amenityOptions } from '@/app/utils/constants';
 import { getColorByKey } from '@/app/utils/getColor';
-import { Button, Grid } from '@radix-ui/themes';
+import { Button, Grid, Text } from '@radix-ui/themes';
 
 export default function FilterButtons({
   selectedFilter,
@@ -8,6 +8,9 @@ export default function FilterButtons({
 }: any) {
   return (
     <>
+      <Text as='p' size='5'>
+        Filter by
+      </Text>
       <Grid
         columns={{
           initial: '3',
@@ -17,7 +20,6 @@ export default function FilterButtons({
         width='auto'
       >
         <Button
-          // className={selectedFilter === 'all' ? 'ring-2 ring-current ' : ''}
           variant={selectedFilter === 'all' ? 'soft' : 'solid'}
           key='all'
           color='brown'
@@ -27,7 +29,6 @@ export default function FilterButtons({
         </Button>
         {allAmenities.map((amenity: any) => (
           <Button
-            // className={selectedFilter === amenity ? 'text-white bg-black' : ''}
             variant={selectedFilter === amenity ? 'soft' : 'solid'}
             key={amenity}
             color={getColorByKey(amenity)}
