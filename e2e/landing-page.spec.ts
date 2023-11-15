@@ -101,9 +101,13 @@ test.describe('Landing page interactivity works', () => {
         .nth(1)
         .innerText();
       await page.getByTestId('places').locator('div').nth(1).click();
-      const placePage = await page.getByTestId('place-name').innerText();
-      const cleanedPlacePage = placePage.replace('Name: ', '');
-      expect(place).toContain(cleanedPlacePage);
+      await page.getByRole('heading', { name: 'Workplace' }).click();
+      const placePage = await page
+        .getByTestId('card-container')
+        .locator('div')
+        .nth(3)
+        .innerText();
+      expect(place).toContain(placePage);
     });
     test('City carousel link leads to correct city page', async ({ page }) => {
       const place = await page
@@ -113,7 +117,7 @@ test.describe('Landing page interactivity works', () => {
         .innerText();
       await page.getByTestId('cities').locator('div').nth(1).click();
       const placePage = await page.getByTestId('city-name').innerText();
-      const cleanedPlacePage = placePage.replace('Name: ', '');
+      const cleanedPlacePage = placePage.replace(',', '');
       expect(place).toContain(cleanedPlacePage);
     });
   });

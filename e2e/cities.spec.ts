@@ -14,7 +14,11 @@ test.describe('landing page renders correctly', () => {
       .locator('div')
       .nth(1)
       .innerText();
+    console.log(inputString);
     [expectedName, expectedWorkplaces] = inputString.split('\n');
+    const matches = inputString.match(/\d+/);
+    expectedWorkplaces = matches ? matches[0] : '0';
+    console.log(expectedName, expectedWorkplaces);
     await page.getByTestId('cities').locator('div').nth(1).click();
     await page.getByTestId('city-name').innerText();
   });
@@ -43,14 +47,13 @@ test.describe('landing page renders correctly', () => {
     expect(actualName).toContain(expectedName);
   });
   test('Renders correct count of workplaces', async ({ page }) => {
-    const actualName = await page.getByTestId('city-name').innerText();
     const actualWorkplaces = await page
       .getByTestId('city-workspaces')
       .innerText();
     expect(actualWorkplaces).toContain(expectedWorkplaces);
   });
   test('Renders correct number of workplace cards', async ({ page }) => {
-    const actualWorkplaces = await page.getByTestId('place-card').count();
+    const actualWorkplaces = await page.getByTestId('card-container').count();
     expect(parseInt(expectedWorkplaces)).toEqual(actualWorkplaces);
   });
 });
