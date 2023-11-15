@@ -1,10 +1,9 @@
 'use client';
 
-import { SupabaseCall } from '@/utils/supabaseCall';
+import { SupabaseCall } from '@/app/utils/supabaseCall';
 import { Button } from '@radix-ui/themes';
 import newClient from '../../config/supabaseclient';
-import { Profile } from '../../utils/types';
-import RedirectBtn from '../RedirectBtn';
+import RedirectBtn from './RedirectBtn';
 
 export default function AddToWishList({
   id,
@@ -15,7 +14,6 @@ export default function AddToWishList({
 }) {
   async function updateList() {
     const supabase = newClient();
-    const wishlistArray: Profile[] | null = null;
     const wishListArr = await SupabaseCall('profiles', 'wish_list', 'id', user);
 
     if (

@@ -1,6 +1,6 @@
-import { CreateAddWorkplaceForm } from '@/app/components/addSpaceComponents/validationForm';
 import newClient from '@/app/config/supabaseclient';
 import { citiesWithId } from '@/app/utils/constants';
+import { CreateAddWorkplaceForm } from '@/app/utils/types';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 

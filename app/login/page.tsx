@@ -3,7 +3,7 @@ import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import { Database } from '../../database.types';
 import Navbar from '../components/NavBar';
-import WholeForm from '../components/authPageComponents/AuthForm';
+import WholeForm from '../components/forms/AuthForm';
 
 export default async function Login() {
   const cookieStore = cookies();

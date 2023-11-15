@@ -1,7 +1,7 @@
 import Navbar from '@/app/components/NavBar';
+import { SupabaseCall } from '@/app/utils/supabaseCall';
 import { Profile, Workspace } from '@/app/utils/types';
 import { Database } from '@/database.types';
-import { SupabaseCall } from '@/utils/supabaseCall';
 import { Heading } from '@radix-ui/themes';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';

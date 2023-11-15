@@ -1,4 +1,4 @@
-import { SupabaseCall } from '@/utils/supabaseCall';
+import { SupabaseCall } from '@/app/utils/supabaseCall';
 
 export default async function getCityIds() {
   const cityWithId = await SupabaseCall('cities', 'name,id', '', '');
