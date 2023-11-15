@@ -2,7 +2,7 @@
 
 import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
 import { Flex, Heading } from '@radix-ui/themes';
-import Router from 'next/router';
+import { useEffect, useState } from 'react';
 import newClient from '../config/supabaseclient';
 import { Amenities, WishlistDisplay } from '../utils/types';
 
@@ -12,6 +12,8 @@ export default function DisplayWishlistPlaces({
   wishListArr,
   user,
 }: WishlistDisplay) {
+  const [deleteFlag, setDeleteFlag] = useState(false);
+
   async function DeleteWorkPlace(valueToDelete: number) {
     const supabase = newClient();
 
@@ -19,8 +21,6 @@ export default function DisplayWishlistPlaces({
       wishListArr &&
       wishListArr[0]['wish_list'] &&
       wishListArr[0]['wish_list'].filter((x) => x !== valueToDelete);
-
-    console.log(updatedWishList);
 
     const { data, error } = await supabase
       .from('profiles')
@@ -30,8 +30,18 @@ export default function DisplayWishlistPlaces({
     if (error) {
       console.error('Error:', error.message);
     }
-    Router.reload();
+
+    setDeleteFlag(true);
   }
+
+  useEffect(() => {
+    if (deleteFlag) {
+      window.location.reload();
+
+      setDeleteFlag(false);
+    }
+  }, [deleteFlag]);
+
   const amenitiesStats: Amenities[] | undefined = places?.map((space) => ({
     id: space.id,
     pet_friendly: space.pet_friendly,
@@ -82,7 +92,11 @@ export default function DisplayWishlistPlaces({
                           amenity.id === (space.id as unknown as string)
                       )?.amenities}`}
                     />
-                    <button onClick={() => DeleteWorkPlace(space.id)}>
+                    <button
+                      onClick={() => {
+                        DeleteWorkPlace(space.id);
+                      }}
+                    >
                       Delete
                     </button>
                   </div>
