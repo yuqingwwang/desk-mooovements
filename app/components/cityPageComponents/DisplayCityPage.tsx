@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from 'react';
 
-import { Heading, Flex } from '@radix-ui/themes';
-import { CityData } from '@/app/utils/types';
 import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
-import FilterButtons from './FilterButtons';
+import { CityData } from '@/app/utils/types';
+import { Flex, Heading } from '@radix-ui/themes';
 import CityHeader from './CityHeader';
+import FilterButtons from './FilterButtons';
 
 export default function DisplayCityPage({
   city,

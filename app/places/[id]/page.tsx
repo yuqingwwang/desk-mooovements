@@ -1,16 +1,14 @@
+import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
+import Navbar from '@/app/components/NavBar';
+import AddToWishList from '@/app/components/detailPageComponents/AddToWishlist';
+import { MapView } from '@/app/components/detailPageComponents/MapView';
 import SeeMore from '@/app/components/detailPageComponents/SeeMore';
 import { PageByIDParams, Workspace } from '@/app/utils/types';
 import { SupabaseCall } from '@/utils/supabaseCall';
-import Link from 'next/link';
-import Navbar from '@/app/components/NavBar';
-import AddToWishList from '@/app/components/detailPageComponents/AddToWishlist';
-import { cookies } from 'next/headers';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
+import Link from 'next/link';
 import { Database } from '../../../database.types';
-import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
-import { Button } from '@radix-ui/themes';
-import { MapView } from '@/app/components/detailPageComponents/MapView';
-import { Heading, Text } from '@radix-ui/themes';
 
 export default async function WorkSpaces({ params }: PageByIDParams) {
   let place: Workspace[] | null = null;

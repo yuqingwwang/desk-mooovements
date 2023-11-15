@@ -1,6 +1,6 @@
-import { Button, Grid, Text } from '@radix-ui/themes';
+import { allAmenities, amenityOptions } from '@/app/utils/constants';
 import { getColorByKey } from '@/app/utils/getColor';
-import { amenityOptions, allAmenities } from '@/app/utils/constants';
+import { Button, Grid, Text } from '@radix-ui/themes';
 
 export default function FilterButtons({ setSelectedFilter }: any) {
   return (

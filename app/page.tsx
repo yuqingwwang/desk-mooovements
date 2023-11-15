@@ -1,10 +1,10 @@
-import DisplayCities from './components/DisplayCities';
 import Navbar from '@/app/components/NavBar';
+import { Database } from '@/database.types';
 import { Heading } from '@radix-ui/themes';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
+import DisplayCities from './components/DisplayCities';
 import { PageByIDParams } from './utils/types';
-import { Database } from '@/database.types';
 
 export default async function ServerComponent({ params }: PageByIDParams) {
   const cookieStore = cookies();

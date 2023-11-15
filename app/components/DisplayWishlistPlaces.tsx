@@ -1,9 +1,7 @@
 'use client';
-import React from 'react';
-import { Amenities } from '../utils/types';
-import { Heading, Flex } from '@radix-ui/themes';
-import { WishlistDisplay } from '../utils/types';
 import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
+import { Flex, Heading } from '@radix-ui/themes';
+import { Amenities, WishlistDisplay } from '../utils/types';
 
 export default function DisplayWishlistPlaces({
   places,

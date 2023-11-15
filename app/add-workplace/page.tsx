@@ -1,8 +1,7 @@
-import React from 'react';
-import AddWorkplace from '../components/addSpaceComponents/NewWorplace';
+import { Database } from '@/database.types';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-import { Database } from '@/database.types';
+import AddWorkplace from '../components/addSpaceComponents/NewWorplace';
 
 const FormAddingWorkplace = async () => {
   const cookieStore = cookies();

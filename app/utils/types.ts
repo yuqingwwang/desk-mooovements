@@ -1,4 +1,3 @@
-import { type } from 'os';
 import { Database } from '../../database.types';
 
 export type CheckboxProps = {
