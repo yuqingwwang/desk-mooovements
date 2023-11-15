@@ -8,7 +8,6 @@ import { SupabaseCall } from '@/utils/supabaseCall';
 import { Heading } from '@radix-ui/themes';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-import Link from 'next/link';
 import { Database } from '../../../database.types';
 import { notFound } from 'next/navigation';
 
@@ -51,9 +50,7 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
             <div className='mb-3 mt-5 flex space-x-10'>
               <SeeMore place={place} />
 
-              <Link href={'/'}>
-                <AddToWishList id={parseInt(id)} user={user && user.id} />
-              </Link>
+              <AddToWishList id={parseInt(id)} user={user && user.id} />
             </div>
             <MapView coordinates={place && place[0].coordinates} />
           </>
