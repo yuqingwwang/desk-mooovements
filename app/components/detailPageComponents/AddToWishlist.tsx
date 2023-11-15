@@ -2,9 +2,9 @@
 
 import { SupabaseCall } from '@/utils/supabaseCall';
 import { Button } from '@radix-ui/themes';
-import Link from 'next/link';
 import newClient from '../../config/supabaseclient';
 import { Profile } from '../../utils/types';
+import RedirectBtn from '../RedirectBtn';
 
 export default function AddToWishList({
   id,
@@ -46,9 +46,7 @@ export default function AddToWishList({
           Add to Wishlist{' '}
         </Button>
       ) : (
-        <Link href={'/login'}>
-          <Button>Add to Wishlist </Button>
-        </Link>
+        <RedirectBtn />
       )}
     </>
   );
