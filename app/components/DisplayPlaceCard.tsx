@@ -23,6 +23,7 @@ export function DisplayPlaceCard({
       asChild
       variant='surface'
       className='w-auto py-2 md:w-[600px] lg:w-[850px]'
+      data-testid='card-container'
     >
       {pageRoute ? (
         <Link href={`/${pageRoute}`}>

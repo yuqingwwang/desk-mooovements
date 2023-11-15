@@ -17,7 +17,11 @@ export default function Carousel({ title, data }: any) {
   const [slide, setSlide] = useState(0);
 
   return (
-    <Flex className='my-7' direction='column' data-testid={data ? 'data' : ''}>
+    <Flex
+      className='my-7'
+      direction='column'
+      data-testid={title === 'cities' ? 'cities' : 'places'}
+    >
       {data && (
         <>
           <Heading
