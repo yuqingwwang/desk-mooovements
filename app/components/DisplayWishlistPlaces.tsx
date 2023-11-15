@@ -1,12 +1,37 @@
 'use client';
+
 import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
 import { Flex, Heading } from '@radix-ui/themes';
+import Router from 'next/router';
+import newClient from '../config/supabaseclient';
 import { Amenities, WishlistDisplay } from '../utils/types';
 
 export default function DisplayWishlistPlaces({
   places,
   wishlist,
+  wishListArr,
+  user,
 }: WishlistDisplay) {
+  async function DeleteWorkPlace(valueToDelete: number) {
+    const supabase = newClient();
+
+    const updatedWishList =
+      wishListArr &&
+      wishListArr[0]['wish_list'] &&
+      wishListArr[0]['wish_list'].filter((x) => x !== valueToDelete);
+
+    console.log(updatedWishList);
+
+    const { data, error } = await supabase
+      .from('profiles')
+      .update({ wish_list: updatedWishList })
+      .eq('id', user);
+
+    if (error) {
+      console.error('Error:', error.message);
+    }
+    Router.reload();
+  }
   const amenitiesStats: Amenities[] | undefined = places?.map((space) => ({
     id: space.id,
     pet_friendly: space.pet_friendly,
@@ -44,17 +69,23 @@ export default function DisplayWishlistPlaces({
               places
                 .filter((space) => wishlist.some((x) => x === space.id))
                 .map((space) => (
-                  <DisplayPlaceCard
-                    key={space.name}
-                    pageRoute={`places/${space.id}`}
-                    imageLink={space.image}
-                    placeName={space.name}
-                    flavourText={space.address}
-                    amenityList={`${trueAmenitiesWithId?.find(
-                      (amenity) =>
-                        amenity.id === (space.id as unknown as string)
-                    )?.amenities}`}
-                  />
+                  <div key={space.name}>
+                    {' '}
+                    <DisplayPlaceCard
+                      key={space.name}
+                      pageRoute={`places/${space.id}`}
+                      imageLink={space.image}
+                      placeName={space.name}
+                      flavourText={space.address}
+                      amenityList={`${trueAmenitiesWithId?.find(
+                        (amenity) =>
+                          amenity.id === (space.id as unknown as string)
+                      )?.amenities}`}
+                    />
+                    <button onClick={() => DeleteWorkPlace(space.id)}>
+                      Delete
+                    </button>
+                  </div>
                 ))}
           </>
         ) : (
