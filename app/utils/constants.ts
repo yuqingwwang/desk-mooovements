@@ -50,3 +50,5 @@ export const citiesWithId = [
     id: 7,
   },
 ];
+
+export const COOKIE_KEY = 'sb-tkvonehonrmtoeqojhjs-auth-token';
