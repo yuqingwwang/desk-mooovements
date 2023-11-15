@@ -1,6 +1,6 @@
-import React from 'react';
-import { Select } from '@radix-ui/themes';
 import { citiesWithId } from '@/app/utils/constants';
+import { Select } from '@radix-ui/themes';
+import React from 'react';
 
 interface CitySelectProps {
   value: string;

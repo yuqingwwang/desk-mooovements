@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { CreateAddWorkplaceForm } from '@/app/components/addSpaceComponents/validationForm';
 import newClient from '@/app/config/supabaseclient';
 import { citiesWithId } from '@/app/utils/constants';
-import { CreateAddWorkplaceForm } from '@/app/components/addSpaceComponents/validationForm';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export function useAmenityHandling() {
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);

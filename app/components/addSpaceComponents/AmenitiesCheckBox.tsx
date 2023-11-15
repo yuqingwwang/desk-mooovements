@@ -1,6 +1,6 @@
-import React from 'react';
-import { Text, Strong, Checkbox, Heading } from '@radix-ui/themes';
 import * as Label from '@radix-ui/react-label';
+import { Checkbox, Heading, Strong, Text } from '@radix-ui/themes';
+import React from 'react';
 
 interface AmenitiesCheckboxesProps {
   selectedAmenities: string[];

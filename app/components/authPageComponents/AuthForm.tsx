@@ -1,7 +1,7 @@
 'use client';
 
-import { Button, TextField, Flex, Heading } from '@radix-ui/themes';
 import { FormInputProps } from '@/app/utils/types';
+import { Button, Heading, TextField } from '@radix-ui/themes';
 
 const FormInput: React.FC<FormInputProps> = ({ name, type, placeholder }) => {
   return (
