@@ -23,7 +23,6 @@ export default function DisplayWishlistPlaces({
       const amenities = Object.keys(amenity).filter(
         (key) => amenity[key] === true
       );
-      console.log(amenities);
       return {
         id: amenity.id,
         amenities: amenities as string[],

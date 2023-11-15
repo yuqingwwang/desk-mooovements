@@ -9,7 +9,6 @@ import { notFound } from 'next/navigation';
 
 async function fetchData(id: string): Promise<CityData> {
   const result = (await allData(id)) as CityData;
-  console.log(result);
   return result;
 }
 
@@ -17,7 +16,6 @@ export default async function cities({ params }: PageByIDParams) {
   const { city, workSpacesData, trueAmenitiesWithId } = await fetchData(
     params.id
   );
-  console.log(city);
   if (!city) notFound();
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient<Database>({
