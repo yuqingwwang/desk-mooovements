@@ -1,5 +1,6 @@
 import { type } from 'os';
 import { Database } from '../../database.types';
+import { UserResponse } from '@supabase/supabase-js';
 
 export type CheckboxProps = {
   checked: boolean;
@@ -28,6 +29,8 @@ export type PopularCarousel = {
 export type WishlistDisplay = {
   places?: Workspace[] | null;
   wishlist?: number[] | null;
+  wishListArr?: Profile[] | null;
+  user?: string | null;
 };
 export type Profile = Database['public']['Tables']['profiles']['Row'];
 export type FormInputProps = {

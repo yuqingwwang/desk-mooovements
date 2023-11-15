@@ -7,44 +7,32 @@ import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
 import newClient from '../config/supabaseclient';
 import { SupabaseCall } from '@/utils/supabaseCall';
 import { useState } from 'react';
-
+import Router from 'next/router';
 export default function DisplayWishlistPlaces({
   places,
   wishlist,
   wishListArr,
-  user
+  user,
 }: WishlistDisplay) {
-  // const [Wlist, setWlist]= useState(wishListArr[0]['wish_list'])
-
-  
-  async function DeleteWorkPlace(valueToDelete){
+  async function DeleteWorkPlace(valueToDelete: number) {
     const supabase = newClient();
-    
+
     const updatedWishList =
-      wishListArr && wishListArr[0]['wish_list'].filter(x => x!== valueToDelete )
-     
+      wishListArr &&
+      wishListArr[0]['wish_list'] &&
+      wishListArr[0]['wish_list'].filter((x) => x !== valueToDelete);
+
     console.log(updatedWishList);
-    
-        
-      const { data, error } = await supabase
+
+    const { data, error } = await supabase
       .from('profiles')
       .update({ wish_list: updatedWishList })
-      .eq('id', user.id);
-
-      // setWlist( wishListArr && wishListArr[0]['wish_list'].filter(x => x!== valueToDelete )
-      // )
-       
-      // console.log(Wlist);
-          
-      //   const { data, error } = await supabase
-      //   .from('profiles')
-      //   .update({ wish_list: Wlist })
-      //   .eq('id', user.id);
+      .eq('id', user);
 
     if (error) {
       console.error('Error:', error.message);
     }
-
+    Router.reload();
   }
   const amenitiesStats: Amenities[] | undefined = places?.map((space) => ({
     id: space.id,
@@ -82,20 +70,23 @@ export default function DisplayWishlistPlaces({
               wishlist &&
               places
                 .filter((space) => wishlist.some((x) => x === space.id))
-                .map((space) => (<div> <DisplayPlaceCard
-                    key={space.name}
-                    pageRoute={`places/${space.id}`}
-                    imageLink={space.image}
-                    placeName={space.name}
-                    // flavourText={space.address}
-                    flavourText={`${trueAmenitiesWithId?.find(
-                      (amenity) =>
-                        amenity.id === (space.id as unknown as string)
-                    )?.amenities}`}
-                  />
-                  <button key={space.id} onClick={() => DeleteWorkPlace(space.id)}>Delete</button>
+                .map((space) => (
+                  <div key={space.name}>
+                    {' '}
+                    <DisplayPlaceCard
+                      pageRoute={`places/${space.id}`}
+                      imageLink={space.image}
+                      placeName={space.name}
+                      // flavourText={space.address}
+                      flavourText={`${trueAmenitiesWithId?.find(
+                        (amenity) =>
+                          amenity.id === (space.id as unknown as string)
+                      )?.amenities}`}
+                    />
+                    <button onClick={() => DeleteWorkPlace(space.id)}>
+                      Delete
+                    </button>
                   </div>
-                  
                 ))}
           </>
         ) : (

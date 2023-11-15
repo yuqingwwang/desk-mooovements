@@ -36,8 +36,8 @@ export default async function wishlist() {
       <DisplayWishlistPlaces
         places={places}
         wishlist={wishlistArray && wishlistArray[0].wish_list}
-        wishListArr ={wishlistArray}
-        user = {user}
+        wishListArr={wishlistArray}
+        user={user?.id}
       />
       <Navbar user={user && user.id} />
     </div>
