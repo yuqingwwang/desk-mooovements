@@ -1,15 +1,15 @@
-import Link from 'next/link';
+import { getColorByKey } from '@/app/utils/getColor';
+import { PlaceCardParams } from '@/app/utils/types';
 import {
   Avatar,
+  Badge,
   Box,
   Card,
+  Container,
   Flex,
   Text,
-  Badge,
-  Container,
 } from '@radix-ui/themes';
-import { PlaceCardParams } from '@/app/utils/types';
-import { getColorByKey } from '@/app/utils/getColor';
+import Link from 'next/link';
 
 export function DisplayPlaceCard({
   pageRoute,

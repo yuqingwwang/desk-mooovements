@@ -1,18 +1,18 @@
 'use client';
 
-import { Heading, Button, Callout } from '@radix-ui/themes';
-import { useForm } from 'react-hook-form';
-import { CreateAddWorkplaceForm } from './validationForm';
-import Spinner from './Spiner';
-import NavBar from '../NavBar';
-import SelectCity from './SelectCity';
-import CustomTextField from './CustomTextField';
-import AmenitiesCheckboxes from './AmenitiesCheckBox';
 import {
   useAmenityHandling,
   useCityHandling,
   useSubmitHandling,
 } from '@/app/lib/useAddWorkSpace';
+import { Button, Callout, Heading } from '@radix-ui/themes';
+import { useForm } from 'react-hook-form';
+import NavBar from '../NavBar';
+import AmenitiesCheckboxes from './AmenitiesCheckBox';
+import CustomTextField from './CustomTextField';
+import SelectCity from './SelectCity';
+import Spinner from './Spiner';
+import { CreateAddWorkplaceForm } from './validationForm';
 
 export default function AddWorkplace({ user }: { user: any | null }) {
   const {

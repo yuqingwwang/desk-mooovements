@@ -1,5 +1,5 @@
+import { Amenities, CityPage } from '@/app/utils/types';
 import { SupabaseCall } from '@/utils/supabaseCall';
-import { CityPage, Amenities } from '@/app/utils/types';
 
 export default async function getAmenities(id: string) {
   let city: CityPage[] | null = null;

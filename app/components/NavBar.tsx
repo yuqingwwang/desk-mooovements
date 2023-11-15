@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { Button } from '@radix-ui/themes';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Button } from '@radix-ui/themes';
+import { useState } from 'react';
 
 export default function NavBar({ user }: { user: string | null }) {
   const [isMenuOpen, setMenuOpen] = useState(false);

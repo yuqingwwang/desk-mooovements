@@ -1,9 +1,9 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { FaSearch } from 'react-icons/fa';
 import { TextField } from '@radix-ui/themes';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { FaSearch } from 'react-icons/fa';
 
 export const SearchBar: React.FC<{
   cities: { id: number; name: string | null }[];
