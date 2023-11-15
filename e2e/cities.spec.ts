@@ -14,11 +14,9 @@ test.describe('landing page renders correctly', () => {
       .locator('div')
       .nth(1)
       .innerText();
-    console.log(inputString);
     [expectedName, expectedWorkplaces] = inputString.split('\n');
     const matches = inputString.match(/\d+/);
     expectedWorkplaces = matches ? matches[0] : '0';
-    console.log(expectedName, expectedWorkplaces);
     await page.getByTestId('cities').locator('div').nth(1).click();
     await page.getByTestId('city-name').innerText();
   });
