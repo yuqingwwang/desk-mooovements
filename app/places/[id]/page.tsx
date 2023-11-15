@@ -10,6 +10,7 @@ import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { Database } from '../../../database.types';
+import { notFound } from 'next/navigation';
 
 export default async function WorkSpaces({ params }: PageByIDParams) {
   let place: Workspace[] | null = null;
@@ -24,6 +25,7 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
     'id',
     id
   );
+  if (place && place.length === 0) notFound();
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient<Database>({
     cookies: () => cookieStore,
