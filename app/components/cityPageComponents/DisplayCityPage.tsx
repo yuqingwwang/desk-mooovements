@@ -34,7 +34,10 @@ export default function DisplayCityPage({
             <Heading data-testid='city-workspaces' as='h2' size='5'>
               {workSpacesData && workSpaceState.length} Work Spaces
             </Heading>
-            <div data-testid='place-card-container'>
+            <div
+              data-testid='place-card-container'
+              className='flex gap-6 flex-col'
+            >
               {workSpacesData &&
                 workSpaceState.map((space) => (
                   <DisplayPlaceCard
