@@ -29,8 +29,10 @@ export default function DisplayCityPage({
         {city && city.length > 0 ? (
           <>
             <CityHeader data-testid='city-header' city={city} />
-            <FilterButtons setSelectedFilter={setSelectedFilter} />
-
+            <FilterButtons
+              selectedFilter={selectedFilter}
+              setSelectedFilter={setSelectedFilter}
+            />
             <Heading data-testid='city-workspaces' as='h2' size='5'>
               {workSpacesData && workSpaceState.length} Work Spaces
             </Heading>
