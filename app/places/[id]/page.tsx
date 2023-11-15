@@ -5,6 +5,7 @@ import { MapView } from '@/app/components/detailPageComponents/MapView';
 import SeeMore from '@/app/components/detailPageComponents/SeeMore';
 import { PageByIDParams, Workspace } from '@/app/utils/types';
 import { SupabaseCall } from '@/utils/supabaseCall';
+import { Heading } from '@radix-ui/themes';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
@@ -33,7 +34,10 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
 
   return (
     <>
-      <div className='mt-7'>
+      <div className='mt-7 flex flex-col items-center'>
+        <Heading as='h1' size='8' className='pb-4'>
+          Workplace
+        </Heading>
         {place && place.length > 0 ? (
           <>
             <DisplayPlaceCard
