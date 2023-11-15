@@ -14,7 +14,7 @@ export default async function ServerComponent({ params }: PageByIDParams) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  console.log('This is the user from the home page', user);
+
   return (
     <>
       <main>

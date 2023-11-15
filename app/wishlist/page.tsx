@@ -26,7 +26,6 @@ export default async function wishlist() {
     '',
     ''
   );
-  // console.log(places)
 
   return (
     <div>
