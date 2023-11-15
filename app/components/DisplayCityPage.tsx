@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react';
 import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
 import { CityData } from '@/app/utils/types';
 import { Flex, Heading } from '@radix-ui/themes';
-import CityHeader from './CityHeader';
-import FilterButtons from './FilterButtons';
+import FilterButtons from './buttons/FilterButtons';
+import CityHeader from './texts/CityHeader';
 
 export default function DisplayCityPage({
   city,

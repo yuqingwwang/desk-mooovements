@@ -5,14 +5,14 @@ import {
   useCityHandling,
   useSubmitHandling,
 } from '@/app/lib/useAddWorkSpace';
+import { CreateAddWorkplaceForm } from '@/app/utils/types';
 import { Button, Callout, Heading } from '@radix-ui/themes';
 import { useForm } from 'react-hook-form';
 import NavBar from '../NavBar';
+import Spinner from '../Spiner';
+import CustomTextField from '../texts/CustomTextField';
 import AmenitiesCheckboxes from './AmenitiesCheckBox';
-import CustomTextField from './CustomTextField';
 import SelectCity from './SelectCity';
-import Spinner from './Spiner';
-import { CreateAddWorkplaceForm } from './validationForm';
 
 export default function AddWorkplace({ user }: { user: any | null }) {
   const {

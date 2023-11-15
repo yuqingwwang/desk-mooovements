@@ -1,5 +1,5 @@
+import DisplayCityPage from '@/app/components/DisplayCityPage';
 import Navbar from '@/app/components/NavBar';
-import DisplayCityPage from '@/app/components/cityPageComponents/DisplayCityPage';
 import allData from '@/app/utils/getData';
 import { CityData, PageByIDParams } from '@/app/utils/types';
 import { Database } from '@/database.types';
