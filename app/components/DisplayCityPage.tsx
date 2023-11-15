@@ -32,7 +32,10 @@ export default function DisplayCityPage({
             <Text as='p' size='5'>
               Filter by
             </Text>
-            <FilterButtons setSelectedFilter={setSelectedFilter} />
+            <FilterButtons
+              selectedFilter={selectedFilter}
+              setSelectedFilter={setSelectedFilter}
+            />
 
             <Heading data-testid='city-workspaces' as='h2' size='5'>
               {workSpacesData && workSpaceState.length} Work Spaces
