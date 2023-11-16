@@ -1,3 +1,21 @@
+## Getting Started
+
+First, you'll need a few environmental variables to run it locally.
+
+Just ask us.
+
+Then run the development server:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Deploy on Vercel
+
+Alternatively, view our deployed app here [on Vercel Platform](https://desk-mooovements-1b004ndx5-elenas-projects-f436e785.vercel.app/).
+
 # Introduction
 
 What are you building?
@@ -8,9 +26,27 @@ Why are you building it?
 
 - Digital nomads often struggle to find flexible workspaces without long memberships and those open at unconventional hours. This app will help simplify their search for a place to work.
 
+## Getting Started
+
+First, you'll need a few environmental variables to run it locally.
+
+Just ask us.
+
+Then run the development server:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Deploy on Vercel
+
+Alternatively, view our deployed app here [on Vercel Platform](https://desk-mooovements-1b004ndx5-elenas-projects-f436e785.vercel.app/).
+
 # Project scope
 
-We are not building an exhaustive list of places to work at...
+We are not building an exhaustive list of places to work at.
 
 Expect to find some hidden gems here, and please do contribute to the site with your favourite places to work!
 
@@ -59,8 +95,13 @@ What roles did your team take
 
 How did you plan a user experience?
 
-- Here's our figma design: https://www.figma.com/file/NZccojtf3RhwXvdxG5C9FQ/Moooooooo?type=design&node-id=1%3A24&mode=design&t=GJhzZSfMuFg0gEDv-1
+- Here's our [figma design](https://www.figma.com/file/NZccojtf3RhwXvdxG5C9FQ/Moooooooo?type=design&node-id=1%3A24&mode=design&t=GJhzZSfMuFg0gEDv-1)
 
+Our Database
+
+<img width="676" alt="image" src="https://github.com/fac28/desk-mooovements/assets/44486576/fa9cefac-6b15-471a-8241-72c39a1c7474">
+
+  
 <!--- What technical decisions did you make?
 Server-render vs client-render vs both
 Relational or non-relational or no DB
@@ -90,20 +131,3 @@ What problems did you encounter during deployment?
 
 Our codes are nicely structured and easy to read. It's easy for someone to make changes to the codebase, and a new person can quickly be onboarded to contribute.
 
-## Getting Started
-
-First, you'll need a few environmental variables to run it locally.
-
-Just ask us.
-
-Then run the development server:
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## Deploy on Vercel
-
-Alternatively, view our deployed app here [on Vercel Platform](https://desk-mooovements-1b004ndx5-elenas-projects-f436e785.vercel.app/).
