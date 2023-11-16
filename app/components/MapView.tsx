@@ -6,7 +6,7 @@ import Map, { Marker } from 'react-map-gl';
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
 export const MapView = ({ coordinates }: { coordinates: any }) => {
-  if (!coordinates) return <div>loading...</div>;
+  if (!coordinates) return <p>no location info found</p>;
 
   let [long, lat] = coordinates;
 
