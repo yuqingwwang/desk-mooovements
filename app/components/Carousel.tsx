@@ -1,7 +1,7 @@
 'use client';
 import { Button, Flex, Heading } from '@radix-ui/themes';
 import { useState } from 'react';
-import { DisplayPlaceCard } from './DisplayPlaceCard';
+import { DisplayCard } from './cards/DisplayCard';
 
 export default function Carousel({ title, data }: any) {
   function addToSlide() {
@@ -34,7 +34,7 @@ export default function Carousel({ title, data }: any) {
           >
             Popular {title}
           </Heading>
-          <DisplayPlaceCard
+          <DisplayCard
             pageRoute={`${title}/${data[slide].id}`}
             imageLink={data[slide]['image']}
             placeName={data[slide]['name']}

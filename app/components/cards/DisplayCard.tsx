@@ -11,7 +11,7 @@ import {
 } from '@radix-ui/themes';
 import Link from 'next/link';
 
-export function DisplayPlaceCard({
+export function DisplayCard({
   pageRoute,
   imageLink,
   placeName,

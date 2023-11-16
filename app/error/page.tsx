@@ -8,7 +8,6 @@ const ErrorPage: React.FC = () => {
   const searchParams = useSearchParams();
   const message = searchParams.get('message');
 
-  // redirect to login page in 3 seconds
   useEffect(() => {
     setTimeout(() => {
       window.location.href = '/login';

@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react';
 
-import { DisplayPlaceCard } from '@/app/components/DisplayPlaceCard';
+import { DisplayCard } from '@/app/components/cards/DisplayCard';
 import { CityData } from '@/app/utils/types';
-import { Flex, Heading, Text } from '@radix-ui/themes';
+import { Flex, Heading } from '@radix-ui/themes';
 import FilterButtons from './buttons/FilterButtons';
 import CityHeader from './texts/CityHeader';
 
@@ -29,35 +29,30 @@ export default function DisplayCityPage({
         {city && city.length > 0 ? (
           <>
             <CityHeader data-testid='city-header' city={city} />
-            <Text as='p' size='5'>
-              Filter by
-            </Text>
             <FilterButtons
               selectedFilter={selectedFilter}
               setSelectedFilter={setSelectedFilter}
             />
 
             <Heading data-testid='city-workspaces' as='h2' size='5'>
-              {workSpacesData && workSpaceState.length} Work Spaces
+              {workSpaceState?.length} Work Spaces
             </Heading>
             <div
               data-testid='place-card-container'
               className='flex gap-6 flex-col'
             >
-              {workSpacesData &&
-                workSpaceState.map((space) => (
-                  <DisplayPlaceCard
-                    key={space.name}
-                    pageRoute={`places/${space.id}`}
-                    imageLink={space.image}
-                    placeName={space.name}
-                    flavourText={space.address}
-                    amenityList={`${trueAmenitiesWithId?.find(
-                      (amenity) =>
-                        amenity.id === (space.id as unknown as string)
-                    )?.amenities}`}
-                  />
-                ))}
+              {workSpaceState?.map((space) => (
+                <DisplayCard
+                  key={space.name}
+                  pageRoute={`places/${space.id}`}
+                  imageLink={space.image}
+                  placeName={space.name}
+                  flavourText={space.address}
+                  amenityList={`${trueAmenitiesWithId?.find(
+                    (amenity) => amenity.id === (space.id as unknown as string)
+                  )?.amenities}`}
+                />
+              ))}
             </div>
           </>
         ) : (

@@ -2,7 +2,7 @@ import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
-import type { Database } from '../../../database.types';
+import type { Database } from '@/database.types';
 
 export async function POST(request: Request) {
   const requestUrl = new URL(request.url);
@@ -30,11 +30,6 @@ export async function POST(request: Request) {
       status: 301,
     });
   } else {
-    // const userID = data?.user?.id ?? ''
-    const email = data?.user?.email ?? '';
-    // const redirectUrl = `${
-    //   requestUrl.origin
-    // }/login?success=true&email=${encodeURIComponent(email)}`;
     const redirectUrl = `${requestUrl.origin}/`;
 
     return NextResponse.redirect(redirectUrl, {
