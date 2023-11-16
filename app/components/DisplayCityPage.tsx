@@ -3,25 +3,24 @@
 import { useEffect, useState } from 'react';
 
 import { DisplayCard } from '@/app/components/cards/DisplayCard';
-import { CityData } from '@/app/utils/types';
 import { Flex, Heading } from '@radix-ui/themes';
 import FilterButtons from './buttons/FilterButtons';
 import CityHeader from './texts/CityHeader';
 
 export default function DisplayCityPage({
   city,
-  workSpacesData,
+  actualWorkSpacesData,
   trueAmenitiesWithId,
-}: CityData) {
+}: any) {
   const [selectedFilter, setSelectedFilter] = useState('all') as any;
-  const [workSpaceState, setWorkSpaceState] = useState(workSpacesData);
+  const [workSpaceState, setWorkSpaceState] = useState(actualWorkSpacesData);
   useEffect(() => {
-    const filteredWorkspace = workSpacesData.filter((space: any) => {
+    const filteredWorkspace = actualWorkSpacesData?.filter((space: any) => {
       if (selectedFilter === 'all') return true;
       return space[`${selectedFilter}`];
     });
     setWorkSpaceState(filteredWorkspace);
-  }, [selectedFilter, workSpacesData]);
+  }, [selectedFilter, actualWorkSpacesData]);
 
   return (
     <>
@@ -41,7 +40,7 @@ export default function DisplayCityPage({
               data-testid='place-card-container'
               className='flex gap-6 flex-col'
             >
-              {workSpaceState?.map((space) => (
+              {workSpaceState?.map((space: any) => (
                 <DisplayCard
                   key={space.name}
                   pageRoute={`places/${space.id}`}
@@ -49,7 +48,8 @@ export default function DisplayCityPage({
                   placeName={space.name}
                   flavourText={space.address}
                   amenityList={`${trueAmenitiesWithId?.find(
-                    (amenity) => amenity.id === (space.id as unknown as string)
+                    (amenity: any) =>
+                      amenity.id === (space.id as unknown as string)
                   )?.amenities}`}
                 />
               ))}
