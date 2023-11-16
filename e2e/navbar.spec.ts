@@ -33,7 +33,7 @@ test.describe('Navbar interactivity works correctly on desktop', () => {
     ).toBeVisible;
   });
   test('Search button leads to home page', async ({ page }) => {
-    await page.getByRole('link', { name: 'Search' }).click();
+    await page.getByRole('link', { name: 'Home' }).click();
     await expect(
       page.getByRole('heading', { name: 'Welcome to desk-mooovements!' })
     ).toBeVisible;
