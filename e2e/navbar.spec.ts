@@ -32,7 +32,7 @@ test.describe('Navbar interactivity works correctly on desktop', () => {
       page.getByRole('heading', { name: 'Welcome to desk-mooovements!' })
     ).toBeVisible;
   });
-  test('Search button leads to home page', async ({ page }) => {
+  test('Home button leads to home page', async ({ page }) => {
     await page.getByRole('link', { name: 'Home' }).click();
     await expect(
       page.getByRole('heading', { name: 'Welcome to desk-mooovements!' })
