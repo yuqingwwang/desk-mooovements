@@ -97,7 +97,8 @@ What interesting technical problems did you have to solve?
 - cookies
 
 Did writing automated tests catch any bugs?
-- For more details, ask James
+- I never actually set the tests up to run on git hooks or before deployment.
+- We only had e2e tests which relied on the page layout. Page layout was fairly transient throuhout the project.
 
 What problems did you encounter during deployment?
 - Fly didn't work;
