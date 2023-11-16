@@ -12,9 +12,6 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Deploy on Vercel
-
-Alternatively, view our deployed app here [on Vercel Platform](desk-mooovements.vercel.app).
 
 # Introduction
 
@@ -26,23 +23,9 @@ Why are you building it?
 
 - Digital nomads often struggle to find flexible workspaces without long memberships and those open at unconventional hours. This app will help simplify their search for a place to work.
 
-## Getting Started
-
-First, you'll need a few environmental variables to run it locally.
-
-Just ask us.
-
-Then run the development server:
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
 ## Deploy on Vercel
 
-Alternatively, view our deployed app here [on Vercel Platform](https://desk-mooovements-1b004ndx5-elenas-projects-f436e785.vercel.app/).
+Alternatively, view our deployed app here [on Vercel Platform](https://desk-mooovements-git-remove-border-elenas-projects-f436e785.vercel.app/).
 
 # Project scope
 
