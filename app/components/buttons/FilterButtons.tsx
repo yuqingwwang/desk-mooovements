@@ -24,6 +24,7 @@ export default function FilterButtons({
           key='all'
           color='brown'
           onClick={() => setSelectedFilter('all')}
+          size='4'
         >
           All
         </Button>
@@ -33,6 +34,7 @@ export default function FilterButtons({
             key={amenity}
             color={getColorByKey(amenity)}
             onClick={() => setSelectedFilter(amenity)}
+            size='4'
           >
             {amenityOptions.find((option) => option.value === amenity)?.label}
           </Button>
