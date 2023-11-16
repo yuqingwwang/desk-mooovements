@@ -2,7 +2,7 @@ import { MapView } from '@/app/components/MapView';
 import Navbar from '@/app/components/NavBar';
 import AddToWishList from '@/app/components/buttons/AddToWishlist';
 import { DisplayCard } from '@/app/components/cards/DisplayCard';
-import { SupabaseCall } from '@/app/utils/supabaseCall';
+import allData from '@/app/utils/getData';
 import { PageByIDParams, Workspace } from '@/app/utils/types';
 import { Database } from '@/database.types';
 import { Heading } from '@radix-ui/themes';
@@ -10,20 +10,15 @@ import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
+async function fetchData(id: string) {
+  const result = (await allData(id)) as any;
+  return result;
+}
+
 export default async function WorkSpaces({ params }: PageByIDParams) {
-  let place: Workspace[] | null = null;
-  const id = params.id;
-  place = await SupabaseCall(
-    'work_spaces',
-    'id, name, address, image, \
-    cities (name), pet_friendly, \
-    opens_till_late, has_wifi, has_socket, \
-    has_shower, has_meeting_room, has_phone_booth, has_locker, \
-    coordinates',
-    'id',
-    id
-  );
-  if (place && place.length === 0) notFound();
+  const { place }: { place: Workspace[] } = await fetchData(params.id);
+
+  if (place?.length === 0) notFound();
   const cookieStore = cookies();
   const supabase = createRouteHandlerClient<Database>({
     cookies: () => cookieStore,
@@ -47,7 +42,7 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
             />
 
             <div className='mb-3 mt-5 flex space-x-10'>
-              <AddToWishList id={parseInt(id)} user={user && user.id} />
+              <AddToWishList id={parseInt(params.id)} user={user && user.id} />
             </div>
             <MapView coordinates={place && place[0].coordinates} />
           </>

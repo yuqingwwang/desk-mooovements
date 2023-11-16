@@ -109,3 +109,22 @@ export type CreateAddWorkplaceForm = {
   foodRating: number;
   comments: string;
 };
+
+export type WorkPlaceWithCity = {
+  address: string;
+  cities: { id: number };
+  coordinates?: [number, number];
+  created_at: string;
+  created_by: string;
+  has_locker: boolean;
+  has_meeting_room: boolean;
+  has_phone_booth: boolean;
+  has_shower: boolean;
+  has_socket: boolean;
+  has_wifi: boolean;
+  id: number;
+  image: string;
+  name: string;
+  opens_till_late: boolean;
+  pet_friendly: boolean;
+};
