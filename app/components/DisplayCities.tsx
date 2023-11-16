@@ -44,9 +44,7 @@ const DisplayCities = async () => {
         id='popularCities'
         className='mt-5
         flex flex-col flex-wrap
-        content-center border-4
-        border-double
-        border-yellow-500'
+        content-center'
       >
         <Carousel title='cities' data={topCities} />
         <Carousel title='places' data={places} />
