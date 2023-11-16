@@ -1,7 +1,7 @@
 'use client';
+import { DisplayCard } from '@/app/components/cards/DisplayCard';
 import { Button, Flex, Heading } from '@radix-ui/themes';
 import { useState } from 'react';
-import { DisplayCard } from './cards/DisplayCard';
 
 export default function Carousel({ title, data }: any) {
   function addToSlide() {

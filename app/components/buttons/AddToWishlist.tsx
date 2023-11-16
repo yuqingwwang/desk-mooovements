@@ -1,8 +1,8 @@
 'use client';
 
+import newClient from '@/app/config/supabaseclient';
 import { SupabaseCall } from '@/app/utils/supabaseCall';
 import { Button } from '@radix-ui/themes';
-import newClient from '../../config/supabaseclient';
 import RedirectBtn from './RedirectBtn';
 
 export default function AddToWishList({

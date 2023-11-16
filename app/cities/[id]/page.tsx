@@ -16,7 +16,6 @@ export default async function cities({ params }: PageByIDParams) {
   const { city, actualWorkSpacesData, trueAmenitiesWithId } = await fetchData(
     params.id
   );
-  console.log('actual data', actualWorkSpacesData);
 
   if (!city) notFound();
   const cookieStore = cookies();
