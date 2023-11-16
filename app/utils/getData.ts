@@ -10,11 +10,18 @@ export default async function getAmenities(id: string) {
     'id',
     id
   );
-  if (city?.length === 0)
-    return { city: false, workSpacesData: false, trueAmenitiesWithId: false };
-  const workSpacesData = city && city[0]['work_spaces'];
 
-  const amenitiesStats: Amenities[] | undefined = workSpacesData?.map(
+  const actualWorkSpacesData =
+    (await SupabaseCall('work_spaces', '*, cities(id)', 'city', id)) || [];
+
+  if (city?.length === 0)
+    return {
+      city: false,
+      actualWorkSpacesData: false,
+      trueAmenitiesWithId: false,
+    };
+
+  const amenitiesStats: Amenities[] | undefined = actualWorkSpacesData?.map(
     (space) => ({
       id: space.id,
       pet_friendly: space.pet_friendly,
@@ -41,7 +48,7 @@ export default async function getAmenities(id: string) {
 
   return {
     city,
-    workSpacesData,
+    actualWorkSpacesData,
     trueAmenitiesWithId,
   };
 }
