@@ -14,7 +14,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Deploy on Vercel
 
-Alternatively, view our deployed app here [on Vercel Platform](https://desk-mooovements-1b004ndx5-elenas-projects-f436e785.vercel.app/).
+Alternatively, view our deployed app here [on Vercel Platform](desk-mooovements.vercel.app).
 
 # Introduction
 
@@ -101,7 +101,6 @@ Our Database
 
 <img width="676" alt="image" src="https://github.com/fac28/desk-mooovements/assets/44486576/fa9cefac-6b15-471a-8241-72c39a1c7474">
 
-  
 <!--- What technical decisions did you make?
 Server-render vs client-render vs both
 Relational or non-relational or no DB
@@ -130,4 +129,3 @@ What problems did you encounter during deployment?
 - and we used Vercel because it's built for NexJS app.
 
 Our codes are nicely structured and easy to read. It's easy for someone to make changes to the codebase, and a new person can quickly be onboarded to contribute.
-
