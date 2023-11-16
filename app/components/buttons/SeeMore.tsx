@@ -1,6 +1,7 @@
 'use client';
 import { Button } from '@radix-ui/themes';
 import { useState } from 'react';
+
 export default function SeeMore(props: any) {
   const place = props.place[0];
   const [show, setShow] = useState(false);

@@ -1,5 +1,6 @@
 'use client';
 
+import CustomTextField from '@/app/components/texts/CustomTextField';
 import {
   useAmenityHandling,
   useCityHandling,
@@ -10,7 +11,6 @@ import { Button, Callout, Heading } from '@radix-ui/themes';
 import { useForm } from 'react-hook-form';
 import NavBar from '../NavBar';
 import Spinner from '../Spiner';
-import CustomTextField from '../texts/CustomTextField';
 import AmenitiesCheckboxes from './AmenitiesCheckBox';
 import SelectCity from './SelectCity';
 
