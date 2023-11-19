@@ -1,45 +1,42 @@
-import { SupabaseCall } from '@/app/utils/supabaseCall';
+import allData from '@/app/utils/getData';
 import { City, WorkspaceWithReviews } from '@/app/utils/types';
 import { Flex } from '@radix-ui/themes';
 import Carousel from './Carousel';
 import { SearchBar } from './SearchBar';
 
-const DisplayCities = async () => {
-  const cities: City[] =
-    (await SupabaseCall(
-      'cities',
-      'id, name, country, work_spaces(count), image',
-      '',
-      ''
-    )) || [];
+async function fetchData() {
+  const result = (await allData('')) as any;
+  return result;
+}
+
+export default async function DisplayCities() {
+  const {
+    allCities,
+    allSpacesWithReviews,
+  }: { allCities: City[]; allSpacesWithReviews: WorkspaceWithReviews[] } =
+    await fetchData();
 
   let topCities: City[] = [];
-  if (cities) {
+  if (allCities) {
     // sort by number of workspaces and keep the top 3
-    cities.sort((a, b) => b.work_spaces[0].count - a.work_spaces[0].count);
-    topCities = cities.slice();
+    allCities.sort((a, b) => b.work_spaces[0].count - a.work_spaces[0].count);
+    topCities = allCities.slice();
     topCities.splice(3);
   }
 
-  const places: WorkspaceWithReviews[] =
-    (await SupabaseCall(
-      'work_spaces',
-      'id, name, address, image, city, reviews(count)',
-      '',
-      ''
-    )) || [];
-
-  if (places) {
+  if (allSpacesWithReviews) {
     // sort by number of reviews
-    places.sort((a, b) => b.reviews[0].count - a.reviews[0].count);
+    allSpacesWithReviews.sort(
+      (a, b) => b.reviews[0].count - a.reviews[0].count
+    );
 
     // keep up to 3 places
-    places.splice(3);
+    allSpacesWithReviews.splice(3);
   }
 
   return (
     <div>
-      <SearchBar cities={cities ?? []} />
+      <SearchBar cities={allCities ?? []} />
       <Flex
         id='popularCities'
         className='mt-5
@@ -47,10 +44,8 @@ const DisplayCities = async () => {
         content-center'
       >
         <Carousel title='cities' data={topCities} />
-        <Carousel title='places' data={places} />
+        <Carousel title='places' data={allSpacesWithReviews} />
       </Flex>
     </div>
   );
-};
-
-export default DisplayCities;
+}

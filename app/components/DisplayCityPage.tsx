@@ -12,7 +12,7 @@ export default function DisplayCityPage({
   actualWorkSpacesData,
   trueAmenitiesWithId,
 }: any) {
-  const [selectedFilter, setSelectedFilter] = useState('all') as any;
+  const [selectedFilter, setSelectedFilter] = useState('all');
   const [workSpaceState, setWorkSpaceState] = useState(actualWorkSpacesData);
   useEffect(() => {
     const filteredWorkspace = actualWorkSpacesData?.filter((space: any) => {
@@ -25,7 +25,7 @@ export default function DisplayCityPage({
   return (
     <>
       <Flex direction='column' gap='3' align='center'>
-        {city && city.length > 0 ? (
+        {city?.length > 0 ? (
           <>
             <CityHeader data-testid='city-header' city={city} />
             <FilterButtons
