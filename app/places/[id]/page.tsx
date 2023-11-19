@@ -2,7 +2,7 @@ import { MapView } from '@/app/components/MapView';
 import Navbar from '@/app/components/NavBar';
 import AddToWishList from '@/app/components/buttons/AddToWishlist';
 import { DisplayCard } from '@/app/components/cards/DisplayCard';
-import allData from '@/app/utils/getPlace';
+import placeData from '@/app/utils/getPlace';
 import { PageByIDParams, Workspace } from '@/app/utils/types';
 import { Database } from '@/database.types';
 import { Heading } from '@radix-ui/themes';
@@ -13,7 +13,7 @@ import { notFound } from 'next/navigation';
 export const revalidate = 0;
 
 async function fetchData(id: string) {
-  const result = (await allData(id)) as any;
+  const result = (await placeData(id)) as any;
   return result;
 }
 

@@ -1,11 +1,11 @@
-import allData from '@/app/utils/getCity';
+import cityData from '@/app/utils/getCity';
 import { City, WorkspaceWithReviews } from '@/app/utils/types';
 import { Flex } from '@radix-ui/themes';
 import Carousel from './Carousel';
 import { SearchBar } from './SearchBar';
 
 async function fetchData() {
-  const result = (await allData('')) as any;
+  const result = (await cityData('')) as any;
   return result;
 }
 
