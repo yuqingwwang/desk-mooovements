@@ -4,10 +4,11 @@ import {
   City,
   CityPage,
   WorkPlaceWithCity,
-  WorkspaceWithReviews,
 } from '@/app/utils/types';
 
-export default async function getAmenities(id: string) {
+export const revalidate = 0;
+
+export default async function getCity(id: string) {
   let city: CityPage[] | null = null;
 
   city = await SupabaseCall(
@@ -26,14 +27,6 @@ export default async function getAmenities(id: string) {
       actualWorkSpacesData: false,
       trueAmenitiesWithId: false,
     };
-
-  const allSpacesWithReviews: WorkspaceWithReviews[] =
-    (await SupabaseCall(
-      'work_spaces',
-      'id, name, address, image, city, reviews(count)',
-      '',
-      ''
-    )) || [];
 
   const allCities: City[] =
     (await SupabaseCall(
@@ -68,23 +61,18 @@ export default async function getAmenities(id: string) {
       };
     });
 
-  const place = await SupabaseCall(
-    'work_spaces',
-    'id, name, address, image, \
-    cities (name), pet_friendly, \
-    opens_till_late, has_wifi, has_socket, \
-    has_shower, has_meeting_room, has_phone_booth, has_locker, \
-    coordinates',
-    'id',
-    id
+  const allSpaces = await SupabaseCall('work_spaces', '*, reviews(*)', '', '');
+
+  // get rid of those with no review
+  const allSpacesWithReviews = allSpaces?.filter(
+    (space) => space.reviews.length > 0
   );
 
   return {
     city,
     actualWorkSpacesData,
+    allCities,
     trueAmenitiesWithId,
     allSpacesWithReviews,
-    allCities,
-    place,
   };
 }

@@ -1,6 +1,6 @@
 import DisplayCityPage from '@/app/components/DisplayCityPage';
 import Navbar from '@/app/components/NavBar';
-import allData from '@/app/utils/getData';
+import cityData from '@/app/utils/getCity';
 import { PageByIDParams } from '@/app/utils/types';
 import { Database } from '@/database.types';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
@@ -10,7 +10,7 @@ import { notFound } from 'next/navigation';
 export const revalidate = 0; // fetched on every single request
 
 async function fetchData(id: string) {
-  const result = (await allData(id)) as any;
+  const result = (await cityData(id)) as any;
   return result;
 }
 

@@ -2,7 +2,7 @@ import { MapView } from '@/app/components/MapView';
 import Navbar from '@/app/components/NavBar';
 import AddToWishList from '@/app/components/buttons/AddToWishlist';
 import { DisplayCard } from '@/app/components/cards/DisplayCard';
-import allData from '@/app/utils/getData';
+import placeData from '@/app/utils/getPlace';
 import { PageByIDParams, Workspace } from '@/app/utils/types';
 import { Database } from '@/database.types';
 import { Heading } from '@radix-ui/themes';
@@ -10,15 +10,20 @@ import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
-export const revalidate = 0; // fetched on every single request
+export const revalidate = 0;
 
 async function fetchData(id: string) {
-  const result = (await allData(id)) as any;
+  const result = (await placeData(id)) as any;
   return result;
 }
 
 export default async function WorkSpaces({ params }: PageByIDParams) {
-  const { place }: { place: Workspace[] } = await fetchData(params.id);
+  const {
+    place,
+    trueAmenitiesWithId,
+  }: { place: Workspace[]; trueAmenitiesWithId: any } = await fetchData(
+    params.id
+  );
 
   if (place?.length === 0) notFound();
   const cookieStore = cookies();
@@ -35,12 +40,15 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
         <Heading as='h1' size='8' className='pb-4'>
           Workplace
         </Heading>
-        {place && place.length > 0 ? (
+        {place?.length > 0 ? (
           <>
             <DisplayCard
               imageLink={place[0].image}
               placeName={place[0].name}
               flavourText={place[0].address}
+              amenityList={`${trueAmenitiesWithId?.find(
+                (amenity: any) => Number(amenity.id) === place[0].id
+              )?.amenities}`}
             />
 
             <div className='mb-3 mt-5 flex space-x-10'>
