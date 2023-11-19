@@ -1,9 +1,18 @@
 'use client';
 
-import { Button } from '@radix-ui/themes';
-import Link from 'next/link';
+import AuthBtn from '@/app/components/buttons/AuthButton';
+import BurgerBtn from '@/app/components/buttons/BurgerBtn';
+import { LinkData } from '@/app/utils/types';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import MobileMenu from './MobileMenu';
+import NavItem from './NavItem';
+
+const linkData: LinkData[] = [
+  { href: '/', label: 'Home' },
+  { href: '/wishlist', label: 'Wish List' },
+  { href: '/add-workplace', label: 'Add Workplace' },
+];
 
 export default function NavBar({ user }: { user: string | null }) {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -37,110 +46,25 @@ export default function NavBar({ user }: { user: string | null }) {
           {/* desktop view */}
           <div className='hidden md:flex'>
             <ul className='mt-4 flex space-x-8 rounded-lg border border-gray-100 bg-gray-50 p-0 font-medium'>
-              {!isMenuOpen && (
-                <>
-                  <li>
-                    <Link
-                      href='/'
-                      className='block rounded bg-blue-700 px-4 py-2 text-white'
-                      aria-current='page'
-                    >
-                      Home
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href='/wishlist'
-                      className='block rounded px-4 py-2 text-gray-900 hover:bg-gray-100'
-                    >
-                      Wish List
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href='/add-workplace'
-                      className='block rounded px-4 py-2 text-gray-900 hover:bg-gray-100'
-                    >
-                      Add Workplace
-                    </Link>
-                  </li>
-                </>
-              )}
+              {!isMenuOpen &&
+                linkData.map((item, index) => (
+                  <NavItem key={index} href={item.href} label={item.label} />
+                ))}
             </ul>
           </div>
           {/* mobile view burger menu closed */}
           <div className='flex md:order-2'>
             {user ? (
               <form method='post' action='/auth/logout'>
-                <Button type='submit' className='mr-5'>
-                  Log Out
-                </Button>
+                <AuthBtn type='logout' />
               </form>
             ) : (
-              <Button className='mr-5' onClick={handleLoginButtonClick}>
-                Log In
-              </Button>
+              <AuthBtn type='login' handleClick={handleLoginButtonClick} />
             )}
-            <button
-              type='button'
-              className='ml-2 inline-flex h-10 w-10 items-center justify-center rounded-lg p-2 text-sm text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 md:hidden'
-              aria-controls='navbar-sticky'
-              aria-expanded={isMenuOpen}
-              onClick={toggleMenu}
-            >
-              <span className='sr-only'>Open main menu</span>
-              <svg
-                className='h-5 w-5'
-                aria-hidden='true'
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 17 14'
-              >
-                <path
-                  stroke='currentColor'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth='2'
-                  d='M1 1h15M1 7h15M1 13h15'
-                />
-              </svg>
-            </button>
+            <BurgerBtn isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
           </div>
           {/* mobile view burger menu opened */}
-          {isMenuOpen && (
-            <div
-              className='w-full items-center justify-between md:order-1 md:flex md:w-auto'
-              id='navbar-sticky'
-            >
-              <ul className='mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900'>
-                <li>
-                  <Link
-                    href='/'
-                    className='block rounded bg-blue-700 py-2 pl-3 pr-4 text-white md:bg-transparent md:p-0 md:text-blue-700 md:dark:text-blue-500'
-                    aria-current='page'
-                  >
-                    Search
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href='/wishlist'
-                    className='block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500'
-                  >
-                    Wish List
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href='/add-workplace'
-                    className='block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500'
-                  >
-                    Add Workplace
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          )}
+          {isMenuOpen && <MobileMenu items={linkData} />}
         </div>
       </nav>
     </>

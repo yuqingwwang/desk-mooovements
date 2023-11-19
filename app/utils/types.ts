@@ -110,6 +110,16 @@ export type CreateAddWorkplaceForm = {
   comments: string;
 };
 
+export interface LinkData {
+  href: string;
+  label: string;
+}
+
+export interface NavItemProps {
+  href: string;
+  label: string;
+}
+
 export type WorkPlaceWithCity = {
   address: string;
   cities: { id: number };

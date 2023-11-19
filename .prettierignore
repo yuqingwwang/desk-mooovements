@@ -3,3 +3,4 @@
 .husky/pre-commit
 .prettierignore
 .eslintignore
+README.md

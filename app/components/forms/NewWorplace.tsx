@@ -14,7 +14,7 @@ import Spinner from '../Spiner';
 import AmenitiesCheckboxes from './AmenitiesCheckBox';
 import SelectCity from './SelectCity';
 
-export default function AddWorkplace({ user }: { user: any | null }) {
+export default function AddWorkplace({ user }: { user: string | null }) {
   const {
     register,
     handleSubmit,
@@ -75,7 +75,7 @@ export default function AddWorkplace({ user }: { user: any | null }) {
         </Button>
       </form>
 
-      <NavBar user={user && user.id} />
+      <NavBar user={user} />
     </div>
   );
 }
