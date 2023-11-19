@@ -1,4 +1,3 @@
-import { COOKIE_KEY } from '@/app/utils/constants';
 import type { Database } from '@/database.types';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
@@ -13,7 +12,7 @@ export async function POST(request: Request) {
 
   await supabase.auth.signOut();
 
-  cookieStore.delete(COOKIE_KEY);
+  // cookieStore.delete(COOKIE_KEY);
 
   return NextResponse.redirect(requestUrl.origin, {
     status: 301,

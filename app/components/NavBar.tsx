@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@radix-ui/themes';
+import AuthBtn from '@/app/components/buttons/AuthButton';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -72,14 +72,10 @@ export default function NavBar({ user }: { user: string | null }) {
           <div className='flex md:order-2'>
             {user ? (
               <form method='post' action='/auth/logout'>
-                <Button type='submit' className='mr-5'>
-                  Log Out
-                </Button>
+                <AuthBtn type='logout' />
               </form>
             ) : (
-              <Button className='mr-5' onClick={handleLoginButtonClick}>
-                Log In
-              </Button>
+              <AuthBtn type='login' handleClick={handleLoginButtonClick} />
             )}
             <button
               type='button'

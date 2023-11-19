@@ -10,6 +10,8 @@ import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
+export const revalidate = 0; // fetched on every single request
+
 export default async function WorkSpaces({ params }: PageByIDParams) {
   let place: Workspace[] | null = null;
   const id = params.id;

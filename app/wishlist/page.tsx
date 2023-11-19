@@ -2,7 +2,7 @@ import Navbar from '@/app/components/NavBar';
 import { SupabaseCall } from '@/app/utils/supabaseCall';
 import { Profile, Workspace } from '@/app/utils/types';
 import { Database } from '@/database.types';
-import { Heading } from '@radix-ui/themes';
+import { Heading, Text } from '@radix-ui/themes';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import DisplayWishlistPlaces from '../components/DisplayWishlistPlaces';
@@ -27,7 +27,7 @@ export default async function wishlist() {
     ''
   );
 
-  return (
+  return user ? (
     <div>
       <Heading as='h1' align='center'>
         Welcome to your wishlist!
@@ -39,6 +39,11 @@ export default async function wishlist() {
         user={user?.id}
       />
       <Navbar user={user && user.id} />
+    </div>
+  ) : (
+    <div>
+      <Text size='7'>Log in to see your wish list</Text>
+      <Navbar user={null} />
     </div>
   );
 }

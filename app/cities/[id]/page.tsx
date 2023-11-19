@@ -7,6 +7,8 @@ import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import { notFound } from 'next/navigation';
 
+export const revalidate = 0; // fetched on every single request
+
 async function fetchData(id: string) {
   const result = (await allData(id)) as any;
   return result;
