@@ -109,3 +109,13 @@ export type CreateAddWorkplaceForm = {
   foodRating: number;
   comments: string;
 };
+
+export interface LinkData {
+  href: string;
+  label: string;
+}
+
+export interface NavItemProps {
+  href: string;
+  label: string;
+}
