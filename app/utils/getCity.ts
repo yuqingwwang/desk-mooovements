@@ -61,10 +61,18 @@ export default async function getCity(id: string) {
       };
     });
 
+  const allSpaces = await SupabaseCall('work_spaces', '*, reviews(*)', '', '');
+
+  // get rid of those with no review
+  const allSpacesWithReviews = allSpaces?.filter(
+    (space) => space.reviews.length > 0
+  );
+
   return {
     city,
     actualWorkSpacesData,
     allCities,
     trueAmenitiesWithId,
+    allSpacesWithReviews,
   };
 }

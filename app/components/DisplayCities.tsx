@@ -1,4 +1,4 @@
-import allData from '@/app/utils/getPlace';
+import allData from '@/app/utils/getCity';
 import { City, WorkspaceWithReviews } from '@/app/utils/types';
 import { Flex } from '@radix-ui/themes';
 import Carousel from './Carousel';
@@ -25,10 +25,9 @@ export default async function DisplayCities() {
   }
 
   if (allSpacesWithReviews) {
+    console.log(allSpacesWithReviews);
     // sort by number of reviews
-    allSpacesWithReviews.sort(
-      (a, b) => b.reviews[0].count - a.reviews[0].count
-    );
+    allSpacesWithReviews.sort((a, b) => b.reviews.count - a.reviews[0].count);
 
     // keep up to 3 places
     allSpacesWithReviews.splice(3);
