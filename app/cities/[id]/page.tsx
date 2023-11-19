@@ -1,6 +1,6 @@
 import DisplayCityPage from '@/app/components/DisplayCityPage';
 import Navbar from '@/app/components/NavBar';
-import allData from '@/app/utils/getData';
+import allData from '@/app/utils/getCity';
 import { PageByIDParams } from '@/app/utils/types';
 import { Database } from '@/database.types';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';

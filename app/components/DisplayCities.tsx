@@ -1,4 +1,4 @@
-import allData from '@/app/utils/getData';
+import allData from '@/app/utils/getPlace';
 import { City, WorkspaceWithReviews } from '@/app/utils/types';
 import { Flex } from '@radix-ui/themes';
 import Carousel from './Carousel';
