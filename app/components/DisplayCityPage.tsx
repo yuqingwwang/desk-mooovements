@@ -48,8 +48,7 @@ export default function DisplayCityPage({
                   placeName={space.name}
                   flavourText={space.address}
                   amenityList={`${trueAmenitiesWithId?.find(
-                    (amenity: any) =>
-                      amenity.id === (space.id as unknown as string)
+                    (amenity: any) => Number(amenity.id) === space.id
                   )?.amenities}`}
                 />
               ))}

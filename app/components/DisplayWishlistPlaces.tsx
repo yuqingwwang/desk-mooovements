@@ -89,8 +89,7 @@ export default function DisplayWishlistPlaces({
                       placeName={space.name}
                       flavourText={space.address}
                       amenityList={`${trueAmenitiesWithId?.find(
-                        (amenity) =>
-                          amenity.id === (space.id as unknown as string)
+                        (amenity) => Number(amenity.id) === space.id
                       )?.amenities}`}
                     />
                     <button

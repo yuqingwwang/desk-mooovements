@@ -47,8 +47,7 @@ export default async function WorkSpaces({ params }: PageByIDParams) {
               placeName={place[0].name}
               flavourText={place[0].address}
               amenityList={`${trueAmenitiesWithId?.find(
-                (amenity: any) =>
-                  amenity.id === (place[0].id as unknown as string)
+                (amenity: any) => Number(amenity.id) === place[0].id
               )?.amenities}`}
             />
 
