@@ -10,8 +10,7 @@
     "format:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,css,scss}\"",
     "format": "prettier --write .",
     "prepare": "husky install",
-    "update": "supabase gen types typescript --project-id tkvonehonrmtoeqojhjs > database.types.ts",
-    "test": "playwright test --workers 4"
+    "update": "supabase gen types typescript --project-id tkvonehonrmtoeqojhjs > database.types.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
