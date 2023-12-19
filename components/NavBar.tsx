@@ -1,7 +1,7 @@
 'use client';
 
-import AuthBtn from '@/app/components/buttons/AuthButton';
-import BurgerBtn from '@/app/components/buttons/BurgerBtn';
+import AuthBtn from '@/components/buttons/AuthButton';
+import BurgerBtn from '@/components/buttons/BurgerBtn';
 import { LinkData } from '@/app/utils/types';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';

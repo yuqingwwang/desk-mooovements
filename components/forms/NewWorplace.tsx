@@ -1,6 +1,6 @@
 'use client';
 
-import CustomTextField from '@/app/components/texts/CustomTextField';
+import CustomTextField from '@/components/texts/CustomTextField';
 import {
   useAmenityHandling,
   useCityHandling,

@@ -1,4 +1,4 @@
-import AddWorkplace from '@/app/components/forms/NewWorplace';
+import AddWorkplace from '@/components/forms/NewWorplace';
 import { Database } from '@/database.types';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';

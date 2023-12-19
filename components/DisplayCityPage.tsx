@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 
-import { DisplayCard } from '@/app/components/cards/DisplayCard';
-import CityHeader from '@/app/components/texts/CityHeader';
+import { DisplayCard } from '@/components/cards/DisplayCard';
+import CityHeader from '@/components/texts/CityHeader';
 import { Flex, Heading } from '@radix-ui/themes';
 import FilterButtons from './buttons/FilterButtons';
 

@@ -1,5 +1,5 @@
 'use client';
-import { DisplayCard } from '@/app/components/cards/DisplayCard';
+import { DisplayCard } from '@/components/cards/DisplayCard';
 import { Button, Flex, Heading } from '@radix-ui/themes';
 import { useState } from 'react';
 
@@ -15,6 +15,7 @@ export default function Carousel({ title, data }: any) {
     else setSlide(slide - 1);
   }
   const [slide, setSlide] = useState(0);
+
 
   return (
     <Flex
@@ -40,7 +41,7 @@ export default function Carousel({ title, data }: any) {
             placeName={data[slide]['name']}
             flavourText={
               title === 'cities'
-                ? data[slide]['work_spaces'][0]['count'] + ' workspaces'
+                ? data[slide]['count']+ ' workspaces'
                 : data[slide]['address']
             }
           />

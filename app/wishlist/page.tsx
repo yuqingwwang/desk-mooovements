@@ -1,11 +1,11 @@
-import Navbar from '@/app/components/NavBar';
+import Navbar from '@/components/NavBar';
 import { SupabaseCall } from '@/app/utils/supabaseCall';
 import { Profile, Workspace } from '@/app/utils/types';
 import { Database } from '@/database.types';
 import { Heading, Text } from '@radix-ui/themes';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-import DisplayWishlistPlaces from '../components/DisplayWishlistPlaces';
+import DisplayWishlistPlaces from '../../components/DisplayWishlistPlaces';
 
 export default async function wishlist() {
   const cookieStore = cookies();

@@ -1,5 +1,5 @@
-import Navbar from '@/app/components/NavBar';
-import WholeForm from '@/app/components/forms/AuthForm';
+import Navbar from '@/components/NavBar';
+import WholeForm from '@/components/forms/AuthForm';
 import { Database } from '@/database.types';
 import { Heading } from '@radix-ui/themes';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';

@@ -1,7 +1,7 @@
-import { MapView } from '@/app/components/MapView';
-import Navbar from '@/app/components/NavBar';
-import AddToWishList from '@/app/components/buttons/AddToWishlist';
-import { DisplayCard } from '@/app/components/cards/DisplayCard';
+import { MapView } from '@/components/MapView';
+import Navbar from '@/components/NavBar';
+import AddToWishList from '@/components/buttons/AddToWishlist';
+import { DisplayCard } from '@/components/cards/DisplayCard';
 import placeData from '@/app/utils/getPlace';
 import { PageByIDParams, Workspace } from '@/app/utils/types';
 import { Database } from '@/database.types';

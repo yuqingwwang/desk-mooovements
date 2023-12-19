@@ -1,6 +1,6 @@
 'use client';
 
-import { DisplayCard } from '@/app/components/cards/DisplayCard';
+import { DisplayCard } from '@/components/cards/DisplayCard';
 import newClient from '@/app/config/supabaseclient';
 import { Amenities, WishlistDisplay } from '@/app/utils/types';
 import { Flex, Heading } from '@radix-ui/themes';

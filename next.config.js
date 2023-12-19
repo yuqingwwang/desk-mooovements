@@ -6,6 +6,13 @@ nextConfig = {};
 
 const { withSentryConfig } = require('@sentry/nextjs');
 
+module.exports = {
+  reactStrictMode: true, 
+  images: {
+   domains: ['tkvonehonrmtoeqojhjs.supabase.co']
+  },
+}
+
 module.exports = withSentryConfig(
   module.exports,
   {
