@@ -1,13 +1,13 @@
 // import { Generated, ColumnType } from 'kysely'
-import { createKysely } from '@vercel/postgres-kysely'
+import { createKysely } from '@vercel/postgres-kysely';
 
 // define types
 type Database = {
-    cities: Cities,
-    profiles: Profiles,
-    reviews: Reviews,
-    work_spaces: WorkSpaces
-}
+  cities: Cities;
+  profiles: Profiles;
+  reviews: Reviews;
+  work_spaces: WorkSpaces;
+};
 
 type Cities = {
   country: string | null;
@@ -15,8 +15,7 @@ type Cities = {
   image: string | null;
   name: string | null;
   count?: number | null;
-}
-
+};
 
 type Profiles = {
   amenity_preference: string | null;
@@ -24,7 +23,7 @@ type Profiles = {
   id: string;
   social_preference: string | null;
   wish_list: number[] | null;
-}
+};
 
 type Reviews = {
   comments: string | null;
@@ -33,9 +32,10 @@ type Reviews = {
   place_id: number | null;
   user_id: string | null;
   vibe_rating: number | null;
-}
+};
 
-type WorkSpaces = {
+export type WorkSpaces = {
+  [x: string]: any;
   address: string | null;
   city: number | null;
   created_at: string | null;
@@ -53,55 +53,94 @@ type WorkSpaces = {
   pet_friendly: boolean | null;
   cityName?: string | null;
   count?: string | null;
-}
+};
 
-
-const db = createKysely<Database>()
-
+const db = createKysely<Database>();
 
 export async function getCities(): Promise<Cities[]> {
-
   const res = await db
-      .selectFrom('cities').select(['id', 'name', 'image', 'country'])
-      .execute()
+    .selectFrom('cities')
+    .select(['id', 'name', 'image', 'country'])
+    .execute();
 
-  return res
+  return res;
 }
 
-export async function getSpaces(): Promise <WorkSpaces[]>{
-
+export async function getSpaces(): Promise<WorkSpaces[]> {
   const res = await db
-      .selectFrom('work_spaces')
-      .innerJoin('cities', 'work_spaces.city', 'cities.id')
-      .select([
-        'work_spaces.id', 'work_spaces.name',
-        'work_spaces.image',
-        'address', 'city',
-        'has_locker', 'has_meeting_room', 'has_phone_booth',
-        'has_shower', 'has_socket', 'has_wifi', 'opens_till_late',
-        'pet_friendly', 'created_at', 'created_by', 'cities.name as cityName'
-      ])
-      .execute()
+    .selectFrom('work_spaces')
+    .innerJoin('cities', 'work_spaces.city', 'cities.id')
+    .select([
+      'work_spaces.id',
+      'work_spaces.name',
+      'work_spaces.image',
+      'address',
+      'city',
+      'has_locker',
+      'has_meeting_room',
+      'has_phone_booth',
+      'has_shower',
+      'has_socket',
+      'has_wifi',
+      'opens_till_late',
+      'pet_friendly',
+      'created_at',
+      'created_by',
+      'cities.name as cityName',
+    ])
+    .execute();
 
-  return res
+  return res;
 }
 
 // get number of spaces in each city
-export async function getSpacesCount(cityNumber: number): Promise <{count: string | null }>{
-
+export async function getSpacesCount(
+  cityNumber: number
+): Promise<{ count: string | null }> {
   const res = await db
-      .selectFrom('work_spaces')
-      .innerJoin('cities', 'work_spaces.city', 'cities.id')
-      .select(({ fn }) => [
-        fn.count<number>('work_spaces.id').as('count')
-      ])
-      .groupBy('cities.name')
-      .where('cities.id', '=', cityNumber)
-      .execute()
+    .selectFrom('work_spaces')
+    .innerJoin('cities', 'work_spaces.city', 'cities.id')
+    .select(({ fn }) => [fn.count<number>('work_spaces.id').as('count')])
+    .groupBy('cities.name')
+    .where('cities.id', '=', cityNumber)
+    .execute();
 
   if (res.length === 0) {
-    return {count: '0'}
+    return { count: '0' };
   }
 
-  return { count: res[0].count.toString() }
+  return { count: res[0].count.toString() };
+}
+
+// get workspaces in a city
+
+export async function getSpacesInCity(
+  cityNumber: string
+): Promise<WorkSpaces[]> {
+  // retrieve all spaces in a city as an array
+  const res = await db
+    .selectFrom('work_spaces')
+    .innerJoin('cities', 'work_spaces.city', 'cities.id')
+    .select([
+      'work_spaces.id',
+      'work_spaces.name',
+      'work_spaces.image',
+      'address',
+      'city',
+      'has_locker',
+      'has_meeting_room',
+      'has_phone_booth',
+      'has_shower',
+      'has_socket',
+      'has_wifi',
+      'opens_till_late',
+      'pet_friendly',
+      'created_at',
+      'created_by',
+      'cities.name as cityName',
+    ])
+    .where('cities.id', '=', Number(cityNumber))
+    .execute();
+
+  return res;
 }

@@ -54,6 +54,15 @@ function CardContents({
   flavourText,
   amenityList,
 }: PlaceCardParams) {
+  let listOfAmenities = [] as string[];
+
+  if (amenityList && amenityList.length > 1) {
+    listOfAmenities = amenityList.split(',');
+  }
+  if (amenityList && amenityList.length === 1) {
+    listOfAmenities = [amenityList];
+  }
+
   return (
     <Flex gap='1' align='center'>
       <Avatar
@@ -70,7 +79,7 @@ function CardContents({
         <Text as='div' size='5' weight='bold'>
           {placeName}
         </Text>
-        {amenityList?.split(',').map((item: any, index: number) => (
+        {listOfAmenities.map((item: any, index: number) => (
           <Badge
             className='mr-2'
             color={getColorByKey(item)}
