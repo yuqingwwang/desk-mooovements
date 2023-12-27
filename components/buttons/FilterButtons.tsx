@@ -7,17 +7,18 @@ export default function FilterButtons({
   setSelectedFilter,
 }: any) {
   return (
-    <>
+    <div className='px-10'>
       <Text as='p' size='5'>
         Filter by
       </Text>
       <Grid
         columns={{
           initial: '3',
-          md: '9',
+          md: '4',
         }}
-        gap='3'
+        gap='4'
         width='auto'
+        className='pt-5'
       >
         <Button
           variant={selectedFilter === 'all' ? 'soft' : 'solid'}
@@ -40,6 +41,6 @@ export default function FilterButtons({
           </Button>
         ))}
       </Grid>
-    </>
+    </div>
   );
 }

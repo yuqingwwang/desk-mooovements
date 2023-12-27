@@ -1,4 +1,6 @@
-import { getCities, getSpaces, getSpacesCount } from '@/app/lib/vercel-storage';
+import { getCities } from '@/app/lib/getCities';
+import { getSpaces } from '@/app/lib/getSpaces';
+import { getSpacesCount } from '@/app/lib/getSpacesCount';
 import Carousel from '@/components/Carousel';
 import { Flex } from '@radix-ui/themes';
 

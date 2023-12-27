@@ -100,7 +100,7 @@ export interface Database {
         Row: {
           address: string | null;
           city: number | null;
-          coordinates: number[] | null;
+          coordinates?: number[] | null;
           created_at: string | null;
           created_by: string | null;
           has_locker: boolean | null;

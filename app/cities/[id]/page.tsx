@@ -1,4 +1,4 @@
-import { getSpacesInCity } from '@/app/lib/vercel-storage';
+import { getSpacesInCity } from '@/app/lib/getSpacesInCity';
 import { PageByIDParams } from '@/app/utils/types';
 import DisplayCityPage from '@/components/DisplayCityPage';
 import { notFound } from 'next/navigation';
